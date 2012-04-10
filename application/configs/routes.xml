@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <production>
+        <routes>
+                    
+            <home>
+                <route>/</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>index</action>
+                </defaults>
+                <reverse>/</reverse>
+            </home>
+            
+            <post>
+                <route>/dodaj</route>
+                <defaults>
+                    <controller>post</controller>
+                    <action>add</action>
+                </defaults>
+                <reverse>/dodaj</reverse>
+            </post>
+
+            <awaiting>
+                <route>/oczekujace</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>awaiting</action>
+                </defaults>
+                <reverse>/oczekujace</reverse>
+            </awaiting>
+
+            <author type="Zend_Controller_Router_Route_Regex">
+                <route>autor/(.+)</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>author</action>
+                </defaults>
+                <map>
+                    <name>1</name>
+                </map>
+                <reverse>autor/%s</reverse>
+            </author>
+            
+            <view type="Zend_Controller_Router_Route_Regex">
+                <route>post/(\d+)</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>view</action>
+                </defaults>
+                <map>
+                    <id>1</id>
+                </map>
+                <reverse>post/%d</reverse>
+            </view>
+            
+            <rules>
+                <route>/regulamin</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>rules</action>
+                </defaults>
+                <reverse>/regulamin</reverse>
+            </rules>
+
+            <contact>
+                <route>/kontakt</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>contact</action>
+                </defaults>
+                <reverse>/kontakt</reverse>
+            </contact>
+            
+        </routes>
+    </production>
+
+    <development extends="production">
+    </development>
+</configdata>

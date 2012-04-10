@@ -1,0 +1,43 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Poebao?');
+echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<head>
+<?php echo $this->headMeta(); ?>
+<?php echo $this->headTitle(); ?>
+
+<!-- <link href='http://fonts.googleapis.com/css?family=Didact+Gothic&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'> -->
+
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+</head>
+<body>
+    <div id="page">
+
+        <!-- header -->
+        <div id="header">
+            <a href="<?php echo $this->url(array(), 'home'); ?>"><img src="/img/poebao.png" alt="Poebao, content is king" title="Poebao, content is king"><h2 class="hidden">Poebao, content is king</h2></a>
+            <div id="nav">
+                <ul>
+                    <li class="first"><a href="<?php echo $this->url(array(), 'awaiting'); ?>">oczekujące</a></li>
+                    <li class="last">
+                        <a href="<?php echo $this->url(array(), 'post');?>">dodaj</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- main content -->
+        <div id="content">
+        <?php echo $this->layout()->content; ?>
+        </div>
+
+        <!-- footer -->
+        <div id="footer">
+        poebao.pl (c) 2012 - <a href="/regulamin">Regulamin</a> | <a href="/kontakt">Kontakt</a>
+        </div>
+
+    </div>
+</body>
+</html>

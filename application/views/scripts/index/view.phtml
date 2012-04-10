@@ -1,0 +1,33 @@
+<div id="main">
+    <!-- <h1><?php echo $this->escape($this->title); ?></h1> -->
+    <div id="post">
+        <img class="post" src="http://poebao-cdn.kosiarka/<?php echo $this->post['file'] ?>">
+        
+        <div class="info">
+            <h3><?php echo $this->post['title'] ?></h3>
+            <span class="subtext">
+                <p>
+                    <a href="/autor/<?php echo $this->post['author'] ?>"><?php echo $this->post['author'] ?></a> - <?php echo $this->post['added'] ?>
+                </p>
+                <p>
+                    <?php echo $this->post['source'] ?>
+                </p>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- additional -->
+<div id="additional">
+    <div class="block">
+        <img src="/img/tmp/ad.png" alt="" title="" />
+    </div>
+
+    <div class="block">
+        <h3>1000 postów temu ...</h3>
+        <span class="subtext">
+            Poniedziałek, 16 lutego 2011 - 211 dni, 11 godzin i 23 minuty temu
+        </span>
+        <img src="/img/tmp/block.png" alt="" title="" />
+    </div>
+</div>

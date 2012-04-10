@@ -1,0 +1,36 @@
+<div id="main">
+    <!-- <h1><?php echo $this->escape($this->title); ?></h1> -->
+    <ul id="posts">
+        <?php foreach ($this->posts as $key => $value): ?>
+            <li class="" href="post-<?php echo $value->id ?>">
+                <a href="<?php echo $this->url(array('id' => $value->id), 'view') ?>"><img class="post" src="<?php echo $this->storageHost ?>/<?php echo $value->file ?>"></a>
+                <div class="info">
+                    <h3><a href="<?php echo $this->url(array('id' => $value->id), 'view') ?>"><?php echo $value->title ?></a></h3>
+                    <span class="subtext">
+                        <p>
+                            <a href="<?php echo $this->url(array('name' => $value->author), 'author') ?>"><?php echo $value->author ?></a> - <?php echo $value->added ?>
+                        </p>
+                        <p>
+                            <?php echo $value->source ?>
+                        </p>
+                    </span>
+                </div>
+            </li>
+        <?php endforeach ?>
+    </ul>
+</div>
+
+<!-- additional -->
+<div id="additional">
+    <div class="block">
+        <img src="/img/tmp/ad.png" alt="" title="" />
+    </div>
+
+    <div class="block">
+        <h3>1000 postów temu ...</h3>
+        <span class="subtext">
+            Poniedziałek, 16 lutego 2011 - 211 dni, 11 godzin i 23 minuty temu
+        </span>
+        <img src="/img/tmp/block.png" alt="" title="" />
+    </div>
+</div>

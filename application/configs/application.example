@@ -1,0 +1,74 @@
+[production]
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
+resources.view.doctype = "XHTML1_STRICT"
+autoloadernamespaces.jk = Jk_
+
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
+
+; STORAGE
+app.storage.location = /var/www/poebao-cdn
+app.storage.host = http://poebao-cdn.kosiarka
+
+; XEROCOPY / FILE CONVERSION
+app.xerocopy.format.original.type = jpeg
+
+app.xerocopy.format.thumb.width = 460
+app.xerocopy.format.thumb.type = jpeg
+
+app.xerocopy.format.ble.width = 1460
+app.xerocopy.format.ble.type = png
+app.xerocopy.format.ble.filename = ble
+
+app.xerocopy.format.huge.width = 2460
+app.xerocopy.format.huge.type = jpeg
+
+; DATABASE
+resources.db.adapter = PDO_MYSQL
+resources.db.params.host = 127.0.0.1
+resources.db.params.username = 
+resources.db.params.password = 
+resources.db.params.dbname = poebao
+
+; MAIL SERVER
+resources.mail.transport.type = smtp
+resources.mail.transport.host = 
+resources.mail.transport.auth = login
+resources.mail.transport.ssl = ssl
+resources.mail.transport.username = 
+resources.mail.transport.password = 
+resources.mail.defaultFrom.email = 
+resources.mail.defaultFrom.name = 
+resources.mail.defaultTo.email = 
+resources.mail.defaultTo.name = 
+resources.mail.defaultReplyTo.email = 
+resources.mail.defaultReplyTo.name = 
+
+; DEBUG LOG
+resources.log.debug.writerName = "Stream"
+resources.log.debug.writerParams.stream = "/var/log/poebao/debug.log"
+resources.log.debug.filterName = "Priority"
+resources.log.debug.filterParams.priority = 7
+
+; APPLICATION ERROR LOG
+resources.log.stream.writerName = "Stream"
+resources.log.stream.writerParams.stream = "/var/log/poebao/error.log"
+resources.log.stream.filterName = "Priority"
+resources.log.stream.filterParams.priority = 6
+
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
