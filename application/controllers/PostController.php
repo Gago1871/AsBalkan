@@ -29,14 +29,14 @@ class PostController extends Zend_Controller_Action
                 $xerocopy = $appConfig['xerocopy'];
                 $id = Jk_Url::createUniqueId(); // abcd123
                 $hashedDir = Jk_File::getHashedDirStructure($id); // a/b/c/d123
-
+                
                 $file = $form->file->getFileName();
                 $form->file->receive();
                 
                 if ($form->file->isReceived()) {
                     
                     $fileInfo = pathinfo($file);
-                    $normalizedFilename = Jk_Url::normalize($fileInfo['basename']);
+                    $normalizedFilename = Jk_Url::normalize($fileInfo['filename']);
                     
                     $thumbLoc = array();
                     $thumbFilename = array();
@@ -46,7 +46,7 @@ class PostController extends Zend_Controller_Action
                         if (isset($format['width'])) {
                             $image = Jk_Image::resizeImage($file, $format['width']);
                         } else {
-                            $image = self::createImageFromFile($file);
+                            $image = Jk_Image::createImageFromFile($file);
                         }
 
                         $thumbLoc[$key] = $storage . DIRECTORY_SEPARATOR . $key . DIRECTORY_SEPARATOR . $hashedDir;
@@ -61,10 +61,11 @@ class PostController extends Zend_Controller_Action
                         } else {
                             $tmpName = $normalizedFilename;
                         }
+                        $thumbFilename[$key] = $tmpName . '.' . $format['type'];
                         
-                        $thumbFilename[$key] = $thumbLoc[$key] . '-' . $tmpName . '.' . $format['type'];
+                        $thumbFile[$key] = $thumbLoc[$key] . '-' . $tmpName . '.' . $format['type'];
 
-                        Jk_Image::saveImage($image, $thumbFilename[$key]);
+                        Jk_Image::saveImage($image, $thumbFile[$key]);
                     }
                 }
 
@@ -73,7 +74,7 @@ class PostController extends Zend_Controller_Action
                 $agreement = $form->getValue('agreement');
                 
                 $posts = new Application_Model_DbTable_Posts();
-                $posts->add($id, $thumbFilename['thumb'], $title, $author, $fileInfo['basename'], $agreement);
+                $posts->add($id, $thumbFilename['thumb'], $title, $author, $fileInfo['filename'], $agreement);
                 
                 // Zend_Controller_Action_Helper_Redirector::goto
                 $this->_helper->redirector->gotoRoute(array('id' => $id), 'view');
