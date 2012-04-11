@@ -2,16 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `poebao` ;
-CREATE SCHEMA IF NOT EXISTS `poebao` DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci ;
-USE `poebao` ;
 
 -- -----------------------------------------------------
--- Table `poebao`.`posts`
+-- Table `my_7727`.`posts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `poebao`.`posts` ;
+DROP TABLE IF EXISTS `my_7727`.`posts` ;
 
-CREATE  TABLE IF NOT EXISTS `poebao`.`posts` (
+CREATE  TABLE IF NOT EXISTS `my_7727`.`posts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `post_id` VARCHAR(12) NOT NULL ,
   `title` VARCHAR(255) NOT NULL ,
