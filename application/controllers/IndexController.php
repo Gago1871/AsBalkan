@@ -30,8 +30,9 @@ class IndexController extends Zend_Controller_Action
 
         $posts = new Application_Model_DbTable_Posts();
         $this->view->posts = $posts->fetchAll('`author`="' . $author . '" AND `status`="a"', 'added DESC');
-        $this->view->author = $author;
+        // $this->view->author = $author;
         
+        $this->view->title = $author;
         $this->view->headTitle($author);
     }
 
@@ -44,6 +45,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->posts = $posts->fetchAll('`status_waiting`="1" AND `status_promoted`="0" AND `status`="a"', 'added DESC');
 
         $this->view->headTitle('Oczekujące');
+        $this->view->title = 'Oczekujące';
     }
     
 

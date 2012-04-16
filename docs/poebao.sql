@@ -2,6 +2,9 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
+DROP SCHEMA IF EXISTS `my_7727` ;
+CREATE SCHEMA IF NOT EXISTS `my_7727` DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci ;
+USE `my_7727` ;
 
 -- -----------------------------------------------------
 -- Table `my_7727`.`posts`
@@ -15,9 +18,10 @@ CREATE  TABLE IF NOT EXISTS `my_7727`.`posts` (
   `author` VARCHAR(255) NOT NULL ,
   `source` VARCHAR(255) NULL ,
   `file` VARCHAR(1500) NOT NULL ,
-  `status_waiting` TINYINT NOT NULL DEFAULT 1 ,
-  `status_promoted` TINYINT NOT NULL DEFAULT 0 ,
-  `status_moderated` TINYINT NOT NULL DEFAULT 0 ,
+  `status_moderated` TINYINT UNSIGNED NOT NULL DEFAULT 0 ,
+  `status_waiting` TINYINT UNSIGNED NOT NULL DEFAULT 1 ,
+  `status_promoted` TINYINT UNSIGNED NOT NULL DEFAULT 0 ,
+  `status_nsfw` TINYINT UNSIGNED NOT NULL DEFAULT 0 ,
   `added` DATETIME NOT NULL ,
   `original_file` VARCHAR(1500) NOT NULL ,
   `author_ip` VARCHAR(15) NOT NULL ,

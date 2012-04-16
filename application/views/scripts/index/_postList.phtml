@@ -1,7 +1,7 @@
 <!-- <h1><?php echo $this->escape($this->title); ?></h1> -->
 <ul id="posts">
     <?php foreach ($this->posts as $key => $value): ?>
-        <li class="" href="post-<?php echo $value->id ?>">
+        <li <?php echo ((!$key)?'class="first" ':''); ?>href="post-<?php echo $value->id ?>">
             <a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'view') ?>"><img class="post" src="<?php echo $this->storageHost ?>/thumb/<?php echo Jk_File::getHashedDirStructure($value->post_id); ?>-<?php echo $value->file ?>"></a>
             <div class="info">
                 <h2><a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'view') ?>"><?php echo $value->title ?></a></h2>
