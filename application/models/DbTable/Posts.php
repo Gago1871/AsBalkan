@@ -16,13 +16,13 @@ class Application_Model_DbTable_Posts extends Zend_Db_Table_Abstract
         return $row->toArray();    
     }
 
-    public function add($id, $file, $title, $author, $originalFile, $agreement)
+    public function add($id, $file, $title, $author, $originalFile, $agreement, $source)
     {
         $data = array(
             'post_id' => $id,
             'title' => $title,
             'author' => $author,
-            'source' => 'nothing...',
+            'source' => $source,
             'file' => $file,
             'added' => date('Y-m-d H:i:s'),
             'original_file' => $originalFile,

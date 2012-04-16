@@ -24,8 +24,10 @@
             </div>
         </div>
         
-        <?php if ($this->message): ?>
-            <div class="message <?php echo $this->message['type']; ?>"><?php echo $this->message['content'] ?></div>
+        <?php if ($this->messages): ?>
+            <?php foreach ($this->messages as $key => $value): ?>
+                <div class="message <?php echo $value['type']; ?>"><?php echo $value['content'] ?></div>
+            <?php endforeach ?>
         <?php endif ?>
 
         <!-- main content -->

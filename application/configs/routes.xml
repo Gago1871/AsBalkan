@@ -15,7 +15,7 @@
             <post>
                 <route>/dodaj</route>
                 <defaults>
-                    <controller>post</controller>
+                    <controller>index</controller>
                     <action>add</action>
                 </defaults>
                 <reverse>/dodaj</reverse>

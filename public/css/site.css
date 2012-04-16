@@ -234,9 +234,16 @@ form dt {
 
 /* MESSAGES */
 .message {
-    background-color: #32b63c;
     padding: 14px;
     color: white;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.success {
+    background-color: #32b63c;
+}
+
+.failure {
+	background-color: red;
 }
