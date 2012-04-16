@@ -22,12 +22,15 @@ app.xerocopy.format.original.type = jpeg
 app.xerocopy.format.thumb.width = 460
 app.xerocopy.format.thumb.type = jpeg
 
-app.xerocopy.format.ble.width = 1460
-app.xerocopy.format.ble.type = png
-app.xerocopy.format.ble.filename = ble
+app.xerocopy.format.view.width = 650
+app.xerocopy.format.view.type = jpeg
 
-app.xerocopy.format.huge.width = 2460
-app.xerocopy.format.huge.type = jpeg
+; app.xerocopy.format.ble.width = 1460
+; app.xerocopy.format.ble.type = png
+; app.xerocopy.format.ble.filename = ble
+
+; app.xerocopy.format.huge.width = 2460
+; app.xerocopy.format.huge.type = jpeg
 
 ; DATABASE
 resources.db.adapter = PDO_MYSQL

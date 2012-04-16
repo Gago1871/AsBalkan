@@ -14,9 +14,8 @@ class IndexController extends Zend_Controller_Action
     /**
      * Display main site, with approved posts
      */
-    public function indexAction()
-    {
-        $this->view->title = "Poebao";
+    public function indexAction() {
+
         $posts = new Application_Model_DbTable_Posts();
         $this->view->posts = $posts->fetchAll('`status_promoted`="1" AND`status`="a"', 'added DESC');
     }
@@ -28,9 +27,12 @@ class IndexController extends Zend_Controller_Action
     {
         $params = $this->getRequest()->getParams();
         $author = $params['name'];
-        $this->view->title = 'Autor: ' . $author;
+
         $posts = new Application_Model_DbTable_Posts();
         $this->view->posts = $posts->fetchAll('`author`="' . $author . '" AND `status`="a"', 'added DESC');
+        $this->view->author = $author;
+        
+        $this->view->headTitle($author);
     }
 
     /**
@@ -38,9 +40,10 @@ class IndexController extends Zend_Controller_Action
      */
     public function awaitingAction()
     {
-        $this->view->title = 'Oczekujące';
         $posts = new Application_Model_DbTable_Posts();
         $this->view->posts = $posts->fetchAll('`status_waiting`="1" AND `status_promoted`="0" AND `status`="a"', 'added DESC');
+
+        $this->view->headTitle('Oczekujące');
     }
     
 
@@ -51,9 +54,15 @@ class IndexController extends Zend_Controller_Action
     {
         $params = $this->getRequest()->getParams();
         $id = $params['id'];
-        $this->view->title = 'Post ' . $id;
+
         $posts = new Application_Model_DbTable_Posts();
-        $this->view->post = $posts->get($id);
+        $post = $posts->get($id);
+        $this->view->post = $post;
+
+        $this->view->headTitle($post['title']);
+        
+        $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
+        $this->view->message = $message;
     }
     
     /**

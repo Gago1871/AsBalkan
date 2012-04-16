@@ -77,11 +77,15 @@ class PostController extends Zend_Controller_Action
                 $posts->add($id, $thumbFilename['thumb'], $title, $author, $fileInfo['filename'], $agreement);
                 
                 // Zend_Controller_Action_Helper_Redirector::goto
-                $this->_helper->redirector->gotoRoute(array('id' => $id), 'view');
-
+                $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
+                $this->view->message = $message;
+                // $this->_helper->redirector->gotoSimple('view', 'index', null, array('id' => $id, 'title' => $title));
+                $this->_helper->redirector->gotoRouteAndExit(array('id' => $id, 'title' => $title, 'dupa' => 'dupaa'), 'view');
             } else {
                 $form->populate($formData);
             }
         }
+
+        $this->view->headTitle('Dodaj post');
     }
 }

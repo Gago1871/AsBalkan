@@ -31,7 +31,7 @@
             </awaiting>
 
             <author type="Zend_Controller_Router_Route_Regex">
-                <route>autor/(.+)</route>
+                <route>u/(.+)</route>
                 <defaults>
                     <controller>index</controller>
                     <action>author</action>
@@ -39,19 +39,20 @@
                 <map>
                     <name>1</name>
                 </map>
-                <reverse>autor/%s</reverse>
+                <reverse>u/%s</reverse>
             </author>
             
             <view type="Zend_Controller_Router_Route_Regex">
-                <route>post/(.+)</route>
+                <route>p/(.+)-(.*)</route>
                 <defaults>
                     <controller>index</controller>
                     <action>view</action>
                 </defaults>
                 <map>
                     <id>1</id>
+                    <title>2</title>
                 </map>
-                <reverse>post/%s</reverse>
+                <reverse>p/%s-%s</reverse>
             </view>
             
             <rules>

@@ -7,6 +7,7 @@ body {
     color: #25262a;
     background: #dfdfdf url('/img/bg.png') repeat-x;
     font-family: "Didact Gothic";
+	font-size: 110%;
 }
 
 a {
@@ -22,7 +23,9 @@ p {
 }
 
 .hidden {
-    display: none;
+    height: 0;
+	overflow: hidden;
+/*	margin-left: -9999px;*/
 }
 
 .errors {
@@ -30,12 +33,11 @@ p {
 }
 
 #page {
-    width: 960px;
+    width: 980px;
     margin: 0 auto;
 }
 
 #header {
-    width: 960px;
     padding-top: 15px;
     height: 77px;
     color: #ccc;
@@ -84,7 +86,6 @@ p {
 }
 
 #content {
-    width: 960px;
     margin: 0 auto;
     overflow: auto;
     /*position: relative;*/
@@ -139,7 +140,7 @@ p {
 }
 
 #posts .post {
-    width: 462px;
+    width: 460px;
     float: left;
     /*margin-right: 10px;*/
 }
@@ -150,7 +151,7 @@ p {
     font-size: 12px;
 }
 
-#posts .info h3 {
+#posts .info h2 {
     margin-bottom: 6px;
     font-size: 20px;
 }
@@ -188,3 +189,12 @@ form #file, form #submitbutton {
 form dt {
 	float: right;
 }*/
+
+/* MESSAGES */
+.message {
+	background-color: #32b63c;
+	padding: 14px;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}

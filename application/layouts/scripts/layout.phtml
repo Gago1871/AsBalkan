@@ -1,8 +1,4 @@
-<?php
-$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
-$this->headTitle()->setSeparator(' - ');
-$this->headTitle('Poebao?');
-echo $this->doctype(); ?>
+<?php echo $this->doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
 <head>
 <?php echo $this->headMeta(); ?>
@@ -17,7 +13,7 @@ echo $this->doctype(); ?>
 
         <!-- header -->
         <div id="header">
-            <a href="<?php echo $this->url(array(), 'home'); ?>"><img src="/img/poebao.png" alt="Poebao, content is king" title="Poebao, content is king"><h2 class="hidden">Poebao, content is king</h2></a>
+            <a href="<?php echo $this->url(array(), 'home'); ?>"><img src="/img/poebao.png" alt="Poebao, content is king" title="Poebao, content is king"><h1 class="hidden">Poebao, content is king</h1></a>
             <div id="nav">
                 <ul>
                     <li class="first"><a href="<?php echo $this->url(array(), 'awaiting'); ?>">oczekujące</a></li>
@@ -27,10 +23,27 @@ echo $this->doctype(); ?>
                 </ul>
             </div>
         </div>
+        
+        <?php if ($this->message): ?>
+            <div class="message <?php echo $this->message['type']; ?>"><?php echo $this->message['content'] ?></div>
+        <?php endif ?>
 
         <!-- main content -->
         <div id="content">
-        <?php echo $this->layout()->content; ?>
+            <div id="main">
+                <?php echo $this->layout()->content; ?>
+            </div>
+            <div id="additional">
+                <div class="block">
+                    <img src="/img/tmp/ad.png" alt="" title="" />
+                </div>
+
+                <div class="block">
+                    <h3>1000 postów temu ...</h3>
+                    <span class="subtext">Poniedziałek, 16 lutego 2011 - 211 dni, 11 godzin i 23 minuty temu</span>
+                    <img src="/img/tmp/block.png" alt="" title="" />
+                </div>
+            </div>
         </div>
 
         <!-- footer -->
