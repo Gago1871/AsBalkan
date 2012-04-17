@@ -14,6 +14,11 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+	margin-top: 1px;
+	padding-left: 1px;
+}
+
 img {
     border: 0;
 }
@@ -65,7 +70,7 @@ p {
 }
 
 #header a:hover {
-    color: #fbfeff
+/*    color: #fbfeff*/
 }
 
 #header h2 {
@@ -139,7 +144,7 @@ p {
 }
 
 #posts a:hover {
-    color: #0562db;
+/*    color: #0562db;*/
 }
 
 #posts li {
@@ -211,7 +216,7 @@ p {
 }
 
 #footer a:hover {
-    color: #0562db;
+/*    color: #0562db;*/
 }
 
 /* posting form */
