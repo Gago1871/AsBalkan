@@ -12,6 +12,15 @@ class IndexController extends Zend_Controller_Action
         
         $flashMessages = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger')->getMessages();
         $this->view->messages = $flashMessages;
+        
+        $this->form = new Application_Form_Post();
+        $this->view->form = $this->form;
+        
+        $objRoute = Zend_Controller_Front::getInstance()->getRouter();
+
+        $objRoute =  $objRoute->getRoute('post');
+
+        // var_dump( $objRoute);
     }
 
     /**
@@ -72,9 +81,8 @@ class IndexController extends Zend_Controller_Action
     
     public function addAction()
     {
-        $form = new Application_Form_Post();
-        $this->view->form = $form;
-        
+        $form = $this->form;
+
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {

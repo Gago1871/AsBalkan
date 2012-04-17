@@ -5,13 +5,21 @@ class Application_Form_Post extends Zend_Form
     public function init()
     {
         $this->setName('post');
+        
+        /*
+            TODO get url by route name
+        */
+        $this->setAction('/dodaj');
+        
+
 
         $www = new Zend_Form_Element_Text('www');
         $www->setLabel('www')
             ->setRequired(false)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
-            ->addValidator('NotEmpty');
+            ->addValidator('NotEmpty')
+            ->setAttrib('placeholder', 'http://www');
 
         $file = new Zend_Form_Element_File('file');
         $file->setLabel('z dysku')
@@ -43,7 +51,8 @@ class Application_Form_Post extends Zend_Form
         $submit->setAttrib('id', 'submitbutton')
         ->setLabel('Dodaj');
         
-        $cancel = new Zend_Form_Element_Button('cancel');
+        $cancel = new Zend_Form_Element_Text('cancel');
+        // $cancel->setXhtml('sfsdfsdf');
         
         $submit->setDecorators(array(
                'ViewHelper',
@@ -57,6 +66,6 @@ class Application_Form_Post extends Zend_Form
            ));
            
            
-        $this->addElements(array($file, $title, $author, $agreement, $submit, $cancel));
+        $this->addElements(array($www, $file, $title, $author, $agreement, $submit, $cancel));
     }
 }

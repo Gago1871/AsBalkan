@@ -3,10 +3,11 @@
 <head>
 <?php echo $this->headMeta(); ?>
 <?php echo $this->headTitle(); ?>
+<?php echo $this->headScript()->appendFile($this->baseUrl() . '/js/poebao.js') ?>
 
 <link href='http://fonts.googleapis.com/css?family=Didact+Gothic&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
-<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl() . '/css/site.css'); ?>
 </head>
 <body>
     <div id="page">
@@ -18,7 +19,7 @@
                 <ul>
                     <li class="first"><a href="<?php echo $this->url(array(), 'awaiting'); ?>">oczekujące</a></li>
                     <li class="last">
-                        <a href="<?php echo $this->url(array(), 'post');?>">dodaj</a>
+                        <a id="show-upload" onclick="showUploadForm(); return false;" href="<?php echo $this->url(array(), 'post');?>">dodaj</a>
                     </li>
                 </ul>
             </div>
@@ -51,6 +52,14 @@
         <!-- footer -->
         <div id="footer">
         poebao.pl (c) 2012 - <a href="/regulamin">Regulamin</a> | <a href="/kontakt">Kontakt</a>
+        </div>
+        
+
+        <div id="upload">
+            <span id="close">X</span>
+            <h2>Dodaj post</h2>
+
+            <?php echo $this->form; ?>
         </div>
 
     </div>
