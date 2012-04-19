@@ -255,23 +255,24 @@ form dt {
 
 /* UPLOAD OVERLAY */
 #upload {
-	width: 550px;
-	height: 300px;
+	width: 700px;
+	height: 390px;
+	left: -350px;
+	top: -195px;
 	
 	margin: 50% 50%;
-	left: -275px;
-	top: -150px;
-	
-	
-	background: #dcdcdc;
-	border: 10px solid #8f8f8f;
 	padding: 12px;
-	position: fixed;
-/*	position: static;*/
 
-/*	left: 200px;*/
-/*	z-index: 99999;*/
-	display: none;
+	position: fixed;
+	display: none;	
+	background-image: url('/img/opaque.png');
+}
+
+#upload div {
+	padding: 12px;
+	background-color: #dcdcdc;
+	width: 676px;
+	height: 366px;
 }
 
 #upload span {
