@@ -246,7 +246,7 @@ p {
 	padding: 12px;
 
 	position: fixed;
-	/*display: none;	*/
+	display: none;
 	background-image: url('/img/opaque.png');
 }
 
