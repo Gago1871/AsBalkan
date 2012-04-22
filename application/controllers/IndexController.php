@@ -17,9 +17,13 @@ class IndexController extends Zend_Controller_Action
 
         $this->form = new Application_Form_Post();
         $fromFile = false;
-        if (isset($this->params['file']) && $this->params['file'] == 1) {
-            $fromFile = true;
-        }
+
+        if (isset($this->params['file'])) {
+            $this->view->showUpload = true;
+            if ($this->params['file'] == 1) {
+                $fromFile = true;
+            }
+        } 
 
         $this->form->setmyvar($fromFile);
         $this->form->startform(); 

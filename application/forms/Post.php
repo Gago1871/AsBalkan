@@ -41,7 +41,7 @@ class Application_Form_Post extends Zend_Form
         if ($this->fromFile) {
             $file = new Zend_Form_Element_File('file');
             $file
-                ->setLabel('Wgraj z dysku <span>(<a href="?">lud z url</a>)</span>')
+                ->setLabel('Wgraj z dysku <span>(<a href="?file=0">lud z url</a>)</span>')
                 ->setRequired(true)
                 ->addValidator('Size', false, array('min' => '1kB', 'max' => '20MB'));
         
@@ -136,7 +136,7 @@ class Application_Form_Post extends Zend_Form
         // Submit button
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton')
-            ->setDescription('<a href="/">Anuluj</a>')
+            ->setDescription('<a id="closelink" href="/" onclick="hideUploadForm; return false;">Anuluj</a>')
             ->setLabel('Dodaj');
         $submit->class = 'submit';
         $submit->setDecorators(array(

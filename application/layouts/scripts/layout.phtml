@@ -59,10 +59,14 @@
             <div class="container">
                 <span id="closebutton">X</span>
                 <h2>Dodaj post</h2>
-
                 <?php echo $this->form; ?>    
             </div>
         </div>
+        <?php if ($this->showUpload): ?>
+            <script type="text/javascript">
+            showUploadForm();
+            </script>
+        <?php endif ?>
 
     </div>
 </body>
