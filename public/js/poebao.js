@@ -1,6 +1,6 @@
 window.onload = function() {
 	
-	var closeButton = document.getElementById('close');
+	var closeButton = document.getElementById('closebutton');
 	closeButton.addEventListener('click', function () {
 		document.getElementById('upload').style.display = "none";
 	}, false);

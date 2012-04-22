@@ -219,24 +219,6 @@ p {
 /*    color: #0562db;*/
 }
 
-/* posting form */
-form #title, form #author {
-    border: 1px solid #aaa;
-}
-
-form #file, form #submitbutton {
-/*  border: 1px solid #aaa;
-    background: #333;*/
-}
-
-/*form dd {
-    float: left;
-}
-
-form dt {
-    float: right;
-}*/
-
 /* MESSAGES */
 .message {
     padding: 14px;
@@ -258,26 +240,66 @@ form dt {
 	width: 700px;
 	height: 390px;
 	left: -350px;
-	top: -195px;
+	top: 115px;
 	
-	margin: 50% 50%;
+	margin: 0 50%;
 	padding: 12px;
 
 	position: fixed;
-	display: none;	
+	/*display: none;	*/
 	background-image: url('/img/opaque.png');
 }
 
-#upload div {
+#upload .container {
 	padding: 12px;
 	background-color: #dcdcdc;
 	width: 676px;
 	height: 366px;
 }
 
-#upload span {
+#upload #closebutton {
 	float: right;
 	font-weight: bold;
 	padding: 6px 10px;
 	cursor: pointer;
+}
+
+/* POSTING FORM */
+#post table td.element {
+    /*font-size: 17px;*/
+    vertical-align: top;
+}
+
+#post input {
+    /*cursor: pointer;*/
+    /*font-size: 25px;*/
+}
+
+#post .file, #post .submit {
+    /*font-size: 30px;*/
+}
+
+#post .poebao {
+    border: 1px solid #aaa;
+}
+
+#post label {
+    font-size: 22px;
+}
+
+#post label span {
+    font-size: 16px;
+}
+
+#post .agreement {
+    height: 80px;
+}
+
+#post  input.submit {
+    margin-right: 10px;
+    /*font-size: 25px;*/
+}
+
+#post .submit .hint {
+    /*font-size: 17px;*/
 }

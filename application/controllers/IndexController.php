@@ -13,7 +13,17 @@ class IndexController extends Zend_Controller_Action
         $flashMessages = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger')->getMessages();
         $this->view->messages = $flashMessages;
         
+        $this->params = $this->getRequest()->getParams();
+
         $this->form = new Application_Form_Post();
+        $fromFile = false;
+        if (isset($this->params['file']) && $this->params['file'] == 1) {
+            $fromFile = true;
+        }
+
+        $this->form->setmyvar($fromFile);
+        $this->form->startform(); 
+
         $this->view->form = $this->form;
         
         $objRoute = Zend_Controller_Front::getInstance()->getRouter();
@@ -37,8 +47,7 @@ class IndexController extends Zend_Controller_Action
      */
     public function authorAction()
     {
-        $params = $this->getRequest()->getParams();
-        $author = $params['name'];
+        $author = $this->params['name'];
 
         $posts = new Application_Model_DbTable_Posts();
         $this->view->posts = $posts->fetchAll('`author`="' . $author . '" AND `status`="a"', 'added DESC');
@@ -66,8 +75,7 @@ class IndexController extends Zend_Controller_Action
      */
     public function viewAction()
     {
-        $params = $this->getRequest()->getParams();
-        $id = $params['id'];
+        $id = $this->params['id'];
 
         $posts = new Application_Model_DbTable_Posts();
         $post = $posts->get($id);
