@@ -14,6 +14,17 @@
                     </p>
                 </span>
             </div>
+            <?php if ($this->identity): ?>
+                <div class="admin">
+                    <a href="/moveToMain?id=<?php echo $value->id ?>" class="button ok">Główna</a>
+                    <a href="/poczek?id=<?php echo $value->id ?>" class="button middle">Poczek.</a>
+                    <a href="/remove?id=<?php echo $value->id ?>" class="button warning">Usuń</a>
+                    <p>
+                        Jakieś info dodatkowe....
+                    </p>
+                </div>    
+            <?php endif ?>
+            
         </li>
     <?php endforeach ?>
 </ul>

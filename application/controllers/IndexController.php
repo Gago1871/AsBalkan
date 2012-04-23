@@ -35,6 +35,18 @@ class IndexController extends Zend_Controller_Action
         $objRoute =  $objRoute->getRoute('post');
 
         // var_dump( $objRoute);
+
+        $auth = Zend_Auth::getInstance();
+
+        if ($auth->hasIdentity()) {
+            $identity = $auth->getIdentity();
+            $this->view->identity = $identity;
+        }
+    }
+
+    public function initForm()
+    {
+        
     }
 
     /**
@@ -171,6 +183,52 @@ class IndexController extends Zend_Controller_Action
         }
 
         $this->view->headTitle('Dodaj post');
+    }
+
+    /**
+     * Login user action
+     *
+     * @since 2012-04-23
+     * @author Jakub Kułak <jakub.kulak@gmail.com>
+     */
+    public function loginAction()
+    {
+        $loginForm = new Application_Form_Login();
+        
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($loginForm->isValid($formData)) {
+
+                $filename = APPLICATION_PATH . '/users/.htdigest';
+                $realm = 'Admin';
+
+                $auth = Zend_Auth::getInstance();
+                $adapter = new Zend_Auth_Adapter_Digest($filename, $realm, $formData['login'], $formData['password']);                                
+                $result = $auth->authenticate($adapter);
+
+                if ($result->isValid()) {
+                    $identity = $result->getIdentity();
+                    $this->_redirect($this->_helper->url->url(array(), 'awaiting'));
+                } else {
+                    $loginForm->setErrors(array('Invalid user/pass'));
+                    $loginForm->addDecorator('Errors', array('placement' => 'prepend'));
+                }
+            }
+        }
+
+        $this->view->loginForm = $loginForm;    
+    }
+
+    /**
+     * Logout user action
+     *
+     * @since 2012-04-23
+     * @author Jakub Kułak <jakub.kulak@gmail.com>
+     */
+    public function logoutAction()
+    {
+        Zend_Auth::getInstance()->clearIdentity();
+        $this->_redirect($this->_helper->url->url(array(), 'home'));
     }
     
     /**

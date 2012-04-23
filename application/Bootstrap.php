@@ -17,6 +17,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //$router->removeDefaultRoutes();
         $router->addConfig($routes, 'routes');
     }
+
+    public function _initTranslator()
+    {  
+      $translator = new Zend_Translate('array', APPLICATION_PATH . '/lang/pl.php', 'pl');
+      $translator->setLocale('pl');
+
+      Zend_Registry::set('Zend_Translate', $translator);
+    }
     
     /**
      *

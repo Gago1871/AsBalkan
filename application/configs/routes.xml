@@ -72,6 +72,24 @@
                 </defaults>
                 <reverse>/kontakt</reverse>
             </contact>
+
+            <adminlogin>
+                <route>/poebaoadminlogin</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>login</action>
+                </defaults>
+                <reverse>/poebaoadminlogin</reverse>
+            </adminlogin>
+            
+            <logout>
+                <route>/logout</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>logout</action>
+                </defaults>
+                <reverse>/logout</reverse>
+            </logout>
             
         </routes>
     </production>

@@ -185,6 +185,37 @@ p {
     font-size: 20px;
 }
 
+#posts .admin {
+    float: right;
+    width: 178px;
+}
+
+#posts .admin a.button {
+    display: block;
+    float: left;
+    border: 1px solid #ccc;
+    padding: 4px;
+    margin-right: 4px;
+}
+
+#posts .admin a.button:hover {
+    border: 1px solid #888;
+}
+
+#posts .admin a.button.ok {
+    background-color: #00a600;
+}
+
+#posts .admin a.button.middle {
+    background-color: #FFFFC5;
+}
+
+#posts .admin a.button.warning {
+    background-color: #A80000;
+}
+
+
+
 /* post view */
 #post h1 {
 	margin-top: 40px;
