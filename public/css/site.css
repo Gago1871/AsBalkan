@@ -347,3 +347,11 @@ p {
     display: inline;
     margin-right: 10px;
 }
+
+#moderate .element label {
+    margin-right: 10px;
+}
+
+#moderate .element label input {
+    margin-right: 4px;
+}

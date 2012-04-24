@@ -20,7 +20,6 @@ class Application_Form_Moderation extends Zend_Form
         $defaultDecorator = array(
             // array('Errors', 'placement' => 'prepend'),
             array('ViewHelper'),
-            // array('formRadio'),
             // array('Description', array('class' => 'hidden')),
             // array(array('data' => 'HtmlTag'),  array('tag' =>'td', 'class'=> 'element')),
             array('Label', array('tag' => 'span', 'placement' => 'append')),
@@ -33,6 +32,7 @@ class Application_Form_Moderation extends Zend_Form
             ->addMultiOption(1, 'Waiting')
             ->addMultiOption(2, 'Promoted');
         $category->setDecorators($defaultDecorator);
+        $category->setSeparator('');
 
         $nsfw = new Zend_Form_Element_Checkbox('nsfw');
         $nsfw->setLabel('NSFW')
