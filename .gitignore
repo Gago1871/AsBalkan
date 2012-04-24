@@ -3,3 +3,4 @@ docs/poebao.mwb.bak
 application/configs/application.ini
 public/.htaccess
 public/.htpasswd
+application/users/.htdigest

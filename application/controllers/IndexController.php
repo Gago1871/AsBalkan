@@ -15,7 +15,7 @@ class IndexController extends Zend_Controller_Action
         
         $this->params = $this->getRequest()->getParams();
 
-        $this->form = new Application_Form_Post();
+        $this->postForm = new Application_Form_Post();
         $fromFile = false;
 
         if (isset($this->params['file'])) {
@@ -25,10 +25,10 @@ class IndexController extends Zend_Controller_Action
             }
         } 
 
-        $this->form->setmyvar($fromFile);
-        $this->form->startform(); 
+        $this->postForm->setmyvar($fromFile);
+        $this->postForm->startform(); 
 
-        $this->view->form = $this->form;
+        $this->view->postForm = $this->postForm;
         
         $objRoute = Zend_Controller_Front::getInstance()->getRouter();
 
@@ -44,18 +44,13 @@ class IndexController extends Zend_Controller_Action
         }
     }
 
-    public function initForm()
-    {
-        
-    }
-
     /**
      * Display main site, with approved posts
      */
     public function indexAction() {
 
         $posts = new Application_Model_DbTable_Posts();
-        $this->view->posts = $posts->fetchAll('`status_promoted`="1" AND`status`="a"', 'added DESC');
+        $this->view->posts = $posts->fetchAll('`category`="2" AND `status`="a"', 'added DESC');
     }
     
     /**
@@ -79,7 +74,7 @@ class IndexController extends Zend_Controller_Action
     public function awaitingAction()
     {
         $posts = new Application_Model_DbTable_Posts();
-        $this->view->posts = $posts->fetchAll('`status_waiting`="1" AND `status_promoted`="0" AND `status`="a"', 'added DESC');
+        $this->view->posts = $posts->fetchAll('`category`="1" AND `status`="a"', 'added DESC');
 
         $this->view->headTitle('Oczekujące');
         $this->view->title = 'Oczekujące';
@@ -105,13 +100,13 @@ class IndexController extends Zend_Controller_Action
     
     public function addAction()
     {
-        $form = $this->form;
+        $postForm = $this->postForm;
 
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
-            if ($form->isValid($formData)) {
+            if ($postForm->isValid($formData)) {
 
-                $www = $form->getValue('www');
+                $www = $postForm->getValue('www');
                 
                 $appConfig = Zend_Registry::get('Config_App');
                 $storage = $appConfig['storage']['location']; // /var/www/poebao-cdn
@@ -119,10 +114,10 @@ class IndexController extends Zend_Controller_Action
                 $id = Jk_Url::createUniqueId(); // abcd123
                 $hashedDir = Jk_File::getHashedDirStructure($id); // a/b/c/d123
                 
-                $file = $form->file->getFileName();
-                $form->file->receive();
+                $file = $postForm->file->getFileName();
+                $postForm->file->receive();
                 
-                if ($form->file->isReceived()) {
+                if ($postForm->file->isReceived()) {
                     
                     $fileInfo = pathinfo($file);
                     $normalizedFilename = Jk_Url::normalize($fileInfo['filename']);
@@ -157,9 +152,9 @@ class IndexController extends Zend_Controller_Action
                     }
                 }
 
-                $title = $form->getValue('title');
-                $author = $form->getValue('author');
-                $agreement = $form->getValue('agreement');
+                $title = $postForm->getValue('title');
+                $author = $postForm->getValue('author');
+                $agreement = $postForm->getValue('agreement');
                 
                 // read source of the file
                 $source = 'HD';
@@ -178,7 +173,7 @@ class IndexController extends Zend_Controller_Action
                 
                 $message = array('type' => 'failure', 'content' => 'You`re doing it wrong...');
                 $this->_helper->getHelper('FlashMessenger')->addMessage($message);
-                                $form->populate($formData);
+                                $postForm->populate($formData);
             }
         }
 
@@ -193,11 +188,11 @@ class IndexController extends Zend_Controller_Action
      */
     public function loginAction()
     {
-        $loginForm = new Application_Form_Login();
+        $form = new Application_Form_Login();
         
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
-            if ($loginForm->isValid($formData)) {
+            if ($form->isValid($formData)) {
 
                 $filename = APPLICATION_PATH . '/users/.htdigest';
                 $realm = 'Admin';
@@ -208,15 +203,43 @@ class IndexController extends Zend_Controller_Action
 
                 if ($result->isValid()) {
                     $identity = $result->getIdentity();
-                    $this->_redirect($this->_helper->url->url(array(), 'awaiting'));
+                    $this->_redirect($this->_helper->url->url(array(), 'moderation'));
                 } else {
-                    $loginForm->setErrors(array('Invalid user/pass'));
-                    $loginForm->addDecorator('Errors', array('placement' => 'prepend'));
+                    $form->setErrors(array('Invalid user/pass'));
+                    $form->addDecorator('Errors', array('placement' => 'prepend'));
                 }
             }
         }
 
-        $this->view->loginForm = $loginForm;    
+        $this->view->form = $form;    
+    }
+
+    /**
+     * Moderation list action
+     *
+     * @since 2012-04-24
+     * @author Jakub Kułak <jakub.kulak@gmail.com>
+     */
+    public function moderationAction()
+    {
+        $this->view->headTitle('Moderacja');
+        $this->view->title = 'Moderacja';
+
+        $posts = array();
+
+        $form = new Application_Form_Moderation();
+
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($form->isValid($formData)) {
+
+                $postsModel = new Application_Model_DbTable_Posts();
+                $posts = $postsModel->fetchFromCategory($formData['category'], $formData['nsfw'], $formData['removed']);
+            }
+        }
+
+        $this->view->posts = $posts;
+        $this->view->form = $form;
     }
 
     /**

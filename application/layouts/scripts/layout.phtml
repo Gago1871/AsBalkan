@@ -22,7 +22,8 @@
                         <a id="show-upload" onclick="showUploadForm(); return false;" href="<?php echo $this->url(array(), 'post');?>">dodaj</a>
                     </li>
                     <?php if ($this->identity): ?>
-                        <li><a href="<?php echo $this->url(array(), 'logout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>    
+                        <li><a href="<?php echo $this->url(array(), 'moderation') ?>">moderacja</a></li>
+                        <li><a href="<?php echo $this->url(array(), 'logout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
                     <?php endif ?>
                     
                 </ul>
@@ -63,7 +64,7 @@
             <div class="container">
                 <span id="closebutton">X</span>
                 <h2>Dodaj post</h2>
-                <?php echo $this->form; ?>    
+                <?php echo $this->postForm; ?>    
             </div>
         </div>
         <?php if ($this->showUpload): ?>

@@ -7,6 +7,14 @@ return array(
     // Login form
     "Invalid user/pass" => "Błędne dane logownia",
 
+    // Application_Form_Moderation
+    "Not moderated" => "Niezmoderowane",
+    "Promoted" => "Główna",
+    "Waiting" => "Oczekujące",
+    "NSWF" => "NSWF",
+    "Removed" => "Usunięte",
+    "Filter" => "Filtruj",
+
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Błędny typ danych, oczekiwany ciąg znaków",
     "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' to niepoprawny adres e-mail",

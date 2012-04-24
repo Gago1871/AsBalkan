@@ -334,3 +334,16 @@ p {
 #post .submit .hint {
     /*font-size: 17px;*/
 }
+
+/* ADMIN */
+#moderate {
+    margin-bottom: 10px;
+    background-color: #B5BFB7;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#moderate .element {
+    display: inline;
+    margin-right: 10px;
+}

@@ -15,6 +15,8 @@ class Application_Form_Login extends Zend_Form
      */
     public function init()
     {
+        $this->setName('login');
+
         $login = new Zend_Form_Element_Text('login');
         $login->setLabel('E-mail')
             ->setRequired(true)

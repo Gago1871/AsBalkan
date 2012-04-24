@@ -2,11 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-ALTER SCHEMA `my_7727`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_polish_ci ;
-
-USE `my_7727`;
-
-ALTER TABLE `my_7727`.`posts` CHARACTER SET = utf8 , COLLATE = utf8_polish_ci , ADD COLUMN `status_nsfw` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0  AFTER `status_promoted` , CHANGE COLUMN `status_moderated` `status_moderated` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0  AFTER `file` , CHANGE COLUMN `status_waiting` `status_waiting` TINYINT(3) UNSIGNED NOT NULL DEFAULT 1  , CHANGE COLUMN `status_promoted` `status_promoted` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0  ;
+ALTER TABLE `my_7727`.`posts` DROP COLUMN `status_promoted` , DROP COLUMN `status_moderated` , CHANGE COLUMN `status` `status` ENUM('a','d') NOT NULL COMMENT 'a - active\nd - deleted\n'  AFTER `status_nsfw` , CHANGE COLUMN `status_waiting` `category` INT(10) UNSIGNED NOT NULL DEFAULT 0  ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

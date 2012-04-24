@@ -30,6 +30,15 @@
                 <reverse>/oczekujace</reverse>
             </awaiting>
 
+            <moderation>
+                <route>/moderation</route>
+                <defaults>
+                    <controller>index</controller>
+                    <action>moderation</action>
+                </defaults>
+                <reverse>/moderation</reverse>
+            </moderation>
+
             <author type="Zend_Controller_Router_Route_Regex">
                 <route>u/(.+)</route>
                 <defaults>
