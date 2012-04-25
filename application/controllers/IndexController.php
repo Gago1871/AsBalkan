@@ -30,11 +30,8 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->postForm = $this->postForm;
         
-        $objRoute = Zend_Controller_Front::getInstance()->getRouter();
-
-        $objRoute =  $objRoute->getRoute('post');
-
-        // var_dump( $objRoute);
+        // $objRoute = Zend_Controller_Front::getInstance()->getRouter();
+        // $objRoute =  $objRoute->getRoute('post');
 
         $auth = Zend_Auth::getInstance();
 
@@ -212,34 +209,6 @@ class IndexController extends Zend_Controller_Action
         }
 
         $this->view->form = $form;    
-    }
-
-    /**
-     * Moderation list action
-     *
-     * @since 2012-04-24
-     * @author Jakub Kułak <jakub.kulak@gmail.com>
-     */
-    public function moderationAction()
-    {
-        $this->view->headTitle('Moderacja');
-        $this->view->title = 'Moderacja';
-
-        $posts = array();
-
-        $form = new Application_Form_Moderation();
-
-        if ($this->getRequest()->isPost()) {
-            $formData = $this->getRequest()->getPost();
-            if ($form->isValid($formData)) {
-
-                $postsModel = new Application_Model_DbTable_Posts();
-                $posts = $postsModel->fetchFromCategory($formData['category'], $formData['nsfw'], $formData['removed']);
-            }
-        }
-
-        $this->view->posts = $posts;
-        $this->view->form = $form;
     }
 
     /**

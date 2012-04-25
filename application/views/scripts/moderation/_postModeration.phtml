@@ -1,0 +1,11 @@
+<div class="admin">
+    <a href="<?php echo $this->url(array('category' => 2, 'id' => $this->post->id), 'modcategory'); ?>" class="button<?php if ($this->post->category == 2): ?> set<?php endif ?>">Główna</a>
+    <a href="<?php echo $this->url(array('category' => 1, 'id' => $this->post->id), 'modcategory'); ?>" class="button<?php if ($this->post->category == 1): ?> set<?php endif ?>">Oczekujące</a>
+    <a href="<?php echo $this->url(array('id' => $this->post->id, 'flag' => 'nsfw', 'value' => !$this->post->flag_nsfw), 'modflag'); ?>" class="button<?php if ($this->post->flag_nsfw == 1): ?> set<?php endif ?>">NSFW</a>
+    <a href="<?php echo $this->url(array('id' => $this->post->id, 'status' => ($this->post->status=='a'?'d':'a')), 'modstatus'); ?>" class="button<?php if ($this->post->status <> 'd'): ?> delete<?php endif ?>"><?php if ($this->post->status <> 'd'): ?>Usuń<?php else: ?>Przywróć<?php endif ?></a>
+
+    <p>
+        <!-- Jakieś info dodatkowe.... -->
+
+    </p>
+</div> 

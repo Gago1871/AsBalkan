@@ -30,15 +30,6 @@
                 <reverse>/oczekujace</reverse>
             </awaiting>
 
-            <moderation>
-                <route>/moderation</route>
-                <defaults>
-                    <controller>index</controller>
-                    <action>moderation</action>
-                </defaults>
-                <reverse>/moderation</reverse>
-            </moderation>
-
             <author type="Zend_Controller_Router_Route_Regex">
                 <route>u/(.+)</route>
                 <defaults>
@@ -99,6 +90,56 @@
                 </defaults>
                 <reverse>/logout</reverse>
             </logout>
+
+            <!-- moderation -->
+            <moderation>
+                <route>/moderation</route>
+                <defaults>
+                    <controller>moderation</controller>
+                    <action>list</action>
+                </defaults>
+                <reverse>/moderation</reverse>
+            </moderation>
+
+            <modcategory type="Zend_Controller_Router_Route_Regex">
+                <route>moderation/category/(.+)/(.+)</route>
+                <defaults>
+                    <controller>moderation</controller>
+                    <action>setcategory</action>
+                </defaults>
+                <map>
+                    <id>1</id>
+                    <category>2</category>
+                </map>
+                <reverse>moderation/category/%s/%s</reverse>
+            </modcategory>
+
+            <modflag type="Zend_Controller_Router_Route_Regex">
+                <route>moderation/flag/(.+)/(.+)/(.+)</route>
+                <defaults>
+                    <controller>moderation</controller>
+                    <action>flag</action>
+                </defaults>
+                <map>
+                    <flag>1</flag>
+                    <id>2</id>
+                    <value>3</value>
+                </map>
+                <reverse>moderation/flag/%s/%s/%s</reverse>
+            </modflag>
+
+            <modstatus type="Zend_Controller_Router_Route_Regex">
+                <route>moderation/status/(.+)/(.+)</route>
+                <defaults>
+                    <controller>moderation</controller>
+                    <action>status</action>
+                </defaults>
+                <map>
+                    <id>1</id>
+                    <status>2</status>
+                </map>
+                <reverse>moderation/status/%s/%s</reverse>
+            </modstatus>
             
         </routes>
     </production>

@@ -33,20 +33,10 @@ class Application_Model_DbTable_Posts extends Zend_Db_Table_Abstract
         return $this->insert($data);
     }
 
-    public function update($id, $symbol, $name)
-    {
-        $data = array(
-            'symbol' => $symbol,
-            'name' => $name,
-            );
-        $this->update($data, 'post_id = '. (int)$id);
-    }
-
     public function delete($id)
     {
         $this->delete('post_id =' . (int)$id);
     }
-
 
     /**
      * Fetch posts from given category
@@ -67,8 +57,72 @@ class Application_Model_DbTable_Posts extends Zend_Db_Table_Abstract
         }
 
         if (!$nsfw) {
-            $conditions .= ' AND `status_nsfw`="0"';
+            $conditions .= ' AND `flag_nsfw`="0"';
         }
         return $this->fetchAll('`category`="' . $category . '"' . $conditions, 'added DESC');
+    }
+
+    /**
+     * Set post category
+     * 
+     * @param integer $id
+     * @param integer $category
+     * @return boolean
+     * 
+     * @since 2012-04-25
+     * @author Jakub Kułak <jakub.kulak@gmail.com>
+     */
+    public function setCategory($id, $category)
+    {
+        $data = array(
+            'category' => $category,
+            );
+
+        $result = $this->update($data, 'id = ' . (int) $id);
+
+        return $this;
+    }
+
+    /**
+     * Set post flag
+     * 
+     * @param integer $id
+     * @param string $flag
+     * @param string $value
+     * @return boolean
+     * 
+     * @since 2012-04-26
+     * @author Jakub Kułak <jakub.kulak@gmail.com>
+     */
+    public function setFlag($id, $flag, $value)
+    {
+        $data = array(
+            'flag_' . $flag => $value,
+            );
+
+        $result = $this->update($data, 'id = ' . (int) $id);
+
+        return $this;
+    }
+
+    /**
+     * Set status
+     * 
+     * @param integer $id
+     * @param integer $value
+     * @return boolean
+     * 
+     * @since 2012-04-25
+     * @author Jakub Kułak <jakub.kulak@gmail.com>
+     */
+    public function setStatus($id, $value)
+    {
+        $data = array(
+            'status' => $value,
+            );
+
+        $result = $this->update($data, 'id = ' . (int) $id);
+
+        return $this;
     }
 }

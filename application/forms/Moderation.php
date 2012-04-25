@@ -30,7 +30,8 @@ class Application_Form_Moderation extends Zend_Form
         $category
             ->addMultiOption(0, 'Not moderated')
             ->addMultiOption(1, 'Waiting')
-            ->addMultiOption(2, 'Promoted');
+            ->addMultiOption(2, 'Promoted')
+            ->setValue(0);
         $category->setDecorators($defaultDecorator);
         $category->setSeparator('');
 
