@@ -37,11 +37,13 @@ class Application_Form_Moderation extends Zend_Form
 
         $nsfw = new Zend_Form_Element_Checkbox('nsfw');
         $nsfw->setLabel('NSFW')
-            ->setDecorators($defaultDecorator);
+            ->setDecorators($defaultDecorator)
+            ->setChecked(true);
 
         $removed = new Zend_Form_Element_Checkbox('removed');
         $removed->setLabel('Removed')
-            ->setDecorators($defaultDecorator);
+            ->setDecorators($defaultDecorator)
+            ->setChecked(true);
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Filter')
