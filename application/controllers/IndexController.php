@@ -33,12 +33,8 @@ class IndexController extends Zend_Controller_Action
         // $objRoute = Zend_Controller_Front::getInstance()->getRouter();
         // $objRoute =  $objRoute->getRoute('post');
 
-        $auth = Zend_Auth::getInstance();
-
-        if ($auth->hasIdentity()) {
-            $identity = $auth->getIdentity();
-            $this->view->identity = $identity;
-        }
+        $this->view->identity = $this->_helper->getIdentity();
+        // $this->_helper->getIdentity->example('sd');
     }
 
     /**

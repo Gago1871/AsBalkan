@@ -9,12 +9,7 @@ class ModerationController extends Zend_Controller_Action
         $appConfig = Zend_Registry::get('Config_App');
         $this->view->storageHost = $appConfig['storage']['host'];
 
-        $auth = Zend_Auth::getInstance();
-
-        if ($auth->hasIdentity()) {
-            $identity = $auth->getIdentity();
-            $this->view->identity = $identity;
-        }
+        $this->view->identity = $this->_helper->getIdentity();
 
         $this->posts = new Application_Model_DbTable_Posts();
         $this->requestParams = $this->getRequest()->getParams();

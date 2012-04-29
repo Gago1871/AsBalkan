@@ -7,6 +7,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $appConfig = $this->getOption('app');
         Zend_Registry::set('Config_App', $appConfig);
 
+        $config = $this->getOptions();
+        Zend_Registry::set('Zend_Config', $config);
+
         // Start routing
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
@@ -16,6 +19,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $routes = new Zend_Config_Xml(APPLICATION_PATH . '/configs/routes.xml', APPLICATION_ENV);
         //$router->removeDefaultRoutes();
         $router->addConfig($routes, 'routes');
+
+        Zend_Controller_Action_HelperBroker::addPrefix('Jk_Helper');
     }
 
     public function _initTranslator()
@@ -45,5 +50,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headTitle()->setSeparator(' - ');
         $view->headTitle('poebao');
 
+        $config = Zend_Registry::get('Zend_Config');
+        $view->headScript()->appendFile($view->baseUrl() . $config['js']['app']['filename']);
+        $view->headScript()->appendFile($view->baseUrl() . $config['js']['jquery']['filename']);
     }
 }
