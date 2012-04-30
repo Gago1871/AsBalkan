@@ -1,30 +1,14 @@
-window.onload = function() {
-	
-	var closeButton = document.getElementById('closebutton');
-	closeButton.addEventListener('click', function () {
-		hideUploadForm();
-	}, false);
 
-	var closeLink = document.getElementById('closelink');
-	closeLink.addEventListener('click', function () {
-		hideUploadForm();
-	}, true);
-	
-	// var showUploadButton = document.getElementById('show-upload');
-	// showUploadButton.addEventListener('click', function () {
-	// 	document.getElementById('upload').style.display = "block";
-	// }, true);
-	
-}
+// jquery
+$(function () {
+    // set up navigation buttons
+    $('#nav-show-upload-form').click(function () {
+        $('#upload-form-layer').show();
+        return false;
+    });
 
-function showUploadForm() {
-
-	document.getElementById('upload').style.display = "block";
-	return true;
-}
-
-function hideUploadForm() {
-
-	document.getElementById('upload').style.display = "none";
-	return false;
-}
+    $('#nav-hide-upload-form').click(function () {
+        $('#upload-form-layer').hide();
+        return false;
+    });
+});

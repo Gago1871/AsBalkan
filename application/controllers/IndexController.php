@@ -14,27 +14,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->messages = $flashMessages;
         
         $this->params = $this->getRequest()->getParams();
-
-        $this->postForm = new Application_Form_Post();
-        $fromFile = false;
-
-        if (isset($this->params['file'])) {
-            $this->view->showUpload = true;
-            if ($this->params['file'] == 1) {
-                $fromFile = true;
-            }
-        } 
-
-        $this->postForm->setmyvar($fromFile);
-        $this->postForm->startform(); 
-
-        $this->view->postForm = $this->postForm;
-        
-        // $objRoute = Zend_Controller_Front::getInstance()->getRouter();
-        // $objRoute =  $objRoute->getRoute('post');
-
         $this->view->identity = $this->_helper->getIdentity();
-        // $this->_helper->getIdentity->example('sd');
     }
 
     /**
@@ -67,7 +47,7 @@ class IndexController extends Zend_Controller_Action
     public function awaitingAction()
     {
         $posts = new Application_Model_DbTable_Posts();
-        $this->view->posts = $posts->fetchAll('`category`="1" AND `status`="a"', 'added DESC');
+        $this->view->posts = $posts->fetchAll('`category` IN ("1", "0") AND `status`="a"', 'added DESC');
 
         $this->view->headTitle('Oczekujące');
         $this->view->title = 'Oczekujące';
@@ -172,52 +152,6 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->headTitle('Dodaj post');
     }
-
-    /**
-     * Login user action
-     *
-     * @since 2012-04-23
-     * @author Jakub Kułak <jakub.kulak@gmail.com>
-     */
-    public function loginAction()
-    {
-        $form = new Application_Form_Login();
-        
-        if ($this->getRequest()->isPost()) {
-            $formData = $this->getRequest()->getPost();
-            if ($form->isValid($formData)) {
-
-                $filename = APPLICATION_PATH . '/users/.htdigest';
-                $realm = 'Admin';
-
-                $auth = Zend_Auth::getInstance();
-                $adapter = new Zend_Auth_Adapter_Digest($filename, $realm, $formData['login'], $formData['password']);                                
-                $result = $auth->authenticate($adapter);
-
-                if ($result->isValid()) {
-                    $identity = $result->getIdentity();
-                    $this->_redirect($this->_helper->url->url(array(), 'moderation'));
-                } else {
-                    $form->setErrors(array('Invalid user/pass'));
-                    $form->addDecorator('Errors', array('placement' => 'prepend'));
-                }
-            }
-        }
-
-        $this->view->form = $form;    
-    }
-
-    /**
-     * Logout user action
-     *
-     * @since 2012-04-23
-     * @author Jakub Kułak <jakub.kulak@gmail.com>
-     */
-    public function logoutAction()
-    {
-        Zend_Auth::getInstance()->clearIdentity();
-        $this->_redirect($this->_helper->url->url(array(), 'home'));
-    }
     
     /**
      * Display contact form
@@ -232,7 +166,4 @@ class IndexController extends Zend_Controller_Action
     public function rulesAction()
     {
     }
-
-
 }
-

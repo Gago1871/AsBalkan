@@ -287,8 +287,8 @@ p {
 	background-color: red;
 }
 
-/* UPLOAD OVERLAY */
-#upload {
+/* UPLOAD LAYER */
+#upload-form-layer {
 	width: 700px;
 	height: 390px;
 	left: -350px;
@@ -302,14 +302,14 @@ p {
 	background-image: url('/img/opaque.png');
 }
 
-#upload .container {
+#upload-form-layer .container {
 	padding: 12px;
 	background-color: #dcdcdc;
 	width: 676px;
 	height: 366px;
 }
 
-#upload #closebutton {
+#upload-form-layer #nav-hide-upload-form {
 	float: right;
 	font-weight: bold;
 	padding: 6px 10px;
@@ -317,42 +317,42 @@ p {
 }
 
 /* POSTING FORM */
-#post table td.element {
+#uploadform table td.element {
     /*font-size: 17px;*/
     vertical-align: top;
 }
 
-#post input {
+#uploadform input {
     /*cursor: pointer;*/
     /*font-size: 25px;*/
 }
 
-#post .file, #post .submit {
+#uploadform .file, #uploadform .submit {
     /*font-size: 30px;*/
 }
 
-#post .poebao {
+#uploadform .poebao {
     border: 1px solid #aaa;
 }
 
-#post label {
+#uploadform label {
     font-size: 22px;
 }
 
-#post label span {
+#uploadform label span {
     font-size: 16px;
 }
 
-#post .agreement {
+#uploadform .agreement {
     height: 80px;
 }
 
-#post  input.submit {
+#uploadform  input.submit {
     margin-right: 10px;
     /*font-size: 25px;*/
 }
 
-#post .submit .hint {
+#uploadform .submit .hint {
     /*font-size: 17px;*/
 }
 

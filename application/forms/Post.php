@@ -2,32 +2,15 @@
 
 class Application_Form_Post extends Zend_Form
 {
-    
-    private $fromFile;
-
     public function init()
     {
-        // $this->startForm();
-    }
+        // read form attribs passed to constructor in controller
+        $attribs = $this->getAttribs();
 
+        $fromFile = (1 == $attribs['uploadfromfile']);
 
-
-    public function setmyvar($var)
-    {
-        $this->fromFile = $var;
-    }
-
-    public function startForm()
-    {
-
-        // $fromFile = $this->fromFile;
-
-        $this->setName('post');
-        
-        /*
-            TODO get url by route name
-        */
-        $this->setAction('/dodaj');
+        $this->setName('uploadform');
+        $this->setAction($attribs['action']);
 
         $defaultDecorator = array(
             array('Errors', 'placement' => 'prepend'),
@@ -38,10 +21,12 @@ class Application_Form_Post extends Zend_Form
             array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
         );
 
-        if ($this->fromFile) {
+        $uploadFromFile = new Zend_Form_Element_Hidden('uploadfromfile');
+
+        if ($fromFile) {
             $file = new Zend_Form_Element_File('file');
             $file
-                ->setLabel('Wgraj z dysku <span>(<a href="?file=0">lud z url</a>)</span>')
+                ->setLabel('Wgraj z dysku <span>(<a href="?uploadfromfile=0">lud z url</a>)</span>')
                 ->setRequired(true)
                 ->addValidator('Size', false, array('min' => '1kB', 'max' => '20MB'));
         
@@ -53,16 +38,19 @@ class Application_Form_Post extends Zend_Form
                 array(array('data' => 'HtmlTag'),  array('tag' =>'td', 'class'=> 'element')),
                 array('Label', array('tag' => 'td', 'escape' => false)),
                 array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
-        ));
+            ));
+
+            $uploadFromFile->setValue(1);
+
         } else {
 
-            $file = new Zend_Form_Element_Text('www');
+            $file = new Zend_Form_Element_Text('file');
             $file->setLabel('www')
                 ->setRequired(false)
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addValidator('NotEmpty')
-                ->setLabel('url pliku <span>(<a href="?file=1">lud dodaj z dysku</a>)</span>')
+                ->setLabel('url pliku <span>(<a href="?uploadfromfile=1">lud dodaj z dysku</a>)</span>')
                 ->setAttrib('placeholder', 'http://www')
                 ->setDescription('A to jest opis pola WWW');
             $file->class = 'poebao';
@@ -75,9 +63,8 @@ class Application_Form_Post extends Zend_Form
                 array('Label', array('tag' => 'td', 'escape' => false)),
                 array(array('row' => 'HtmlTag'), array('tag' => 'tr', 'openOnly' => true))
             ));
+            $uploadFromFile->setValue(0);
         }
-
-        $fromFile = new Zend_Form_Element_Hidden('from_file');
 
         // Title field
         $title = new Zend_Form_Element_Text('title');
@@ -149,7 +136,7 @@ class Application_Form_Post extends Zend_Form
             array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
         ));
 
-        $this->addElements(array($fromFile, $file, $title, $source, $author, $agreement, $submit));
+        $this->addElements(array($uploadFromFile, $file, $title, $source, $author, $agreement, $submit));
 
         $this->setDecorators(array(
             'FormElements',

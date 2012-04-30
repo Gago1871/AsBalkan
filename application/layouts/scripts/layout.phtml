@@ -19,11 +19,11 @@
                 <ul>
                     <li class="first"><a href="<?php echo $this->url(array(), 'awaiting'); ?>">oczekujące</a></li>
                     <li>
-                        <a id="show-upload" onclick="showUploadForm(); return false;" href="<?php echo $this->url(array(), 'post');?>">dodaj</a>
+                        <a id="nav-show-upload-form" href="<?php echo $this->url(array(), 'postupload');?>">dodaj</a>
                     </li>
                     <?php if ($this->identity): ?>
                         <li><a href="<?php echo $this->url(array(), 'moderation') ?>">moderacja</a></li>
-                        <li><a href="<?php echo $this->url(array(), 'logout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
+                        <li><a href="<?php echo $this->url(array(), 'userlogout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
                     <?php endif ?>
                     
                 </ul>
@@ -59,10 +59,9 @@
         poebao.pl (c) 2012 - <a href="/regulamin">Regulamin</a> | <a href="/kontakt">Kontakt</a>
         </div>
         
-
-        <div id="upload">
+        <div id="upload-form-layer">
             <div class="container">
-                <span id="closebutton">X</span>
+                <span id="nav-hide-upload-form">X</span>
                 <h2>Dodaj post</h2>
                 <?php echo $this->postForm; ?>    
             </div>

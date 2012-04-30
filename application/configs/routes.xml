@@ -11,15 +11,6 @@
                 </defaults>
                 <reverse>/</reverse>
             </home>
-            
-            <post>
-                <route>/dodaj</route>
-                <defaults>
-                    <controller>index</controller>
-                    <action>add</action>
-                </defaults>
-                <reverse>/dodaj</reverse>
-            </post>
 
             <awaiting>
                 <route>/oczekujace</route>
@@ -73,25 +64,37 @@
                 <reverse>/kontakt</reverse>
             </contact>
 
-            <adminlogin>
+            <!-- POST -->     
+            <postupload>
+                <route>/dodaj</route>
+                <defaults>
+                    <controller>post</controller>
+                    <action>upload</action>
+                </defaults>
+                <reverse>/dodaj</reverse>
+            </postupload>
+
+            <!-- USER -->
+
+            <userlogin>
                 <route>/poebaoadminlogin</route>
                 <defaults>
-                    <controller>index</controller>
+                    <controller>user</controller>
                     <action>login</action>
                 </defaults>
                 <reverse>/poebaoadminlogin</reverse>
-            </adminlogin>
+            </userlogin>
             
-            <logout>
+            <userlogout>
                 <route>/logout</route>
                 <defaults>
-                    <controller>index</controller>
+                    <controller>user</controller>
                     <action>logout</action>
                 </defaults>
                 <reverse>/logout</reverse>
-            </logout>
+            </userlogout>
 
-            <!-- moderation -->
+            <!-- MODERATION -->
             <moderation>
                 <route>/moderation</route>
                 <defaults>

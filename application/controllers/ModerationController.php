@@ -6,6 +6,7 @@ class ModerationController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+
         $appConfig = Zend_Registry::get('Config_App');
         $this->view->storageHost = $appConfig['storage']['host'];
 
