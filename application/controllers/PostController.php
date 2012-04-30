@@ -53,12 +53,19 @@ class PostController extends Zend_Controller_Action
                     $file = $form->getValue('file');
                     $source = 'web';
 
-                    $message = array('type' => 'failure', 'content' => 'Na razie nie obsługujemy jeszcze wgrywania z WWW.');
-                    $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                    // set_time_limit(0);
+                    $tmpfname = tempnam(sys_get_temp_dir(), 'poebao');
 
-                    // $this->_helper->redirector->gotoSimple('view', 'index', null, array('id' => $id, 'title' => $title));
-                    $this->_helper->redirector->gotoRouteAndExit(array('id' => $id, 'title' => $title), 'awaiting');
+                    $fp = fopen($tmpfname, 'w+');//This is the file where we save the information
+                    $ch = curl_init($file);//Here is the file we are downloading
+                    curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+                    curl_setopt($ch, CURLOPT_FILE, $fp);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                    curl_exec($ch);
+                    curl_close($ch);
+                    fclose($fp);
 
+                    $thumbFilename = $this->processFile($file, $id);
                 }
 
                 $fileInfo = pathinfo($file);
