@@ -85,21 +85,21 @@ class PostController extends Zend_Controller_Action
                     }
                 }
 
-                // check file type based on mime type
-                $mime = Jk_File::getMimeType($file);
-                switch ($mime) {
-                    case 'image/jpeg':
-                    case 'image/gif':
-                    case 'image/png':
-                        break;
-                    default:
-                        $message = array('type' => 'failure', 'content' => $mime . ' filetype is not supported.');
-                        $this->_helper->getHelper('FlashMessenger')->addMessage($message);
-                        $form->populate($this->params);
-                        $this->view->headTitle('Dodaj post');
-                        $this->view->form = $form;
-                        return;
-                }
+                // // check file type based on mime type
+                // $mime = Jk_File::getMimeType($file);
+                // switch ($mime) {
+                //     case 'image/jpeg':
+                //     case 'image/gif':
+                //     case 'image/png':
+                //         break;
+                //     default:
+                //         $message = array('type' => 'failure', 'content' => $mime . ' filetype is not supported.');
+                //         $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                //         $form->populate($this->params);
+                //         $this->view->headTitle('Dodaj post');
+                //         $this->view->form = $form;
+                //         return;
+                // }
 
                 $thumbnailData = $this->xerocopy($file);
 
