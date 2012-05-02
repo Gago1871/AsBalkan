@@ -33,19 +33,6 @@
                 <reverse>u/%s</reverse>
             </author>
             
-            <view type="Zend_Controller_Router_Route_Regex">
-                <route>p/(.+)-(.*)</route>
-                <defaults>
-                    <controller>index</controller>
-                    <action>view</action>
-                </defaults>
-                <map>
-                    <id>1</id>
-                    <title>2</title>
-                </map>
-                <reverse>p/%s-%s</reverse>
-            </view>
-            
             <rules>
                 <route>/regulamin</route>
                 <defaults>
@@ -73,6 +60,19 @@
                 </defaults>
                 <reverse>/dodaj</reverse>
             </postupload>
+
+            <postview type="Zend_Controller_Router_Route_Regex">
+                <route>p/(.+)-(.*)</route>
+                <defaults>
+                    <controller>post</controller>
+                    <action>view</action>
+                </defaults>
+                <map>
+                    <id>1</id>
+                    <title>2</title>
+                </map>
+                <reverse>p/%s-%s</reverse>
+            </postview>
 
             <!-- USER -->
 

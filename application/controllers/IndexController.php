@@ -53,24 +53,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->title = 'Oczekujące';
     }
     
-
-    /**
-     * Display post
-     */
-    public function viewAction()
-    {
-        $id = $this->params['id'];
-
-        $posts = new Application_Model_DbTable_Posts();
-        $post = $posts->get($id);
-        $this->view->post = $post;
-
-        $this->view->headTitle($post['title']);
-        
-        $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
-        $this->view->message = $message;
-    }
-    
     public function addAction()
     {
         $postForm = $this->postForm;

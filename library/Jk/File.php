@@ -25,11 +25,11 @@ class Jk_File
         return $dirName . substr($hash, $depth, strlen($hash) - $depth);
     }
     
-    
     /**
      * Create directory from given path, and set a+rwx rights
      */
-    public function createDir($path) {
+    public function createDir($path)
+    {
 
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
@@ -37,4 +37,38 @@ class Jk_File
         
         return true;
     }
+
+    public function download($url, $dir = null, $prefix = 'jk')
+    {
+        $tmpdir = (null === $dir?sys_get_temp_dir():$dir);
+        $tmpname = tempnam($tmpdir, $prefix);
+
+        $fp = fopen($tmpname, 'w+');//This is the file where we save the information
+        $ch = curl_init($url);//Here is the file we are downloading
+        curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        if (!curl_exec($ch)) {
+
+            curl_close($ch);
+            fclose($fp);
+            throw new Exception("Error downloading file", 1);
+        }
+        curl_close($ch);
+        fclose($fp);
+
+        return $tmpname;
+    }
+
+    /**
+     * Get mime type of given file
+     */
+    public function getMimeType($filename)
+    {
+        $finfo = finfo_open(FILEINFO_MIME);
+        $data = explode('; ', finfo_file($finfo, $filename)); 
+        return $data[0];
+    }
+
+
 }
