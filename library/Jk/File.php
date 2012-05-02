@@ -65,9 +65,11 @@ class Jk_File
      */
     public function getMimeType($filename)
     {
-        $finfo = finfo_open(FILEINFO_MIME);
-        $data = explode('; ', finfo_file($finfo, $filename)); 
-        return $data[0];
+        // $finfo = finfo_open(FILEINFO_MIME);
+        // $data = explode('; ', finfo_file($finfo, $filename)); 
+        // return $data[0];
+
+        return mime_content_type($filename);
     }
 
 
