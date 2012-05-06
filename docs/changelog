@@ -1,0 +1,5 @@
+v0.1 (2012-05-06)
+ * Changed created images quality to 95
+ * Wrapping words in post list and post view
+ * When uploading from HD, "Source" is available as optional field
+ * When uploading from URL, source is read from URL

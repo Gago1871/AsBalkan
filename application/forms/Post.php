@@ -22,6 +22,9 @@ class Application_Form_Post extends Zend_Form
         );
 
         $uploadFromFile = new Zend_Form_Element_Hidden('uploadfromfile');
+        $uploadFromFile->setDecorators(array(
+            array('ViewHelper', array('class' => 'hidden'))
+        ));
 
         if ($fromFile) {
             $file = new Zend_Form_Element_File('file');
@@ -41,6 +44,18 @@ class Application_Form_Post extends Zend_Form
             ));
 
             $uploadFromFile->setValue(1);
+
+            // Source field
+            $source = new Zend_Form_Element_Text('source');
+            $source->setLabel('Źródło <span>(opcjonalnie)</span>')
+                ->setRequired(false)
+                ->addFilter('StripTags')
+                ->addFilter('StringTrim')
+                ->addValidator('NotEmpty')
+                ->setDescription('A to jest opis pola Źródło');
+
+            $source->class = 'poebao';
+            $source->setDecorators($defaultDecorator);
 
         } else {
 
@@ -64,6 +79,11 @@ class Application_Form_Post extends Zend_Form
                 array(array('row' => 'HtmlTag'), array('tag' => 'tr', 'openOnly' => true))
             ));
             $uploadFromFile->setValue(0);
+
+            $source = new Zend_Form_Element_Hidden('source');
+            $source->setDecorators(array(
+                array('ViewHelper', array('class' => 'hidden'))
+                ));
         }
 
         // Title field
@@ -77,18 +97,6 @@ class Application_Form_Post extends Zend_Form
 
         $title->class = 'poebao';
         $title->setDecorators($defaultDecorator);
-
-        // Source field
-        $source = new Zend_Form_Element_Text('source');
-        $source->setLabel('Źródło <span>(opcjonalnie)</span>')
-            ->setRequired(false)
-            ->addFilter('StripTags')
-            ->addFilter('StringTrim')
-            ->addValidator('NotEmpty')
-            ->setDescription('A to jest opis pola Źródło');
-
-        $source->class = 'poebao';
-        $source->setDecorators($defaultDecorator);
 
         // Author field
         $author = new Zend_Form_Element_Text('author');

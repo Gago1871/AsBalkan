@@ -2,6 +2,8 @@
 
 class Jk_Image
 {
+    private static $_imageQuality = 95;
+
     public function createImageFromFile($file) {
         $data = getimagesize($file);
         
@@ -37,7 +39,8 @@ class Jk_Image
         $tmpImage = imagecreatetruecolor($newWidth, $newHeight);
 
         // copy and resize old image into new image 
-        imagecopyresized($tmpImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        // imagecopyresized($tmpImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagecopyresampled($tmpImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         
         if ($destination) {
             self::saveImage($tmpImage, $destination);
@@ -50,8 +53,12 @@ class Jk_Image
     /**
      * Save image to a file
      */
-    public function saveImage($image, $destination) {
+    public function saveImage($image, $destination, $quality = null) {
         
+        if (null === $quality) {
+            $quality = self::$_imageQuality;
+        }
+
         $imageInfo = pathinfo($destination);
         
         switch ($imageInfo['extension']) {
@@ -60,7 +67,7 @@ class Jk_Image
                 break;
             
             default:
-                self::saveJpeg($image, $destination);
+                self::saveJpeg($image, $destination, $quality);
                 break;
         }
     }
@@ -69,7 +76,12 @@ class Jk_Image
         imagepng($image, $destination);
     }
 
-    public function saveJpeg($image, $destination) {
-        imagejpeg($image, $destination);
+    public function saveJpeg($image, $destination, $quality) {
+        imagejpeg($image, $destination, $quality);
+    }
+
+    public function setImageQuality($quality)
+    {
+        $this->_imageQuality = $quality;
     }
 }

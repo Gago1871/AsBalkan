@@ -152,6 +152,8 @@ p {
     margin-top: 34px;
     padding-top: 39px;
     background: #dfdfdf url('/img/border.png') no-repeat top left;
+
+    word-wrap: break-word;
 }
 
 #posts .first {
@@ -238,8 +240,11 @@ p {
 
 
 /* post view */
+#post {
+    word-wrap: break-word;
+}
 #post h1 {
-	margin-top: 40px;
+	/*margin-top: 40px;*/
 	font-size: 19px;
 }
 

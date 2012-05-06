@@ -57,27 +57,34 @@ class PostController extends Zend_Controller_Action
                     $file = $form->file->getFileName();
                     $form->file->receive();
 
+                    // set source from text field
+                    $source = $form->getValue('source');
+
                     if (!$form->file->isReceived()) {
                         $message = array('type' => 'failure', 'content' => 'Unable to receive file.');
-                        $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                        // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                        $this->view->messages[] = $message;
                         $form->populate($this->params);
                         $this->view->headTitle('Dodaj post');
                         $this->view->form = $form;
                         return;
                     }
-                    $source = 'hd: ' . $file;
 
                 } else {
 
                     // upload from web
                     $file = $form->getValue('file');
-                    $source = 'www: ' . $file;
+
+                    // set source from file url
+                    $filedata = parse_url($file);
+                    $source = $filedata['scheme'] . '://' . $filedata['host'];
 
                     try {
                         $file = Jk_File::download($file);    
                     } catch (Exception $e) {
                         $message = array('type' => 'failure', 'content' => 'Seems like it\'s not a valid URL...');
-                        $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                        // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                        $this->view->messages[] = $message;
                         $form->populate($this->params);
                         $this->view->headTitle('Dodaj post');
                         $this->view->form = $form;
@@ -85,21 +92,22 @@ class PostController extends Zend_Controller_Action
                     }
                 }
 
-                // // check file type based on mime type
-                // $mime = Jk_File::getMimeType($file);
-                // switch ($mime) {
-                //     case 'image/jpeg':
-                //     case 'image/gif':
-                //     case 'image/png':
-                //         break;
-                //     default:
-                //         $message = array('type' => 'failure', 'content' => $mime . ' filetype is not supported.');
-                //         $this->_helper->getHelper('FlashMessenger')->addMessage($message);
-                //         $form->populate($this->params);
-                //         $this->view->headTitle('Dodaj post');
-                //         $this->view->form = $form;
-                //         return;
-                // }
+                // check file type based on mime type
+                $mime = Jk_File::getMimeType($file);
+                switch ($mime) {
+                    case 'image/jpeg':
+                    case 'image/gif':
+                    case 'image/png':
+                        break;
+                    default:
+                        $message = array('type' => 'failure', 'content' => $mime . ' filetype is not supported.');
+                        // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                        $this->view->messages[] = $message;
+                        $form->populate($this->params);
+                        $this->view->headTitle('Dodaj post');
+                        $this->view->form = $form;
+                        return;
+                }
 
                 $thumbnailData = $this->xerocopy($file);
 
@@ -124,7 +132,8 @@ class PostController extends Zend_Controller_Action
             } else {
                 
                 $message = array('type' => 'failure', 'content' => 'You`re doing it wrong...');
-                $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
+                $this->view->messages[] = $message;
                 $form->populate($this->params);
             }
         }
