@@ -20,8 +20,8 @@ class IndexController extends Zend_Controller_Action
     /**
      * Display main site, with approved posts
      */
-    private function _getPostList($select) {
-
+    private function _getPostList($select)
+    {
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
         
         $paginator = new Zend_Paginator($adapter);

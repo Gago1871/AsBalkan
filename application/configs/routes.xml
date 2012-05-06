@@ -4,7 +4,7 @@
         <routes>
                     
             <home type="Zend_Controller_Router_Route_Regex">
-                <route>(.*)</route>
+                <route>([0-9]*)</route>
                 <defaults>
                     <controller>index</controller>
                     <action>index</action>
@@ -17,7 +17,7 @@
             </home>
 
             <awaiting type="Zend_Controller_Router_Route_Regex">
-                <route>oczekujace(/.*)</route>
+                <route>oczekujace(?:/(\d+))?</route>
                 <defaults>
                     <controller>index</controller>
                     <action>awaiting</action>
@@ -43,7 +43,7 @@
                 <reverse>u/%s/%d</reverse>
             </author>
             
-            <rules>
+            <rules type="Zend_Controller_Router_Route_Static">
                 <route>/regulamin</route>
                 <defaults>
                     <controller>index</controller>
@@ -52,7 +52,7 @@
                 <reverse>/regulamin</reverse>
             </rules>
 
-            <contact>
+            <contact type="Zend_Controller_Router_Route_Static">
                 <route>/kontakt</route>
                 <defaults>
                     <controller>index</controller>
@@ -62,7 +62,7 @@
             </contact>
 
             <!-- POST -->     
-            <postupload>
+            <postupload type="Zend_Controller_Router_Route_Static">
                 <route>/dodaj</route>
                 <defaults>
                     <controller>post</controller>
@@ -86,7 +86,7 @@
 
             <!-- USER -->
 
-            <userlogin>
+            <userlogin type="Zend_Controller_Router_Route_Static">
                 <route>/poebaoadminlogin</route>
                 <defaults>
                     <controller>user</controller>
@@ -95,7 +95,7 @@
                 <reverse>/poebaoadminlogin</reverse>
             </userlogin>
             
-            <userlogout>
+            <userlogout type="Zend_Controller_Router_Route_Static">
                 <route>/logout</route>
                 <defaults>
                     <controller>user</controller>
@@ -105,7 +105,7 @@
             </userlogout>
 
             <!-- MODERATION -->
-            <moderation>
+            <moderation type="Zend_Controller_Router_Route_Static">
                 <route>/moderation</route>
                 <defaults>
                     <controller>moderation</controller>
