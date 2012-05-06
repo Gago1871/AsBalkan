@@ -2,8 +2,8 @@
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
  
-<?php if ($this->pageCount): ?>
-<div class="paginationControl">
+<?php if ($this->pageCount > 1): ?>
+<div id="paginator">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
