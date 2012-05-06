@@ -2,7 +2,7 @@
 
 class Jk_Image
 {
-    private static $_imageQuality = 95;
+    private static $_imageQuality = 88;
 
     public function createImageFromFile($file) {
         $data = getimagesize($file);
