@@ -3,34 +3,44 @@
     <production>
         <routes>
                     
-            <home>
-                <route>/</route>
+            <home type="Zend_Controller_Router_Route_Regex">
+                <route>(.*)</route>
                 <defaults>
                     <controller>index</controller>
                     <action>index</action>
+                    <page>1</page>
                 </defaults>
-                <reverse>/</reverse>
+                <map>
+                    <page>1</page>
+                </map>
+                <reverse>%d</reverse>
             </home>
 
-            <awaiting>
-                <route>/oczekujace</route>
+            <awaiting type="Zend_Controller_Router_Route_Regex">
+                <route>oczekujace(/.*)</route>
                 <defaults>
                     <controller>index</controller>
                     <action>awaiting</action>
+                    <page>1</page>
                 </defaults>
-                <reverse>/oczekujace</reverse>
+                <map>
+                    <page>1</page>
+                </map>
+                <reverse>oczekujace/%d</reverse>
             </awaiting>
 
             <author type="Zend_Controller_Router_Route_Regex">
-                <route>u/(.+)</route>
+                <route>u/(.+)/(.*)</route>
                 <defaults>
                     <controller>index</controller>
                     <action>author</action>
+                    <page>1</page>
                 </defaults>
                 <map>
                     <name>1</name>
+                    <page>2</page>
                 </map>
-                <reverse>u/%s</reverse>
+                <reverse>u/%s/%d</reverse>
             </author>
             
             <rules>

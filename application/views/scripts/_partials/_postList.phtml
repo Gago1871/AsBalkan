@@ -1,6 +1,6 @@
 <!-- <h1><?php echo $this->escape($this->title); ?></h1> -->
 <ul id="posts">
-    <?php foreach ($this->posts as $key => $value): ?>
+    <?php foreach ($this->paginator as $key => $value): ?>
         <li <?php echo ((!$key)?'class="first" ':''); ?>href="post-<?php echo $value->id ?>">
             <a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'postview') ?>"><img class="post" src="<?php echo $this->storageHost ?>/thumb/<?php echo Jk_File::getHashedDirStructure($value->post_id); ?>-<?php echo $value->file ?>"></a>
             <?php
@@ -22,3 +22,7 @@
         </li>
     <?php endforeach ?>
 </ul>
+
+<div id="paginator">
+    <?php echo $this->paginator; ?>
+</div>

@@ -59,6 +59,7 @@ class Application_Model_DbTable_Posts extends Zend_Db_Table_Abstract
         if (!$nsfw) {
             $conditions .= ' AND `flag_nsfw`="0"';
         }
+
         return $this->fetchAll('`category`="' . $category . '"' . $conditions, 'added DESC');
     }
 

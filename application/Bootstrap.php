@@ -17,7 +17,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // In case I want to turn on translation
         // Zend_Controller_Router_Route::setDefaultTranslator($translator);
         $routes = new Zend_Config_Xml(APPLICATION_PATH . '/configs/routes.xml', APPLICATION_ENV);
-        //$router->removeDefaultRoutes();
+        $router->removeDefaultRoutes();
         $router->addConfig($routes, 'routes');
 
         Zend_Controller_Action_HelperBroker::addPrefix('Jk_Helper');

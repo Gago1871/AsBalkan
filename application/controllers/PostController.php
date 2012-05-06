@@ -77,7 +77,9 @@ class PostController extends Zend_Controller_Action
 
                     // set source from file url
                     $filedata = parse_url($file);
-                    $source = $filedata['scheme'] . '://' . $filedata['host'];
+                    $source = (!empty($filedata['scheme'])?$filedata['scheme']:'http') . '://' . $filedata['host'];
+                    var_dump($filedata);
+                    // die('sdfsf');
 
                     try {
                         $file = Jk_File::download($file);    

@@ -39,7 +39,6 @@ class Jk_Image
         $tmpImage = imagecreatetruecolor($newWidth, $newHeight);
 
         // copy and resize old image into new image 
-        // imagecopyresized($tmpImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         imagecopyresampled($tmpImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         
         if ($destination) {

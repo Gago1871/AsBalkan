@@ -1,6 +1,8 @@
 v.0.2 (2012-05-07)
  * Added newest favicon.ico
  * Default image compression quality set to 88
+ * Added simple pages to main, awaiting, author views
+ 
 
 v0.1 (2012-05-06)
  * Changed created images quality to 95

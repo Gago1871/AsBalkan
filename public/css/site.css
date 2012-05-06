@@ -137,6 +137,7 @@ p {
 /* post list */
 #posts {
     list-style-type: none;
+    margin-bottom: 20px;
 }
 
 #posts a {
