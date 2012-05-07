@@ -16,6 +16,27 @@ class ModerationController extends Zend_Controller_Action
         $this->requestParams = $this->getRequest()->getParams();
     }
 
+
+    /**
+     *
+     */
+    private function _getPostList($select)
+    {
+        $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+        
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
+
+        Zend_Paginator::setDefaultScrollingStyle('Sliding');
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial(
+            'my_pagination_control.phtml'
+        );
+
+        $this->view->paginator = $paginator;
+    }
+
+
+
     /**
      * Moderation list action
      *
@@ -34,12 +55,32 @@ class ModerationController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
-                $postsModel = new Application_Model_DbTable_Posts();
-                $posts = $postsModel->fetchFromCategory($formData['category'], $formData['nsfw'], $formData['removed']);
+                // $postsModel = new Application_Model_DbTable_Posts();
+                // $posts = $postsModel->fetchFromCategory($formData['category'], $formData['nsfw'], $formData['removed']);
+                
+                $posts = new Application_Model_DbTable_Posts();
+                $select = $posts->select()
+                    ->where('category = ?', $formData['category'])
+                    ->order('added DESC');
+                
+                if (!$formData['removed']) {
+                    $select->where('status = ?', "a");
+                }
+
+                if (!$formData['nsfw']) {
+                    $select->where('flag_nsfw = ?', 0);
+                }
+
+                $this->_getPostList($select);
             }
         } else {
-            $postsModel = new Application_Model_DbTable_Posts();
-            $posts = $postsModel->fetchFromCategory(0);
+            $posts = new Application_Model_DbTable_Posts();
+            $select = $posts->select()
+                ->where('category = ?', 0)
+                // ->where('status = ?', "a")
+                ->order('added DESC');
+
+            $this->_getPostList($select);
         }
 
         $this->view->posts = $posts;

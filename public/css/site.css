@@ -126,7 +126,7 @@ p {
 
 .subtext {
 	font-size: 12px;
-    color: #535b66;
+    color: #737375;
 }
 
 #additional .subtext {
@@ -146,6 +146,10 @@ p {
 
 #posts a:hover {
 /*    color: #0562db;*/
+}
+
+#posts h2 a {
+    color: #222629;
 }
 
 #posts li {
@@ -186,6 +190,14 @@ p {
 #posts .info h2 {
     margin-bottom: 6px;
     font-size: 20px;
+}
+
+#posts .source {
+    color: #737375;
+}
+
+#posts .source a {
+    color: #737375;
 }
 
 #posts .admin {

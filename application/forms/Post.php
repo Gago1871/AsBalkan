@@ -29,7 +29,7 @@ class Application_Form_Post extends Zend_Form
         if ($fromFile) {
             $file = new Zend_Form_Element_File('file');
             $file
-                ->setLabel('Wgraj z dysku <span>(<a href="?uploadfromfile=0">lud z url</a>)</span>')
+                ->setLabel('Wgraj z dysku <span>(<a href="?uploadfromfile=0">lub z url</a>)</span>')
                 ->setRequired(true)
                 ->addValidator('Size', false, array('min' => '1kB', 'max' => '20MB'));
         
@@ -65,7 +65,7 @@ class Application_Form_Post extends Zend_Form
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addValidator('NotEmpty')
-                ->setLabel('url pliku <span>(<a href="?uploadfromfile=1">lud dodaj z dysku</a>)</span>')
+                ->setLabel('url pliku <span>(<a href="?uploadfromfile=1">lub dodaj z dysku</a>)</span>')
                 ->setAttrib('placeholder', 'http://www')
                 ->setDescription('A to jest opis pola WWW');
             $file->class = 'poebao';

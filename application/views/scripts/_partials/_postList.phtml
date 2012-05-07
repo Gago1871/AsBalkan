@@ -14,8 +14,13 @@
                     <p>
                         <a href="<?php echo $this->url(array('name' => $value->author), 'author') ?>"><?php echo $value->author ?></a> - <?php echo $value->added ?>
                     </p>
-                    <p>
-                        <?php echo $value->source ?>
+                    <p><span class="source">
+                        <?php if (filter_var($value->source, FILTER_VALIDATE_URL) !== false): ?>
+                            <a href="<?php echo $value->source ?>" target="_blank"><?php echo $value->source ?></a>
+                        <?php else: ?>
+                            <?php echo $value->source ?>    
+                        <?php endif ?>
+                        </source>
                     </p>
                 </span>
             </div>
