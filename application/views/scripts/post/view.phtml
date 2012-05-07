@@ -4,7 +4,14 @@
 <div id="post" class="clear">
     <div class="info">
         <h1><?php echo $this->post['title'] ?></h1>
-        <h3 class="subtext"><a href="<?php echo $this->url(array('name' => $this->post['author']), 'author') ?>"><?php echo $this->post['author'] ?></a></h3> - <span class="subtext"><?php echo $this->post['added'] ?> - <?php echo $this->post['source'] ?>
+        <h3 class="subtext"><a href="<?php echo $this->url(array('name' => $this->post['author']), 'author') ?>"><?php echo $this->post['author'] ?></a></h3> - <span class="subtext"><?php echo $this->post['added'] ?> - 
+            <span class="source">
+                <?php if (filter_var($this->post['source'], FILTER_VALIDATE_URL) !== false): ?>
+                    <a href="<?php echo $this->post['source'] ?>" target="_blank"><?php echo $this->post['source'] ?></a>
+                <?php else: ?>
+                    <?php echo $this->post['source'] ?>    
+                <?php endif ?>
+            </span>
         </span>
     </div>
     

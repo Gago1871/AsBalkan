@@ -129,6 +129,10 @@ p {
     color: #737375;
 }
 
+.subtext .source a {
+    color: #737375;
+}
+
 #additional .subtext {
     margin-bottom: 12px;
     display: block;
