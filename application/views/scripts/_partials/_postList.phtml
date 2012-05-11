@@ -12,7 +12,7 @@
                 <h2><a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'postview') ?>"><?php echo $value->title ?></a></h2>
                 <span class="subtext">
                     <p>
-                        <a href="<?php echo $this->url(array('name' => $value->author), 'author') ?>"><?php echo $value->author ?></a> - <?php echo $value->added ?>
+                        <a href="<?php echo $this->url(array('name' => $value->author), 'author') ?>"><?php echo $value->author ?></a> - <time class="timeago" datetime="<?php echo $value->added ?>"><?php echo $value->added ?></time>
                     </p>
                     <p><span class="source">
                         <?php if (filter_var($value->source, FILTER_VALIDATE_URL) !== false): ?>

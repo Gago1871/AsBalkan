@@ -59,7 +59,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headTitle('poebao');
 
         $config = Zend_Registry::get('Zend_Config');
+
         $view->headScript()->appendFile($view->baseUrl() . $config['js']['jquery']['filename']);
         $view->headScript()->appendFile($view->baseUrl() . $config['js']['app']['filename']);
+        $view->headScript()->appendFile($view->baseUrl() . '/js/jquery.timeago.js');
+        $view->headScript()->appendFile($view->baseUrl() . '/js/jquery.timeago.pl.js');
     }
 }
