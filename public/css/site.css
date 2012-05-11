@@ -379,6 +379,14 @@ p {
 }
 
 /* ADMIN */
+.admin {
+    border: 1px solid #aaa;
+    background-color: #bbb;
+    padding: 4px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
 #moderate {
     margin-bottom: 10px;
     background-color: #B5BFB7;

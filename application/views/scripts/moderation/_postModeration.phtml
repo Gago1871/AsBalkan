@@ -6,6 +6,10 @@
 
     <p>
         <!-- Jakieś info dodatkowe.... -->
+        <?php if ($this->post->moderated): ?>
+            <span class="subtext">zmoderowany: <?php echo $this->post->moderated ?></span>
+        <?php endif ?>
+        
 
     </p>
 </div> 

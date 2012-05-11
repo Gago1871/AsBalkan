@@ -27,11 +27,6 @@ class IndexController extends Zend_Controller_Action
         $paginator = new Zend_Paginator($adapter);
         $paginator->setCurrentPageNumber($this->_getParam('page'));
 
-        Zend_Paginator::setDefaultScrollingStyle('Sliding');
-        Zend_View_Helper_PaginationControl::setDefaultViewPartial(
-            'my_pagination_control.phtml'
-        );
-
         $this->view->paginator = $paginator;
     }
 
@@ -44,6 +39,7 @@ class IndexController extends Zend_Controller_Action
         $select = $posts->select()
             ->where('category = ?', 2)
             ->where('status = ?', "a")
+            ->order('moderated DESC')
             ->order('added DESC');
 
         $this->_getPostList($select);

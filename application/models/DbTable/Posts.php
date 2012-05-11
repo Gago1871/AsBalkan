@@ -79,8 +79,12 @@ class Application_Model_DbTable_Posts extends Zend_Db_Table_Abstract
             'category' => $category,
             );
 
-        $result = $this->update($data, 'id = ' . (int) $id);
+        // set moderation date if category was set to main
+        if (2 == $category) {
+            $data['moderated'] = date('Y-m-d H:i:s');
+        }
 
+        $result = $this->update($data, 'id = ' . (int) $id);
         return $this;
     }
 
