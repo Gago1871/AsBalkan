@@ -48,6 +48,9 @@ class Application_Model_PostMapper
         return $post;
    }
 
+    /**
+     * Get newer post
+     */
     private function _getPrevious(Application_Model_Post $post)
     {
         switch ($post->getCategory()) {
