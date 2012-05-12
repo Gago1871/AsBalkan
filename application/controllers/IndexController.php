@@ -22,11 +22,14 @@ class IndexController extends Zend_Controller_Action
      */
     private function _getPostList($select)
     {
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
-        
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setCurrentPageNumber($this->_getParam('page'));
+        $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);        
+        $paginator = new Jk_Paginator($adapter);
 
+        if ($this->_getParam('page') > $paginator->count()) {
+            
+        }
+
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
         $this->view->paginator = $paginator;
     }
 
