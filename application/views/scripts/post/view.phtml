@@ -1,10 +1,10 @@
 <!-- <a class="left" href="<?php echo $this->url(array(), 'awaiting') ?>">« Wróć do oczekujących</a> -->
 <div class="right">
     <?php if (!is_null($this->post->getPrevious())): ?>
-        <a class="button button-wider button-taller" href="<?php echo $this->url(array('id' => $this->post->getPrevious()->getPostId(), 'title' => $this->post->getPrevious()->getTitle()), 'postview') ?>">❮❮</a>    
+        <a class="button button-wider button-taller" id="nav-post-view-prev" href="<?php echo $this->url(array('id' => $this->post->getPrevious()->getPostId(), 'title' => $this->post->getPrevious()->getTitle()), 'postview') ?>">❮❮</a>    
     <?php endif ?>
     <?php if (!is_null($this->post->getNext())): ?>
-        <a class="button button-wider button-taller" href="<?php echo $this->url(array('id' => $this->post->getNext()->getPostId(), 'title' => $this->post->getNext()->getTitle()), 'postview') ?>">❯❯</a>
+        <a class="button button-wider button-taller" id="nav-post-view-next" href="<?php echo $this->url(array('id' => $this->post->getNext()->getPostId(), 'title' => $this->post->getNext()->getTitle()), 'postview') ?>">❯❯</a>
     <?php endif ?>
 </div>
 

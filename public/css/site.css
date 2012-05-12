@@ -423,3 +423,19 @@ a.button:hover {
 #moderate .element label input {
     margin-right: 4px;
 }
+
+
+/* nav-infinite-scroll-trigger */
+#nav-infinite-scroll-trigger {
+    width: 442px;
+    height: 60px;
+    text-align: center;
+}
+
+#infscr-loading {
+    /*border: 2px solid lime;*/
+    width: 460px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

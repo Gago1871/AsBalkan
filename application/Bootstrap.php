@@ -64,5 +64,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headScript()->appendFile($view->baseUrl() . $config['js']['app']['filename']);
         $view->headScript()->appendFile($view->baseUrl() . '/js/jquery.timeago.js');
         $view->headScript()->appendFile($view->baseUrl() . '/js/jquery.timeago.pl.js');
+        $view->headScript()->appendFile($view->baseUrl() . '/js/jquery.infinitescroll.js');
     }
 }

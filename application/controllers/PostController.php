@@ -122,7 +122,6 @@ class PostController extends Zend_Controller_Action
                 
                 // read source of the file
                 
-                
                 $posts = new Application_Model_DbTable_Posts();
                 $posts->add($thumbnailData['id'], $thumbnailData['thumb'], $title, $author, $fileInfo['filename'], $agreement, $source);
                 
@@ -132,9 +131,7 @@ class PostController extends Zend_Controller_Action
                 $this->_helper->redirector->gotoRouteAndExit(array('id' => $thumbnailData['id'], 'title' => $title), 'postview');
 
             } else {
-                
                 $message = array('type' => 'failure', 'content' => 'You`re doing it wrong...');
-                // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
                 $this->view->messages[] = $message;
                 $form->populate($this->params);
             }
