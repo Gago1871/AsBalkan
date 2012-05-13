@@ -22,13 +22,13 @@ class PostController extends Zend_Controller_Action
      */
     public function viewAction()
     {
-        $id = $this->params['id'];
+        $id = $this->getRequest()->getParam('id');
 
-        $postMapper = new Application_Model_PostMapper();
-        $post = $postMapper->getById($id);
+        $postGateway = new Application_Model_Post_Gateway();
+        $post = $postGateway->getById($id);
 
         $this->view->post = $post;
-        $this->view->headTitle($post->getTitle());
+        $this->view->headTitle($post->title);
         
         $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
         $this->view->message = $message;

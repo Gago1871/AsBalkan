@@ -14,8 +14,6 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
-define('APP_MAIN_CATEGORY_ID', 2);
-
 /** Zend_Application */
 require_once 'Zend/Application.php';
 

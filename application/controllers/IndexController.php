@@ -25,10 +25,6 @@ class IndexController extends Zend_Controller_Action
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);        
         $paginator = new Jk_Paginator($adapter);
 
-        if ($this->_getParam('page') > $paginator->count()) {
-            
-        }
-
         $paginator->setCurrentPageNumber($this->_getParam('page'));
         $this->view->paginator = $paginator;
     }
@@ -38,14 +34,13 @@ class IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $posts = new Application_Model_DbTable_Posts();
-        $select = $posts->select()
-            ->where('category = ?', 2)
-            ->where('status = ?', "a")
-            ->order('moderated DESC')
-            ->order('added DESC');
+        $postsGateway = new Application_Model_Post_Gateway();
+        $posts = $postsGateway->fetchForMain();
 
-        $this->_getPostList($select);
+        $paginator = new Jk_Paginator(new Zend_Paginator_Adapter_Array($posts->getList()));
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
+
+        $this->view->paginator = $paginator;
     }
     
     /**
@@ -72,16 +67,16 @@ class IndexController extends Zend_Controller_Action
      */
     public function awaitingAction()
     {
-        $posts = new Application_Model_DbTable_Posts();
-        $select = $posts->select()
-            ->where('category IN (0,1)')
-            ->where('status = ?', "a")
-            ->order('added DESC');
+        $postsGateway = new Application_Model_Post_Gateway();
+        $posts = $postsGateway->fetchAwaiting();
 
-        $this->_getPostList($select);
+        $paginator = new Jk_Paginator(new Zend_Paginator_Adapter_Array($posts->getList()));
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
 
-        $this->view->headTitle('Oczekujące');
+        $this->view->paginator = $paginator;
+
         $this->view->title = 'Oczekujące';
+        $this->view->headTitle('Oczekujące');
     }
     
     /**

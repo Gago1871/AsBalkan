@@ -14,12 +14,10 @@ class Jk_Helper_GetIdentity extends Zend_Controller_Action_Helper_Abstract
         $front   = $this->getFrontController();
         $default = $front->getDispatcher()
                          ->getDefaultModule();
+
         if (empty($module)) {
             $module = $default;
         }
-
-        echo 'jestem jk action helper';
-        
     }
 
     public function getIdentity($value='')

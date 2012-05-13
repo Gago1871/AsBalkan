@@ -6,142 +6,101 @@
 class Application_Model_Post
 {
 
-    protected $_id;
-    protected $_postId;
-    protected $_title;
-    protected $_author;
-    protected $_source;
-    protected $_added;
-    protected $_moderated;
-    protected $_category;
+    protected $_gateway = null;
 
-    protected $_file;
+    protected $_data = array(
+        'id' => null,
+        'post_id' => null,
+        'title' => null,
+        'author' => null,
+        'source' => null,
+        'added' => null,
+        'moderated' => null,
+        'category' => null,
+        'file' => null,
+        'flag_nsfw' => null,
+        'status' => null,
+        'original_file' => null,
+        'author_ip' => null,
+        'updated' => null,
+        'agreement' => null,
+        );
 
     protected $_next = null;
     protected $_previous = null;
-
-    function __construct($data)
-    {
-        $this
-            ->setId($data['id'])
-            ->setPostId($data['post_id'])
-            ->setTitle($data['title'])
-            ->setAuthor($data['author'])
-            ->setSource($data['source'])
-            ->setAdded($data['added'])
-            ->setModerated($data['moderated'])
-            ->setCategory($data['category'])
-            ->setFile($data['file']);
-    }
     
-    public function getTitle()
+    public function __construct($data, $gateway)
     {
-        return $this->_title;
+        $this->setGateway($gateway);
+        $this->populate($data);
+
+        if (!isset($this->post_id)) {
+            // throw new Exception('Initial data must contain an id');
+        }
     }
 
-    public function setTitle($title)
+    public function setGateway(Application_Model_Post_Gateway $gateway)
     {
-        $this->_title = $title;
+        $this->_gateway = $gateway;
         return $this;
     }
 
-    public function getAuthor()
+    public function getGateway()
     {
-        return $this->_author;
+        return $this->_gateway;
     }
 
-    public function setAuthor($author)
+    public function populate($data)
     {
-        $this->_author = $author;
+        if ($data instanceof Zend_Db_Table_Row_Abstract) {
+            $data = $data->toArray();
+        } elseif (is_object($data)) {
+            $data = (array) $data;
+        }
+
+        if (!is_array($data)) {
+            throw new Exception('Initial data must be an array or object');
+        }
+
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
+
         return $this;
     }
 
-    public function getSource()
+    public function __set($name, $value)
     {
-        return $this->_source;
+        if (!array_key_exists($name, $this->_data)) {
+            throw new Exception('Invalid ' . get_class() . ' property "' . $name . '"');
+        }
+        $this->_data[$name] = $value;
     }
 
-    public function setSource($source)
+    public function __get($name)
     {
-        $this->_source = $source;
-        return $this;
+        if (!array_key_exists($name, $this->_data)) {
+            throw new Exception('Invalid property "' . $name . '"');
+        }
+
+        return $this->_data[$name];
     }
 
-    public function getAdded()
+    public function __isset($name)
     {
-        return $this->_added;
+        return isset($this->_data[$name]);
     }
 
-    public function setAdded($added)
+    public function __unset($name)
     {
-        $this->_added = $added;
-        return $this;
+        if (isset($this->$name)) {
+            $this->_data[$name] = null;
+        }
     }
 
-    public function getFile()
+    public function setNext(Application_Model_Post $value)
     {
-        return $this->_file;
-    }
-
-    public function setFile($value)
-    {
-        $this->_file = $value;
-        return $this;
-    }
-
-    public function getPostId()
-    {
-        return $this->_postId;
-    }
-
-    public function setPostId($value)
-    {
-        $this->_postId = $value;
-        return $this;
-    }
-
-    public function getCategory()
-    {
-        return $this->_category;
-    }
-
-    public function setCategory($value)
-    {
-        $this->_category = $value;
-        return $this;
-    }
-
-    public function getId()
-    {
-        return $this->_id;
-    }
-
-    public function setId($value)
-    {
-        $this->_id = $value;
-        return $this;
-    }
-
-    public function getModerated()
-    {
-        return $this->_moderated;
-    }
-
-    public function setModerated($value)
-    {
-        $this->_moderated = $value;
-        return $this;
-    }
-
-    public function getPrevious()
-    {
-        return $this->_previous;
-    }
-
-    public function setPrevious(Application_Model_Post $value)
-    {
-        $this->_previous = $value;
-        return $this;
+        $this->_next = $value;
     }
 
     public function getNext()
@@ -149,9 +108,28 @@ class Application_Model_Post
         return $this->_next;
     }
 
-    public function setNext(Application_Model_Post $value)
+    public function setPrevious(Application_Model_Post $value)
     {
-        $this->_next = $value;
-        return $this;
+        $this->_previous = $value;
+    }
+
+    public function getPrevious()
+    {
+        return $this->_previous;
+    }
+
+    public function save()
+    {
+        $gateway = $this->getGateway();
+        $dbTable = $gateway->getDbTable('user');
+
+        if ($row = $dbTable->find($this->username)) {
+            foreach ($this->_data as $key => $value) {
+                $row->$key = $value;
+            }
+            $row->save();
+        } else {
+            $dbTable->insert($this->_data);
+        }
     }
 }
