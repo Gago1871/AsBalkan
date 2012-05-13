@@ -3,7 +3,7 @@
 /**
  * Zend Resource Plugin that loads scripts to html head section
  */
-class Jk_Resource_Headscripts extends Zend_Application_Resource_ResourceAbstract
+class Jk_Resource_HeadScripts extends Zend_Application_Resource_ResourceAbstract
 {
     protected $_options = array(
         'js' => array(),
