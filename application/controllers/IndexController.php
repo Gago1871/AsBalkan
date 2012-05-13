@@ -13,20 +13,7 @@ class IndexController extends Zend_Controller_Action
         $flashMessages = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger')->getMessages();
         $this->view->messages = $flashMessages;
         
-        $this->params = $this->getRequest()->getParams();
         $this->view->identity = $this->_helper->getIdentity();
-    }
-
-    /**
-     * Display main site, with approved posts
-     */
-    private function _getPostList($select)
-    {
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);        
-        $paginator = new Jk_Paginator($adapter);
-
-        $paginator->setCurrentPageNumber($this->_getParam('page'));
-        $this->view->paginator = $paginator;
     }
 
     /**
@@ -50,13 +37,13 @@ class IndexController extends Zend_Controller_Action
     {        
         $author = $this->_getParam('name');
 
-        $posts = new Application_Model_DbTable_Posts();
-        $select = $posts->select()
-            ->where('author = ?', $author)
-            ->where('status = ?', "a")
-            ->order('added DESC');
+        $postsGateway = new Application_Model_Post_Gateway();
+        $posts = $postsGateway->fetchFromAuthor($author);
 
-        $this->_getPostList($select);
+        $paginator = new Jk_Paginator(new Zend_Paginator_Adapter_Array($posts->getList()));
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
+
+        $this->view->paginator = $paginator;
 
         $this->view->title = $author;
         $this->view->headTitle($author);

@@ -22,10 +22,10 @@ class PostController extends Zend_Controller_Action
      */
     public function viewAction()
     {
-        $id = $this->getRequest()->getParam('id');
+        $id = $this->_getParam('id');
 
         $postGateway = new Application_Model_Post_Gateway();
-        $post = $postGateway->getById($id);
+        $post = $postGateway->getByPostId($id);
 
         $this->view->post = $post;
         $this->view->headTitle($post->title);
@@ -122,8 +122,17 @@ class PostController extends Zend_Controller_Action
                 
                 // read source of the file
                 
-                $posts = new Application_Model_DbTable_Posts();
-                $posts->add($thumbnailData['id'], $thumbnailData['thumb'], $title, $author, $fileInfo['filename'], $agreement, $source);
+                $postGateway = new Application_Model_Post_Gateway();
+                $post = $postGateway->createPost(array(
+                    'post_id' => $thumbnailData['id'],
+                    'file' => $thumbnailData['thumb'],
+                    'title' => $title,
+                    'author' => $author,
+                    'original_file' => $fileInfo['filename'],
+                    'agreement' => $agreement,
+                    'source' => $source,
+                    ), true);
+                $post->save();
                 
                 $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
                 $this->_helper->getHelper('FlashMessenger')->addMessage($message);

@@ -118,18 +118,24 @@ class Application_Model_Post
         return $this->_previous;
     }
 
+    /**
+     * Insert or update, depending on existence of _data['id']
+     */
     public function save()
     {
         $gateway = $this->getGateway();
-        $dbTable = $gateway->getDbTable('user');
-
-        if ($row = $dbTable->find($this->username)) {
-            foreach ($this->_data as $key => $value) {
-                $row->$key = $value;
-            }
-            $row->save();
+        if (null === $this->id) {
+            $gateway->getDbTable()->insert($this->_data);
         } else {
-            $dbTable->insert($this->_data);
+            // update only data that is set, remove null
+            $data = $this->_data;
+            unset($data['id']);
+            foreach ($data as $key => $value) {
+                if (null === $value) {
+                    unset($data[$key]);
+                }
+            }
+            $gateway->getDbTable()->update($data, '`id` = "' . $this->_data['id'] . '"');
         }
     }
 }

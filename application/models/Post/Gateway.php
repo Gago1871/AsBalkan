@@ -16,6 +16,25 @@ class Application_Model_Post_Gateway
         $this->_db_table = new Application_Model_Post_DbTable();
     }
 
+    /**
+     * 
+     */
+    public function createPost($data, $fillDefault = false)
+    {
+        //set default values if new
+        if (true === $fillDefault) {
+            $data['added'] = date('Y-m-d H:i:s');
+            $data['category'] = 0;
+            $data['flag_nsfw'] = 0;
+            $data['status'] = 'a';
+            $data['author_ip'] = $_SERVER['REMOTE_ADDR'];
+        }
+        return new Application_Model_Post($data, $this);
+    }
+
+    /**
+     * 
+     */
     public function fetchForMain()
     {
         $select = $this->_db_table->select()
@@ -28,6 +47,9 @@ class Application_Model_Post_Gateway
         return new Application_Model_Post_List($posts, $this);
     }
 
+    /**
+     * 
+     */
     public function fetchAwaiting()
     {
         $select = $this->_db_table->select()
@@ -39,12 +61,46 @@ class Application_Model_Post_Gateway
         return new Application_Model_Post_List($posts, $this);
     }
 
-    public function createPost($data)
+    /**
+     * 
+     */
+    public function fetchFromAuthor($author)
     {
-        return new Application_Model_Post($data, $this);
+        $select = $this->_db_table->select()
+            ->where('author = ?', $author)
+            ->where('status = ?', "a")
+            ->order('added DESC');
+        $posts = $this->_db_table->fetchAll($select);
+
+        return new Application_Model_Post_List($posts, $this);
     }
 
-    public function getById($id)
+    /**
+     * 
+     */
+    public function fetch($data)
+    {
+        $select = $this->_db_table->select()
+            ->where('category = ?', $data['category'])
+            ->order('added ASC');
+
+        if (isset($data['nsfw']) && 0 == $data['nsfw']) {
+            $select->where('flag_nsfw = ?', "0");
+        }
+
+        if (isset($data['nsfw']) && 0 == $data['removed']) {
+            $select->where('status = ?', "a");
+        }
+
+        $posts = $this->_db_table->fetchAll($select);
+
+        return new Application_Model_Post_List($posts, $this);
+    }
+
+    /**
+     * 
+     */
+    public function getByPostId($id)
     {
         //use the Table Gateway to find the row that
         //the id represents
@@ -111,12 +167,12 @@ class Application_Model_Post_Gateway
         
         return $result;
     }
-    
-    function get($id)
-    {
-        $posts = new Application_Model_DbTable_Posts();
-        $post = new Application_Model_Post($posts->find($id));
 
-        return $post;
+    /**
+     * 
+     */
+    public function getDbTable()
+    {
+        return $this->_db_table;
     }
 }

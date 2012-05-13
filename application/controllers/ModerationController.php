@@ -12,30 +12,8 @@ class ModerationController extends Zend_Controller_Action
 
         $this->view->identity = $this->_helper->getIdentity();
 
-        $this->posts = new Application_Model_DbTable_Posts();
         $this->requestParams = $this->getRequest()->getParams();
     }
-
-
-    /**
-     *
-     */
-    private function _getPostList($select)
-    {
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
-        
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setCurrentPageNumber($this->_getParam('page'));
-
-        Zend_Paginator::setDefaultScrollingStyle('Sliding');
-        Zend_View_Helper_PaginationControl::setDefaultViewPartial(
-            'my_pagination_control.phtml'
-        );
-
-        $this->view->paginator = $paginator;
-    }
-
-
 
     /**
      * Moderation list action
@@ -55,33 +33,18 @@ class ModerationController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
-                // $postsModel = new Application_Model_DbTable_Posts();
-                // $posts = $postsModel->fetchFromCategory($formData['category'], $formData['nsfw'], $formData['removed']);
-                
-                $posts = new Application_Model_DbTable_Posts();
-                $select = $posts->select()
-                    ->where('category = ?', $formData['category'])
-                    ->order('added DESC');
-                
-                if (!$formData['removed']) {
-                    $select->where('status = ?', "a");
-                }
-
-                if (!$formData['nsfw']) {
-                    $select->where('flag_nsfw = ?', 0);
-                }
-
-                $this->_getPostList($select);
+                $postGateway = new Application_Model_Post_Gateway();
+                $posts = $postGateway->fetch($formData);
             }
         } else {
-            $posts = new Application_Model_DbTable_Posts();
-            $select = $posts->select()
-                ->where('category = ?', 0)
-                // ->where('status = ?', "a")
-                ->order('added DESC');
-
-            $this->_getPostList($select);
+            $postGateway = new Application_Model_Post_Gateway();
+            $posts = $postGateway->fetch(array('category' => 0));
         }
+
+        $paginator = new Jk_Paginator(new Zend_Paginator_Adapter_Array($posts->getList()));
+        $paginator->setCurrentPageNumber($this->_getParam('page'));
+
+        $this->view->paginator = $paginator;
 
         $this->view->posts = $posts;
         $this->view->form = $form;
@@ -92,10 +55,18 @@ class ModerationController extends Zend_Controller_Action
      */
     public function setcategoryAction()
     {
-        $id = $this->requestParams['id'];
-        $category = $this->requestParams['category'];
+        $id = $this->_getParam('id');
+        $category = $this->_getParam('category');
 
-        $this->posts->setCategory($id, $category);
+        $postGateway = new Application_Model_Post_Gateway();
+
+        $post = new Application_Model_Post(array(
+            'id' => $id,
+            'category' => $category,
+            'moderated' => date('Y-m-d H:i:s'),
+            ), $postGateway);
+        $post->save();
+
         $this->_helper->redirector->gotoRouteAndExit(array(), 'moderation');
     }
 
@@ -104,11 +75,18 @@ class ModerationController extends Zend_Controller_Action
      */
     public function flagAction()
     {
-        $id = $this->requestParams['id'];
-        $flag = $this->requestParams['flag'];
-        $value = $this->requestParams['value'];
+        $id = $this->_getParam('id');
+        $flag = $this->_getParam('flag');
+        $value = $this->_getParam('value');
 
-        $this->posts->setFlag($id, $flag, $value);
+        $postGateway = new Application_Model_Post_Gateway();
+
+        $post = new Application_Model_Post(array(
+            'id' => $id,
+            'flag_' . $flag => $value,
+            ), $postGateway);
+        $post->save();
+
         $this->_helper->redirector->gotoRouteAndExit(array(), 'moderation');
     }
 
@@ -117,10 +95,17 @@ class ModerationController extends Zend_Controller_Action
      */
     public function statusAction()
     {
-        $id = $this->requestParams['id'];
-        $status = $this->requestParams['status'];
+        $id = $this->_getParam('id');
+        $status = $this->_getParam('status');
 
-        $this->posts->setStatus($id, $status);
+        $postGateway = new Application_Model_Post_Gateway();
+
+        $post = new Application_Model_Post(array(
+            'id' => $id,
+            'status' => $status,
+            ), $postGateway);
+        $post->save();
+
         $this->_helper->redirector->gotoRouteAndExit(array(), 'moderation');
     }
 
