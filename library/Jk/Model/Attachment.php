@@ -3,34 +3,22 @@
 /**
 * 
 */
-class Application_Model_Post
+class Jk_Model_Attachment
 {
-
     protected $_gateway = null;
 
     protected $_data = array(
         'id' => null,
-        'post_id' => null,
-        'title' => null,
-        'author' => null,
-        'source' => null,
+        'filename' => null,
         'added' => null,
-        'moderated' => null,
-        'category' => null,
-        'flag_nsfw' => null,
-        'status' => null,
-        'author_ip' => null,
-        'updated' => null,
-        'agreement' => null,
-
-        'attachment_id' => null, //added to handle attachments
-
+        'original_mime' => null,
+        'original_size_x' => null,
+        'original_size_y' => null,
+        'original_filesize' => null,
+        'source' => null,
         );
-
-    protected $_next = null;
-    protected $_previous = null;
     
-    public function __construct($data, $gateway)
+     public function __construct($data, $gateway)
     {
         $this->setGateway($gateway);
         $this->populate($data);
@@ -40,7 +28,7 @@ class Application_Model_Post
         }
     }
 
-    public function setGateway(Application_Model_Post_Gateway $gateway)
+    public function setGateway(Jk_Model_Attachment_Gateway $gateway)
     {
         $this->_gateway = $gateway;
         return $this;
@@ -99,26 +87,6 @@ class Application_Model_Post
         }
     }
 
-    public function setNext(Application_Model_Post $value)
-    {
-        $this->_next = $value;
-    }
-
-    public function getNext()
-    {
-        return $this->_next;
-    }
-
-    public function setPrevious(Application_Model_Post $value)
-    {
-        $this->_previous = $value;
-    }
-
-    public function getPrevious()
-    {
-        return $this->_previous;
-    }
-
     /**
      * Insert or update, depending on existence of _data['id']
      */
@@ -126,7 +94,7 @@ class Application_Model_Post
     {
         $gateway = $this->getGateway();
         if (null === $this->id) {
-            $gateway->getDbTable()->insert($this->_data);
+            $result = $gateway->getDbTable()->insert($this->_data);
         } else {
             // update only data that is set, remove null
             $data = $this->_data;
@@ -136,13 +104,9 @@ class Application_Model_Post
                     unset($data[$key]);
                 }
             }
-            $gateway->getDbTable()->update($data, '`id` = "' . $this->_data['id'] . '"');
+            $result = $gateway->getDbTable()->update($data, '`id` = "' . $this->_data['id'] . '"');
         }
-    }
 
-    public function image($format)
-    {
-        $xerocopy = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource('xerocopy');
-        return $xerocopy->image($this->_data['attachment_id'], $format);
+        return $result;
     }
 }

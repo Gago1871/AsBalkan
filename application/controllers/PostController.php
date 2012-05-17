@@ -111,33 +111,33 @@ class PostController extends Zend_Controller_Action
                         return;
                 }
 
-                $thumbnailData = $this->xerocopy($file);
+                // $attachmentId = $this->invokeArg('xerocopy')->saveImage($file);
+                $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file);
 
                 $fileInfo = pathinfo($file);
 
                 $title = $form->getValue('title');
                 $author = $form->getValue('author');
                 $agreement = $form->getValue('agreement');
-                // $source = $file;
-                
-                // read source of the file
-                
+
+                $id = Jk_Url::generateUniqueId(); // abcd123
+
                 $postGateway = new Application_Model_Post_Gateway();
                 $post = $postGateway->createPost(array(
-                    'post_id' => $thumbnailData['id'],
-                    'file' => $thumbnailData['thumb'],
+                    'post_id' => $id,
                     'title' => $title,
                     'author' => $author,
-                    'original_file' => $fileInfo['filename'],
                     'agreement' => $agreement,
                     'source' => $source,
+                    'attachment_id' => $attachmentId,
                     ), true);
+
                 $post->save();
                 
                 $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
                 $this->_helper->getHelper('FlashMessenger')->addMessage($message);
 
-                $this->_helper->redirector->gotoRouteAndExit(array('id' => $thumbnailData['id'], 'title' => $title), 'postview');
+                $this->_helper->redirector->gotoRouteAndExit(array('id' => $id, 'title' => $title), 'postview');
 
             } else {
                 $message = array('type' => 'failure', 'content' => 'You`re doing it wrong...');
@@ -148,51 +148,5 @@ class PostController extends Zend_Controller_Action
 
         $this->view->headTitle('Dodaj post');
         $this->view->form = $form;
-    }
-
-    private function xerocopy($file)
-    {
-
-        $appConfig = Zend_Registry::get('Config_App');
-        $storage = $appConfig['storage']['location']; // /var/www/poebao-cdn
-        $xerocopy = $appConfig['xerocopy'];
-
-        $id = Jk_Url::createUniqueId(); // abcd123
-        $hashedDir = Jk_File::getHashedDirStructure($id); // a/b/c/d123
-
-        $fileInfo = pathinfo($file);
-        $normalizedFilename = Jk_Url::normalize($fileInfo['filename']);
-        
-        $thumbLoc = array();
-        $thumbFilename = array();
-
-        // start xerocopy magic
-        foreach ($xerocopy['format'] as $key => $format) {
-            if (isset($format['width'])) {
-                $image = Jk_Image::resizeImage($file, $format['width']);
-            } else {
-                $image = Jk_Image::createImageFromFile($file);
-            }
-
-            $thumbLoc[$key] = $storage . DIRECTORY_SEPARATOR . $key . DIRECTORY_SEPARATOR . $hashedDir;
-            Jk_File::createDir($thumbLoc[$key]);
-
-            if (!isset($format['type'])) {
-                $format['type'] = $fileInfo['extension'];
-            }
-
-            if (isset($format['filename'])) {
-                $tmpName = $format['filename'];
-            } else {
-                $tmpName = $normalizedFilename;
-            }
-            
-            $thumbFilename[$key] = $tmpName . '.' . $format['type'];
-            $thumbFile[$key] = $thumbLoc[$key] . '-' . $tmpName . '.' . $format['type'];
-            Jk_Image::saveImage($image, $thumbFile[$key]);
-        }
-
-        $thumbFilename['id'] = $id;
-        return $thumbFilename;
     }
 }

@@ -5,7 +5,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     /**
      * 
      */
-    protected function _initApplication() {
+    protected function _initApplication()
+    {
         // Load configuration from file, put it in the registry
         $appConfig = $this->getOption('app');
         Zend_Registry::set('Config_App', $appConfig);
@@ -36,11 +37,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     public function _initTranslator()
     {  
-      $translator = new Zend_Translate('array', APPLICATION_PATH . '/lang/pl.php', 'pl');
-      $translator->setLocale('pl');
+        $translator = new Zend_Translate('array', APPLICATION_PATH . '/lang/pl.php', 'pl');
+        $translator->setLocale('pl');
 
-      Zend_Registry::set('Zend_Translate', $translator);
-      return $translator;
+        Zend_Registry::set('Zend_Translate', $translator);
+        return $translator;
     }
     
     /**

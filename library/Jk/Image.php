@@ -1,32 +1,20 @@
 <?php
 
+/**
+ * Jk_Image tool class for image operations
+ */
 class Jk_Image
 {
-    private static $_imageQuality = 88;
+    /**
+     * Default JPEG quality for saved images
+     */
+    private static $_jpegQuality = 88;
 
-    public function createImageFromFile($file) {
-        $data = getimagesize($file);
-        
-        switch ($data['mime']) {
-            case 'image/jpeg':
-               $image = imagecreatefromjpeg($file); //jpeg file
-               break;
-            case 'image/gif':
-                $image = imagecreatefromgif($file); //gif file
-                break;
-            case 'image/png':
-                $image = imagecreatefrompng($file); //png file
-                break;
-            default: 
-                $image = false;
-                break;
-            }
-            
-        return $image;
-    }
-    
-    public function resizeImage($source, $newWidth = 100, $destination = null) {
-
+    /**
+     * Resize image keeping proportions /ratio aspect
+     */
+    public function resizeImage($source, $newWidth = 100, $destination = null)
+    {
         $image = self::createImageFromFile($source);
         
         $width = imagesx($image);
@@ -48,16 +36,36 @@ class Jk_Image
         
         return $tmpImage;
     }
+
+    /**
+     * Create image from given file
+     */
+    public function createImageFromFile($file) {
+        $data = getimagesize($file);
+        
+        switch ($data['mime']) {
+            case 'image/jpeg':
+               $image = imagecreatefromjpeg($file); //jpeg file
+               break;
+            case 'image/gif':
+                $image = imagecreatefromgif($file); //gif file
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($file); //png file
+                break;
+            default: 
+                $image = false;
+                break;
+            }
+            
+        return $image;
+    }
     
     /**
      * Save image to a file
      */
-    public function saveImage($image, $destination, $quality = null) {
-        
-        if (null === $quality) {
-            $quality = self::$_imageQuality;
-        }
-
+    public function saveImage($image, $destination)
+    {
         $imageInfo = pathinfo($destination);
         
         switch ($imageInfo['extension']) {
@@ -66,16 +74,28 @@ class Jk_Image
                 break;
             
             default:
-                self::saveJpeg($image, $destination, $quality);
+                self::saveJpeg($image, $destination);
                 break;
         }
     }
     
-    public function savePng($image, $destination) {
+    /**
+     * Save image as a PNG file
+     */
+    public function savePng($image, $destination)
+    {
         imagepng($image, $destination);
     }
 
-    public function saveJpeg($image, $destination, $quality) {
+    /**
+     * Save image as a JPEG file
+     */
+    public function saveJpeg($image, $destination, $quality = null)
+    {
+        if (null === $quality) {
+            $quality = self::$_jpegQuality;
+        }
+
         imagejpeg($image, $destination, $quality);
     }
 

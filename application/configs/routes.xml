@@ -72,16 +72,16 @@
             </postupload>
 
             <postview type="Zend_Controller_Router_Route_Regex">
-                <route>p/(.+)-(.*)</route>
+                <route>p/(.+)</route>
                 <defaults>
                     <controller>post</controller>
                     <action>view</action>
                 </defaults>
                 <map>
                     <id>1</id>
-                    <title>2</title>
+                    <!-- <title>2</title> -->
                 </map>
-                <reverse>p/%s-%s</reverse>
+                <reverse>p/%s</reverse>
             </postview>
 
             <!-- USER -->
