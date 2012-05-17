@@ -1,43 +1,54 @@
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
+
 includePaths.library = APPLICATION_PATH "/../library"
+
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 appnamespace = "Application"
+
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
-resources.view.doctype = "XHTML1_STRICT"
-autoloadernamespaces.jk = Jk_
+
+resources.view.doctype = "HTML5"
+resources.view.charset = "utf-8"
 
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
 
-; STORAGE
-app.storage.location = /var/www/poebao-cdn
-app.storage.host = http://poebao-cdn.kosiarka
+autoloadernamespaces[] = Jk_
+autoloadernamespaces[] = Xerocopy_
+
+pluginPaths.Jk_Resource = "Jk/Resource"
+pluginPaths.Xerocopy_Resource = "Xerocopy/Resource"
 
 ; XEROCOPY / FILE CONVERSION
-app.xerocopy.format.original.type = jpeg
+resources.xerocopy.storage.location = 
+resources.xerocopy.storage.host = 
+resources.xerocopy.storeOriginal = 1
 
-app.xerocopy.format.thumb.width = 460
-app.xerocopy.format.thumb.type = jpeg
+resources.xerocopy.format.thumb.width = 460
+resources.xerocopy.format.thumb.quality = 85
+; resources.xerocopy.format.thumb.type = jpeg
 
-app.xerocopy.format.view.width = 650
-app.xerocopy.format.view.type = jpeg
+resources.xerocopy.format.view.width = 650
+resources.xerocopy.format.view.quality = 88
+; resources.xerocopy.format.view.type = jpeg
 
-; app.xerocopy.format.ble.width = 1460
-; app.xerocopy.format.ble.type = png
-; app.xerocopy.format.ble.filename = ble
-
-; app.xerocopy.format.huge.width = 2460
-; app.xerocopy.format.huge.type = jpeg
+; HEADSCRIPTS
+resources.headScripts.js.jquery =           "/js/jquery-1.7.2.min.js"
+resources.headScripts.js.timeago =          "/js/jquery.timeago.js"
+resources.headScripts.js.timeagolang =      "/js/jquery.timeago.pl.js"
+resources.headScripts.js.infinitescroll =   "/js/jquery.infinitescroll.js"
+resources.headScripts.js.app =              "/js/poebao.js"
 
 ; DATABASE
 resources.db.adapter = PDO_MYSQL
 resources.db.params.host = 127.0.0.1
 resources.db.params.username = 
 resources.db.params.password = 
-resources.db.params.dbname = poebao
+resources.db.params.dbname = my_7727
+resources.db.params.charset = "utf8";
 
 ; MAIL SERVER
 resources.mail.transport.type = smtp
@@ -75,3 +86,5 @@ phpSettings.display_errors = 1
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
 resources.frontController.params.displayExceptions = 1
+
+resources.headScripts.js.jquery =           "/js/jquery-1.7.2.js"
