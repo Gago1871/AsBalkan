@@ -15,8 +15,8 @@ a {
 }
 
 a:hover {
-/*	margin-top: 1px;
-	padding-left: 1px;*/
+/*  margin-top: 1px;
+    padding-left: 1px;*/
 }
 
 img {
@@ -38,15 +38,15 @@ p {
 }
 
 .clear {
-	clear: both;
+    clear: both;
 }
 
 .left {
-	float: left;
+    float: left;
 }
 
 .right {
-	float: right;
+    float: right;
 }
 
 /* GLOBAL CLASSES */
@@ -153,7 +153,7 @@ a.button:hover {
 }
 
 .subtext {
-	font-size: 12px;
+    font-size: 12px;
     color: #737375;
 }
 
@@ -167,49 +167,51 @@ a.button:hover {
 }
 
 /* post list */
-#posts {
+.post-list {
     list-style-type: none;
-    margin-bottom: 20px;
+    /*margin-bottom: 40px;*/
 }
 
-#posts a {
+.post-list a {
     color: #082777;
 }
 
-#posts a:hover {
+.post-list a:hover {
 /*    color: #0562db;*/
 }
 
-#posts h2 a {
+.post-list h2 a {
     color: #222629;
 }
 
-#posts li {
+.post-list li {
     overflow: auto;
-    margin-top: 34px;
-    padding-top: 39px;
-    background: #dfdfdf url('/img/border.png') no-repeat top left;
+    background: #dfdfdf url('/img/border.png') no-repeat bottom left;
+
+    margin-bottom: 34px;
+    padding-bottom: 41px;
+    
 
     word-wrap: break-word;
 }
 
-#posts .first {
-	background: none;
-	margin-top: 0;
-	padding-top: 0;
+.post-list .first {
+    /*background: none;
+    margin-top: 0;
+    padding-top: 0;*/
 }
 
-#posts .last {
+.post-list .last {
     background: none;
 }
 
-#posts .post {
+.post-list .post {
     width: 460px;
     float: left;
     /*margin-right: 10px;*/
 }
 
-#posts .info {
+.post-list .info {
     float: right;
     width: 178px;
     font-size: 12px;
@@ -219,79 +221,76 @@ a.button:hover {
     /*margin-top: -7px;*/
 }
 
-#posts .info h2 {
+.post-list .info h2 {
     margin-bottom: 6px;
     font-size: 20px;
 }
 
-#posts .source {
+.post-list .source {
     color: #737375;
 }
 
-#posts .source a {
+.post-list .source a {
     color: #737375;
 }
 
-#posts .admin {
+.post-list .admin {
     float: right;
     width: 178px;
 }
 
-#posts .admin a.button {
+.post-list .admin a.button {
     float: left;
     margin-right: 4px;
     margin-bottom: 4px;
 }
 
-#posts .admin a.button:hover {
+.post-list .admin a.button:hover {
     border: 1px solid #aaa;
     box-shadow: 1px 1px 2px 1px #bbb;
 }
 
-#posts .admin a.button.ok {
+.post-list .admin a.button.ok {
     /*background-color: #00a600;*/
 }
 
-#posts .admin a.button.set {
+.post-list .admin a.button.set {
     background-color: #3070d1;
     color: #fff;
     text-shadow: -1px -1px 0px #2a5eac;
     border: 1px solid #1951a5;
 }
 
-#posts .admin a.button.delete {
+.post-list .admin a.button.delete {
     background-color: #df1e1e;
     color: #fff;
     text-shadow: -1px -1px 0px #a60c0c;
     border: 1px solid #ba1414;
 }
 
-
-
-#posts .admin p {
+.post-list .admin p {
     clear: both;
 }
-
 
 /* post view */
 #post {
     word-wrap: break-word;
 }
 #post h1 {
-	/*margin-top: 40px;*/
-	font-size: 19px;
+    /*margin-top: 40px;*/
+    font-size: 19px;
 }
 
 #post h3 {
-	display: inline;
+    display: inline;
 }
 
 #post img {
-	margin-top: 16px;
+    margin-top: 16px;
 }
 
 #subnav {
-	float: right;
+    float: right;
 }
 
 /* footer */
@@ -323,36 +322,36 @@ a.button:hover {
 }
 
 .failure {
-	background-color: red;
+    background-color: red;
 }
 
 /* UPLOAD LAYER */
 #upload-form-layer {
-	width: 700px;
-	height: 390px;
-	left: -350px;
-	top: 115px;
-	
-	margin: 0 50%;
-	padding: 12px;
+    width: 700px;
+    height: 390px;
+    left: -350px;
+    top: 115px;
+    
+    margin: 0 50%;
+    padding: 12px;
 
-	position: fixed;
-	display: none;
-	background-image: url('/img/opaque.png');
+    position: fixed;
+    display: none;
+    background-image: url('/img/opaque.png');
 }
 
 #upload-form-layer .container {
-	padding: 12px;
-	background-color: #dcdcdc;
-	width: 676px;
-	height: 366px;
+    padding: 12px;
+    background-color: #dcdcdc;
+    width: 676px;
+    height: 366px;
 }
 
 #upload-form-layer #nav-hide-upload-form {
-	float: right;
-	font-weight: bold;
-	padding: 6px 10px;
-	cursor: pointer;
+    float: right;
+    font-weight: bold;
+    padding: 6px 10px;
+    cursor: pointer;
 }
 
 /* POSTING FORM */
@@ -428,6 +427,7 @@ a.button:hover {
     /*border: 2px solid lime;*/
     width: 460px;
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
+    /*display: none;*/
 }

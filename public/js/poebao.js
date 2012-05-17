@@ -18,7 +18,7 @@ $(function () {
 
     // infinitescroll() is called on the element that surrounds 
     // the items you will be loading more of
-    $('ul#posts').infinitescroll({
+    $('#posts').infinitescroll({
 
         loading: {
             finished: undefined,
@@ -39,14 +39,14 @@ $(function () {
             currPage: 1
         },
         callback: undefined,
-        debug: true,
+        debug: false,
         behavior: undefined,
         binder: $(window), // used to cache the selector
-        navSelector  : "div#paginator", // selector for the paged navigation (it will be hidden)           
+        navSelector  : "#paginator", // selector for the paged navigation (it will be hidden)           
         nextSelector : "#nav-post-list-next-page", // selector for the NEXT link (to page 2)
         
         extraScrollPx: 150,
-        itemSelector : "ul#posts", // selector for all items you'll retrieve
+        itemSelector : "ul.post-list", // selector for all items you'll retrieve
         animate: false,
         pathParse: undefined,
         dataType: 'html',
@@ -54,7 +54,7 @@ $(function () {
         bufferPx: 40,
         errorCallback: function () { },
         infid: 0, //Instance ID
-        pixelsFromNavToBottom: undefined,
+        pixelsFromNavToBottom: 100,
         path: undefined
     });
 });

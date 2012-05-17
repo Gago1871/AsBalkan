@@ -149,14 +149,16 @@
 				$(opts.navSelector).hide();
 				opts.loading.msg
 					.appendTo(opts.loading.selector)
-					.show(opts.loading.speed, function () {
+                    // .show(opts.loading.speed, function () {
+					.show(0, function () {
 	                	beginAjax(opts);
 	            });
 			};
 			
 			// determine loading.finished actions
 			opts.loading.finished = opts.loading.finished || function() {
-				opts.loading.msg.fadeOut('normal');
+                // opts.loading.msg.fadeOut('normal'); jkulak
+				opts.loading.msg.hide();
 			};
 
             // callback loading
