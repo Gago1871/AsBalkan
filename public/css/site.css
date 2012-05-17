@@ -6,7 +6,7 @@
 body {
     color: #25262a;
     background: #dfdfdf url('/img/bg.png') repeat-x;
-    /*font-family: "Didact Gothic";*/
+    font-family: 'Oxygen', sans-serif;
 /*  font-size: 110%;*/
 }
 
@@ -135,7 +135,6 @@ a.button:hover {
 #content {
     margin: 0 auto;
     overflow: auto;
-    font-family: 'Oxygen', sans-serif;
     /*position: relative;*/
     /*border: 1px solid red;*/
 }
