@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Jk_Image tool class for image operations
+ * Xerocopy_Image tool class for image operations
  */
-class Jk_Image
+class Xerocopy_Image
 {
     /**
      * Default JPEG quality for saved images

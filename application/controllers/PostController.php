@@ -78,14 +78,12 @@ class PostController extends Zend_Controller_Action
                     // set source from file url
                     $filedata = parse_url($file);
                     $source = (!empty($filedata['scheme'])?$filedata['scheme']:'http') . '://' . $filedata['host'];
-                    var_dump($filedata);
-                    // die('sdfsf');
+                    $originalSource = $file;
 
                     try {
                         $file = Jk_File::download($file);    
                     } catch (Exception $e) {
                         $message = array('type' => 'failure', 'content' => 'Seems like it\'s not a valid URL...');
-                        // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
                         $this->view->messages[] = $message;
                         $form->populate($this->params);
                         $this->view->headTitle('Dodaj post');
@@ -112,7 +110,7 @@ class PostController extends Zend_Controller_Action
                 }
 
                 // $attachmentId = $this->invokeArg('xerocopy')->saveImage($file);
-                $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file);
+                $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $originalSource);
 
                 $fileInfo = pathinfo($file);
 

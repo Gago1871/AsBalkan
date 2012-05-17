@@ -24,19 +24,6 @@ class Jk_File
 
         return $dirName . substr($hash, $depth, strlen($hash) - $depth);
     }
-    
-    /**
-     * Create directory from given path, and set a+rwx rights
-     */
-    public function createDir($path)
-    {
-
-        if (!is_dir($path)) {
-            mkdir($path, 0777, true);
-        }
-        
-        return true;
-    }
 
     public function download($url, $dir = null, $prefix = 'jk')
     {

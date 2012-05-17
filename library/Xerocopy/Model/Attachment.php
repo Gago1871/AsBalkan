@@ -3,7 +3,7 @@
 /**
 * 
 */
-class Jk_Model_Attachment
+class Xerocopy_Model_Attachment
 {
     protected $_gateway = null;
 
@@ -18,17 +18,13 @@ class Jk_Model_Attachment
         'source' => null,
         );
     
-     public function __construct($data, $gateway)
+    public function __construct($data, $gateway)
     {
         $this->setGateway($gateway);
         $this->populate($data);
-
-        if (!isset($this->post_id)) {
-            // throw new Exception('Initial data must contain an id');
-        }
     }
 
-    public function setGateway(Jk_Model_Attachment_Gateway $gateway)
+    public function setGateway(Xerocopy_Model_Attachment_Gateway $gateway)
     {
         $this->_gateway = $gateway;
         return $this;
@@ -95,16 +91,6 @@ class Jk_Model_Attachment
         $gateway = $this->getGateway();
         if (null === $this->id) {
             $result = $gateway->getDbTable()->insert($this->_data);
-        } else {
-            // update only data that is set, remove null
-            $data = $this->_data;
-            unset($data['id']);
-            foreach ($data as $key => $value) {
-                if (null === $value) {
-                    unset($data[$key]);
-                }
-            }
-            $result = $gateway->getDbTable()->update($data, '`id` = "' . $this->_data['id'] . '"');
         }
 
         return $result;

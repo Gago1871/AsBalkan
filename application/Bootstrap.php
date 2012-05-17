@@ -33,6 +33,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
+     * Enable loading Jk_Model_* classes from jk/models/* dir
+     */
+    public function _initAutoloaders()
+    {
+        $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
+            'basePath' => APPLICATION_PATH . '/../library/Jk',
+            'namespace' => 'Jk_'
+        ));
+
+        $resourceLoader->addResourceTypes(array(
+            'jkmodels' => array(
+                'namespace' => 'Model_',
+                'path' => 'Models')
+            )
+        );
+    }
+
+    /**
      * 
      */
     public function _initTranslator()

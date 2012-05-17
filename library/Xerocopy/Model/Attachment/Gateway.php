@@ -3,14 +3,14 @@
 /**
 * 
 */
-class Jk_Model_Attachment_Gateway
+class Xerocopy_Model_Attachment_Gateway
 {
 
     protected $_db_table;
 
     public function __construct()
     {
-        $this->_db_table = new Jk_Model_Attachment_DbTable();
+        $this->_db_table = new Xerocopy_Model_Attachment_DbTable();
     }
 
     /**
@@ -18,7 +18,7 @@ class Jk_Model_Attachment_Gateway
      */
     public function create($data, $fillDefault = false)
     {
-        return new Jk_Model_Attachment($data, $this);
+        return new Xerocopy_Model_Attachment($data, $this);
     }
 
     /**
@@ -33,7 +33,7 @@ class Jk_Model_Attachment_Gateway
             throw new Exception('Attachment not found');
         }
  
-        $post = new Jk_Model_Attachment($result->toArray(), $this);
+        $post = new Xerocopy_Model_Attachment($result->toArray(), $this);
 
         return $post;
    }

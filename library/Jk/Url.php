@@ -22,16 +22,4 @@ class Jk_Url
 
         return substr($uid, 0, $len);
     }
-    
-    /**
-     * Sanitize string to fit URL RFC ####
-     */
-    public function normalize($string)
-    {
-        $string = preg_replace('/-+/', '-', strtolower(preg_replace('/[^A-Za-z0-9_]/', '-', $string)));
-
-        // $string = preg_replace('/\W/', '', $string);
-
-        return $string;
-    }
 }

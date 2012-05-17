@@ -2,16 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `my_7727` ;
-CREATE SCHEMA IF NOT EXISTS `my_7727` DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci ;
-USE `my_7727` ;
 
 -- -----------------------------------------------------
--- Table `my_7727`.`posts`
+-- Table `posts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `my_7727`.`posts` ;
+DROP TABLE IF EXISTS `posts` ;
 
-CREATE  TABLE IF NOT EXISTS `my_7727`.`posts` (
+CREATE  TABLE IF NOT EXISTS `posts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `post_id` VARCHAR(12) NOT NULL ,
   `title` VARCHAR(255) NOT NULL ,
@@ -28,24 +25,6 @@ CREATE  TABLE IF NOT EXISTS `my_7727`.`posts` (
   `attachment_id` INT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `post_id_UNIQUE` (`post_id` ASC) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `my_7727`.`attachments`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `my_7727`.`attachments` ;
-
-CREATE  TABLE IF NOT EXISTS `my_7727`.`attachments` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `filename` VARCHAR(255) NOT NULL ,
-  `added` DATETIME NOT NULL ,
-  `original_mime` VARCHAR(45) NULL ,
-  `original_size_x` INT UNSIGNED NOT NULL ,
-  `original_size_y` INT UNSIGNED NOT NULL ,
-  `original_filesize` INT UNSIGNED NOT NULL ,
-  `source` VARCHAR(1000) NULL ,
-  PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 

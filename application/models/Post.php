@@ -140,6 +140,9 @@ class Application_Model_Post
         }
     }
 
+    /**
+     * Returns image URL from Xerocopy
+     */
     public function image($format)
     {
         $xerocopy = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource('xerocopy');
