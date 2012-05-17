@@ -16,6 +16,7 @@ class Application_Form_Moderation extends Zend_Form
     public function init()
     {
         $this->setName('moderate');
+        $this->setMethod('GET');
 
         $defaultDecorator = array(
             // array('Errors', 'placement' => 'prepend'),

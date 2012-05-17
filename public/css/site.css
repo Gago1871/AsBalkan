@@ -6,7 +6,7 @@
 body {
     color: #25262a;
     background: #dfdfdf url('/img/bg.png') repeat-x;
-    font-family: "Didact Gothic";
+    /*font-family: "Didact Gothic";*/
 /*  font-size: 110%;*/
 }
 
@@ -91,6 +91,8 @@ a.button:hover {
     margin-bottom: 40px;
 
     font-size: 20px;
+
+    font-family: 'Dosis', sans-serif;
 }
 
 #header a {
@@ -133,6 +135,7 @@ a.button:hover {
 #content {
     margin: 0 auto;
     overflow: auto;
+    font-family: 'Oxygen', sans-serif;
     /*position: relative;*/
     /*border: 1px solid red;*/
 }
