@@ -59,6 +59,7 @@ class PostController extends Zend_Controller_Action
 
                     // set source from text field
                     $source = $form->getValue('source');
+                    $originalSource = $source;
 
                     if (!$form->file->isReceived()) {
                         $message = array('type' => 'failure', 'content' => 'Unable to receive file.');
@@ -109,7 +110,7 @@ class PostController extends Zend_Controller_Action
                         return;
                 }
 
-                // $attachmentId = $this->invokeArg('xerocopy')->saveImage($file);
+                // Do Xerocopy magic - this will create thumbnails
                 $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $originalSource);
 
                 $fileInfo = pathinfo($file);

@@ -81,10 +81,13 @@ class Xerocopy_Resource_Xerocopy extends Zend_Application_Resource_ResourceAbstr
                 $image = Xerocopy_Image::createImageFromFile($file);
             }
 
+            if (isset($format['watermark'])) {
+                $image = Xerocopy_Image::watermark($image, $format['watermark']);
+            }
+
             $location = $storage . DIRECTORY_SEPARATOR . $key . DIRECTORY_SEPARATOR . Xerocopy_Tools::getHashedDir($id) . DIRECTORY_SEPARATOR . $id;
             $destinationFilename = $filename . '.' . $extension;
             $destinationFile = $location . DIRECTORY_SEPARATOR . $destinationFilename;
-
             Xerocopy_Tools::createDir($location);
             Xerocopy_Image::saveImage($image, $destinationFile);
         }

@@ -103,4 +103,27 @@ class Xerocopy_Image
     {
         $this->_imageQuality = $quality;
     }
+
+    /**
+     * Glue watermark in the bottom of image
+     */
+    public function watermark($image, $watermarkFile)
+    {
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        $watermark = self::resizeImage($watermarkFile, $width);
+        $watermarkHeight = imagesy($watermark);
+
+        $mergedImage = imagecreatetruecolor($width, $height + $watermarkHeight);
+
+        //imagecopymerge ( resource $dst_im , resource $src_im , int $dst_x , int $dst_y , int $src_x , int $src_y , int $src_w , int $src_h , int $pct )
+        imagecopymerge($mergedImage, $image, 0, 0, 0, 0, $width, $height, 100);
+        // var_dump($mergedImage);
+        imagecopymerge($mergedImage, $watermark, 0, $height, 0, 0, $width, $watermarkHeight, 100);
+
+        // die('test');
+
+        return $mergedImage;
+    }
 }
