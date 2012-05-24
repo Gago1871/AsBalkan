@@ -44,7 +44,7 @@ class Application_Form_Moderation extends Zend_Form
         $removed = new Zend_Form_Element_Checkbox('removed');
         $removed->setLabel('Removed')
             ->setDecorators($defaultDecorator)
-            ->setChecked(true);
+            ->setChecked(false);
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Filter')

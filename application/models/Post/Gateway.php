@@ -78,18 +78,24 @@ class Application_Model_Post_Gateway
     /**
      * 
      */
-    public function fetch($data)
+    public function fetchForModeration($data)
     {
+        print_r($data);
         $select = $this->_db_table->select()
-            ->where('category = ?', $data['category'])
-            ->order('added ASC');
-
+            ->where('category = ?', $data['category']);
+            
         if (isset($data['nsfw']) && 0 == $data['nsfw']) {
             $select->where('flag_nsfw = ?', "0");
         }
 
-        if (isset($data['nsfw']) && 0 == $data['removed']) {
+        if (isset($data['removed']) && 0 == $data['removed']) {
             $select->where('status = ?', "a");
+        }
+
+        if (in_array($data['category'], array(1, 2))) {
+            $select->order('moderated DESC');
+        } else {
+            $select->order('added ASC');
         }
 
         $posts = $this->_db_table->fetchAll($select);
@@ -137,17 +143,21 @@ class Application_Model_Post_Gateway
      */
     private function _getPrevious(Application_Model_Post $post)
     {
-        switch ($post->category) {
-            case 2:
-                $result = $this->_db_table->fetchRow('`category` = "' . $post->category . '" AND `moderated` > "' . $post->moderated . '"', 'moderated ASC');
-                break;
-            
-            default:
-                $result = $this->_db_table->fetchRow('`category` = "' . $post->category . '" AND `added` > "' . $post->added . '"', 'added ASC');
-                break;
+        $select = $this->_db_table->select();
+        $select->where('status = ?', "a");
+        // $select->where('flag_nsfw = ?', "0");
+
+        if (2 == $post->category) {
+            $select->where('category = ?', $post->category);
+            $select->where('moderated > ?', $post->moderated);
+            $select->order('moderated ASC');
+        } else {
+            $select->where('category IN (0,1)');
+            $select->where('added > ?', $post->added);
+            $select->order('added ASC');
         }
 
-        return $result;
+        return $this->_db_table->fetchRow($select);
     }
 
     /**
@@ -155,17 +165,21 @@ class Application_Model_Post_Gateway
      */
     private function _getNext(Application_Model_Post $post)
     {
-        switch ($post->category) {
-            case 2:
-                $result = $this->_db_table->fetchRow('`category` = "' . $post->category . '" AND `moderated` < "' . $post->moderated . '"', 'moderated DESC');
-                break;
-            
-            default:
-                $result = $this->_db_table->fetchRow('`category` = "' . $post->category . '" AND `added` < "' . $post->added . '"', 'added DESC');
-                break;
+        $select = $this->_db_table->select();
+        $select->where('status = ?', "a");
+        // $select->where('flag_nsfw = ?', "0");
+
+        if (2 == $post->category) {
+            $select->where('category = ?', $post->category);
+            $select->where('moderated < ?', $post->moderated);
+            $select->order('moderated DESC');
+        } else {
+            $select->where('category IN (0,1)');
+            $select->where('added < ?', $post->added);
+            $select->order('added DESC');
         }
-        
-        return $result;
+
+        return $this->_db_table->fetchRow($select);
     }
 
     /**

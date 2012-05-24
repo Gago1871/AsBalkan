@@ -30,15 +30,14 @@ class ModerationController extends Zend_Controller_Action
 
         $form = new Application_Form_Moderation();
         $formData = $this->requestParams;
+        $postGateway = new Application_Model_Post_Gateway();
 
         if (isset($this->requestParams['submit'])) {
             if ($form->isValid($formData)) {
-                $postGateway = new Application_Model_Post_Gateway();
-                $posts = $postGateway->fetch($formData);
+                $posts = $postGateway->fetchForModeration($formData);
             }
         } else {
-            $postGateway = new Application_Model_Post_Gateway();
-            $posts = $postGateway->fetch(array('category' => 0));
+            $posts = $postGateway->fetchForModeration(array('category' => 0, 'removed' => 0));
         }
 
         $paginator = new Jk_Paginator(new Zend_Paginator_Adapter_Array($posts->getList()));
