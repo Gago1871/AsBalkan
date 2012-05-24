@@ -29,9 +29,9 @@ class ModerationController extends Zend_Controller_Action
         $posts = array();
 
         $form = new Application_Form_Moderation();
+        $formData = $this->requestParams;
 
-        if ($this->getRequest()->isPost()) {
-            $formData = $this->getRequest()->getPost();
+        if (isset($this->requestParams['submit'])) {
             if ($form->isValid($formData)) {
                 $postGateway = new Application_Model_Post_Gateway();
                 $posts = $postGateway->fetch($formData);

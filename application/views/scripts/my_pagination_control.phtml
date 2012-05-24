@@ -1,12 +1,36 @@
 <!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
+
+<?php 
+
+/**
+ * Building query from $_GET array to attach it to hrefs
+ * 
+ * Only way of passing GET params to Zend_Paginator URLs
+ */
+function buildQuery()
+{
+    $query = '';
+
+    if (!empty($_GET)) {
+        foreach ($_GET as $key => $value) {
+            $query .= $key . '=' . $value . '&';
+        }
+
+        $query = '?' . trim($query, '&');
+    }
+
+    return $query;
+}
+
+ ?>
  
 <?php if ($this->pageCount > 1): ?>
 <div id="paginator">
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
-  <a id="nav-post-list-previous-page" href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+  <a id="nav-post-list-previous-page" href="<?php echo $this->url(array('page' => $this->previous)); ?><?php echo buildQuery() ?>">
     &lt; Previous
   </a> |
 <?php else: ?>
@@ -16,7 +40,7 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <!-- Numbered page links -->
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
-    <a href="<?php echo $this->url(array('page' => $page)); ?>">
+    <a href="<?php echo $this->url(array('page' => $page)); ?><?php echo buildQuery() ?>">
         <?php echo $page; ?>
     </a> |
   <?php else: ?>
@@ -26,7 +50,7 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
  
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
-  <a id="nav-post-list-next-page" href="<?php echo $this->url(array('page' => $this->next)); ?>">
+  <a id="nav-post-list-next-page" href="<?php echo $this->url(array('page' => $this->next)); ?><?php echo buildQuery() ?>">
     Next &gt;
   </a>
 <?php else: ?>
