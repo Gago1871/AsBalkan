@@ -80,7 +80,6 @@ class Application_Model_Post_Gateway
      */
     public function fetchForModeration($data)
     {
-        print_r($data);
         $select = $this->_db_table->select()
             ->where('category = ?', $data['category']);
             

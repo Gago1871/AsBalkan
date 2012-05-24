@@ -191,16 +191,23 @@ a.button:hover {
     background: #dfdfdf url('/img/border.png') no-repeat bottom left;
 
     margin-bottom: 34px;
-    padding-bottom: 41px;
-    
+    padding-bottom: 21px;
 
     word-wrap: break-word;
+    position: relative;
+}
+
+.post-list .smallslimstick {
+    position: absolute;
+    background-color: #dfdfdf;
+    height: 21px;
+    width: 460px;
+
+    bottom: 21px;
+    /*margin-top: -30px;*/
 }
 
 .post-list .first {
-    /*background: none;
-    margin-top: 0;
-    padding-top: 0;*/
 }
 
 .post-list .last {
@@ -277,6 +284,7 @@ a.button:hover {
 /* post view */
 #post {
     word-wrap: break-word;
+    position: relative;
 }
 #post h1 {
     /*margin-top: 40px;*/
@@ -285,6 +293,16 @@ a.button:hover {
 
 #post h3 {
     display: inline;
+}
+
+#post .smallslimstick {
+    position: absolute;
+    background-color: #dfdfdf;
+    height: 32px;
+    width: 650px;
+
+    bottom: 3px;
+    /*margin-top: -30px;*/
 }
 
 #post img {

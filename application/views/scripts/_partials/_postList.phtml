@@ -2,8 +2,11 @@
 <div id="posts">
     <ul class="post-list">
         <?php foreach ($this->paginator as $key => $value): ?>
-            <li <?php echo ((!$key)?'class="first" ':''); ?>href="post-<?php echo $value->id ?>">
-                <a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'postview') ?>"><img class="post" src="<?php echo $value->image('thumb'); ?>"></a>
+            <li class="<?php echo (!$key)?' first':'' ?>" href="post-<?php echo $value->id ?>">
+                    <a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'postview') ?>">
+                        <img class="post" src="<?php echo $value->image('thumb'); ?>">
+                    </a>
+                    <div class="smallslimstick"></div>
                 <?php
                 if ($this->identity) {
                     echo $this->partial('moderation/_postModeration.phtml', array('post' => $value));
