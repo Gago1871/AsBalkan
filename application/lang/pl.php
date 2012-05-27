@@ -26,6 +26,17 @@ return array(
     "'%localPart%' is no valid local part for email address '%value%'" => "'%value%' to niepoprawny adres e-mail",
     "'%value%' exceeds the allowed length" => "'%value%' exceeds the allowed length",
 
+    // Zend_Validate_InArray
+    "'%value%' was not found in the haystack" => 'Aby dodać post, musisz zaakceptować regulamin',
+
+    // Zend_Validate_File_Size
+    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Maksymalny rozmiar pliku to %max%",
+    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Minimalny rozmiar pliku to %min%",
+    "File '%value%' is not readable or does not exist" => "Nie można odczytać pliku '%value%'",
+
+    // Zend_Validate_File_Upload
+    "File '%value%' was not uploaded" => 'No ale musisz wybrać jakiś plik',
+
     // Zend_Validate_NotEmpty
     'Value is required and can\'t be empty' => 'Pole jest wymagane i nie może być puste!',
 

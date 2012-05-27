@@ -16,7 +16,7 @@ class Application_Form_Post extends Zend_Form
             array('Errors', 'placement' => 'prepend'),
             array('ViewHelper'),
             array('Description', array('class' => 'hidden')),
-            array(array('data' => 'HtmlTag'),  array('tag' =>'td', 'class'=> 'element')),
+            array(array('data' => 'HtmlTag'),  array('tag' => 'td', 'class'=> 'element')),
             array('Label', array('tag' => 'td', 'escape' => false)),
             array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
         );
@@ -31,7 +31,7 @@ class Application_Form_Post extends Zend_Form
             $file
                 ->setLabel('Wgraj z dysku <span>(<a href="?uploadfromfile=0">lub z url</a>)</span>')
                 ->setRequired(true)
-                ->addValidator('Size', false, array('min' => '1kB', 'max' => '20MB'));
+                ->addValidator('Size', false, array('min' => '1kB', 'max' => '4MB'));
         
             $file->class = 'file';
             $file->setDecorators(array(
@@ -69,15 +69,9 @@ class Application_Form_Post extends Zend_Form
                 ->setAttrib('placeholder', 'http://www')
                 ->setDescription('A to jest opis pola WWW');
             $file->class = 'poebao';
+            
+            $file->setDecorators($defaultDecorator);
 
-            $file->setDecorators(array(
-                array('ViewHelper'),
-                array('Errors'),
-                // array('Description', array('class' => 'hidden')),
-                array(array('data' => 'HtmlTag'),  array('tag' =>'td', 'class'=> 'element', 'colspan' => '2', 'openOnly' => true)),
-                array('Label', array('tag' => 'td', 'escape' => false)),
-                array(array('row' => 'HtmlTag'), array('tag' => 'tr', 'openOnly' => true))
-            ));
             $uploadFromFile->setValue(0);
 
             $source = new Zend_Form_Element_Hidden('source');

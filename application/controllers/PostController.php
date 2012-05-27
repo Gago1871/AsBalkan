@@ -75,22 +75,26 @@ class PostController extends Zend_Controller_Action
 
                     // upload from web
                     $file = $form->getValue('file');
-
-                    // set source from file url
-                    $filedata = parse_url($file);
-                    $source = (!empty($filedata['scheme'])?$filedata['scheme']:'http') . '://' . $filedata['host'];
-                    $originalSource = $file;
-
+                        
                     try {
+                        // check if url is valid
+                        if (filter_var($file, FILTER_VALIDATE_URL) == false) {
+                            throw new Exception('Seems like it`s not a valid URL...', 1);
+                        }
+
+                        $filedata = parse_url($file);
+                        $source = (!empty($filedata['scheme'])?$filedata['scheme']:'http') . '://' . $filedata['host'];
+                        $originalSource = $file;
+
                         $file = Jk_File::download($file);    
                     } catch (Exception $e) {
-                        $message = array('type' => 'failure', 'content' => 'Seems like it\'s not a valid URL...');
+                        $message = array('type' => 'failure', 'content' => 'Unable to download file, please try again later (' . $e->getMessage() . ')');
                         $this->view->messages[] = $message;
                         $form->populate($this->params);
                         $this->view->headTitle('Dodaj post');
                         $this->view->form = $form;
                         return;
-                    }
+                    }                    
                 }
 
                 // check file type based on mime type
@@ -102,7 +106,6 @@ class PostController extends Zend_Controller_Action
                         break;
                     default:
                         $message = array('type' => 'failure', 'content' => $mime . ' filetype is not supported.');
-                        // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
                         $this->view->messages[] = $message;
                         $form->populate($this->params);
                         $this->view->headTitle('Dodaj post');
@@ -139,6 +142,7 @@ class PostController extends Zend_Controller_Action
                 $this->_helper->redirector->gotoRouteAndExit(array('id' => $id, 'title' => $title), 'postview');
 
             } else {
+
                 $message = array('type' => 'failure', 'content' => 'You`re doing it wrong...');
                 $this->view->messages[] = $message;
                 $form->populate($this->params);

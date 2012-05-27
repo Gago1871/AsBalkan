@@ -374,15 +374,14 @@ a.button:hover {
     cursor: pointer;
 }
 
-/* POSTING FORM */
+/* UPLOAD FORM */
+#uploadform table {
+    width: 100%;
+}
+
 #uploadform table td.element {
     /*font-size: 17px;*/
     vertical-align: top;
-}
-
-#uploadform input {
-    /*cursor: pointer;*/
-    /*font-size: 25px;*/
 }
 
 #uploadform .file, #uploadform .submit {
@@ -394,15 +393,23 @@ a.button:hover {
 }
 
 #uploadform label {
-    font-size: 22px;
+    font-size: 18px;
+    width: 300px;
 }
 
 #uploadform label span {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 #uploadform .agreement {
     height: 80px;
+}
+
+#uploadform td.element input {
+    /*border: 1px solid green;*/
+    width: 100%;
+    padding: 5px;
+    font-size: 13px;
 }
 
 #uploadform  input.submit {
@@ -413,6 +420,25 @@ a.button:hover {
 #uploadform .submit .hint {
     /*font-size: 17px;*/
 }
+
+#uploadform #file-label {
+    width: 200px;
+}
+
+#uploadform #agreement-label label {
+    font-size: 13px;
+}
+
+#uploadform #submitbutton {
+    width: 100px;
+}
+
+/* UPLOAD FORM ERRORS */
+#uploadform ul.errors {
+    list-style-type: none;
+    font-size: 12px;
+}
+
 
 /* ADMIN */
 .admin {
