@@ -15,8 +15,55 @@ $(function () {
     // init timeago
     $("time.timeago").timeago();
 
+    // init form validation
+    $("input").blur(function () {
+        
+        var forElementId = $(this).parent().prev().find("label").attr("for");
+
+        doValidation(forElementId);
+    });
+
+    function doValidation(id) {
+
+        var url = "/async/validate/post";
+        var data = {};
+        $("input").each(function () {
+            data[$(this).attr("name")] = $(this).val();
+        });
+
+        $.post(url, data, function (resp) {
+            
+            $("#"+id).parent().find(".errors").remove();
+            $("#"+id).parent().prepend(getErrorHtml(resp[id], id));
+        }, "json")
+    }
+
+    function getErrorHtml(formErrors, id) {
+        var o = '<ul id="errors-' + id + '" class="errors">';
+        for (errorKey in formErrors) {
+            o += "<li>" + formErrors[errorKey] + "</li>";
+        };
+
+        o += "</ul>";
+        return o;
+    }
+
+    function uploadSuccess(msg) {
+        window.location.href = msg.data;
+    }
+
+    function uploadFailure(msg) {
+        // $("#"+id).parent().find(".errors").remove();
+        // $("#"+id).parent().prepend(getErrorHtml(resp[id], id));
+        console.log(msg.data);
+
+        for (error in msg.data) {
+            console.log(error);
+        };
+    }
+
     // init upload form
-    $('#uploadform').submit(function() {
+    $('#uploadform').submit(function () {
         
         var request = $.ajax({
                 url: "/dodaj",
@@ -25,14 +72,17 @@ $(function () {
                 dataType: "json"
             });
 
-            request.done(function(msg) {
-                
-                alert( "Request success: " + msg );
-            });
+        request.done(function (msg) {
+            if (msg.status == "success") {
+                uploadSuccess(msg);
+            } else {
+                uploadFailure(msg);
+            }
+        });
 
-            request.fail(function(jqXHR, textStatus) {
-                alert( "Request failed: " + textStatus );
-            });
+        request.fail(function(jqXHR, textStatus) {
+            alert( "Request failed: " + textStatus );
+        });
 
         return false;
     });

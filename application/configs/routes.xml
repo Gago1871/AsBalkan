@@ -104,6 +104,16 @@
                 <reverse>/logout</reverse>
             </userlogout>
 
+            <!-- ASYNC -->
+            <asyncformvalidation>
+                <route>async/validate/post</route>
+                <defaults>
+                    <controller>async</controller>
+                    <action>validate-form</action>
+                </defaults>
+                <reverse>async/validate/post</reverse>
+            </asyncformvalidation>
+
             <!-- MODERATION -->
             <moderation type="Zend_Controller_Router_Route_Regex">
                 <route>moderation(?:/(\d+))?</route>
