@@ -31,6 +31,7 @@ class Application_Form_Post extends Zend_Form
             $file
                 ->setLabel('Wgraj z dysku <span>(<a href="?uploadfromfile=0">lub z url</a>)</span>')
                 ->setRequired(true)
+                ->addValidator('MimeType', false, array('image/jpeg', 'image/gif', 'image/png'))
                 ->addValidator('Size', false, array('min' => '1kB', 'max' => '4MB'));
         
             $file->class = 'file';
@@ -61,10 +62,13 @@ class Application_Form_Post extends Zend_Form
 
             $file = new Zend_Form_Element_Text('file');
             $file->setLabel('www')
-                ->setRequired(false)
+                ->setRequired(true)
+                
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
+                ->addValidator(new Jk_Validate_Uri())
                 ->addValidator('NotEmpty')
+                // ->addValidator('Regex', false, array('/^.*\.(jpg|jpeg|gif|png)$/i'))
                 ->setLabel('url pliku <span>(<a href="?uploadfromfile=1">lub dodaj z dysku</a>)</span>')
                 ->setAttrib('placeholder', 'http://www')
                 ->setDescription('A to jest opis pola WWW');

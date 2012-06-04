@@ -44,4 +44,9 @@ return array(
     "'%value%' is less than %min% characters long" => "'%value%' jest za krótkie, co najmniej: %min% znaków",
     "'%value%' is more than %max% characters long" => "'%value%' jest za długie, maksymalnie %max% znaki",
     "Invalid type given. String expected" => "Błędny typ danych, oczekiwany ciąg znaków",
+
+    // Jk_Validate_Uri
+    "Invalid URI" => "Nieprawidłowy adres grafiki",
+
+
     );

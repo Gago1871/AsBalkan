@@ -39,7 +39,7 @@ class Jk_File
 
             curl_close($ch);
             fclose($fp);
-            throw new Exception("Error downloading file", 1);
+            return false;
         }
         curl_close($ch);
         fclose($fp);
@@ -52,12 +52,12 @@ class Jk_File
      */
     public function getMimeType($filename)
     {
-        $finfo = finfo_open(FILEINFO_MIME);
-        $data = explode('; ', finfo_file($finfo, $filename)); 
-        finfo_close($finfo);
-        return $data[0];
+        // $finfo = finfo_open(FILEINFO_MIME);
+        // $data = explode('; ', finfo_file($finfo, $filename)); 
+        // finfo_close($finfo);
+        // return $data[0];
 
-        // return mime_content_type($filename);
+        return mime_content_type($filename);
     }
 
 
