@@ -3,6 +3,6 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1&appId=315505988530036";
+  js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1&appId=<?php echo Zend_Registry::getInstance()->constants->fb->appId ?>";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>

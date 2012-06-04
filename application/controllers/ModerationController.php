@@ -37,7 +37,7 @@ class ModerationController extends Zend_Controller_Action
                 $posts = $postGateway->fetchForModeration($formData);
             }
         } else {
-            $posts = $postGateway->fetchForModeration(array('category' => 0, 'removed' => 0));
+            $posts = $postGateway->fetchForModeration(array('category' => Zend_Registry::getInstance()->constants->app->category->unmoderated, 'removed' => 0));
         }
 
         $paginator = new Jk_Paginator(new Zend_Paginator_Adapter_Array($posts->getList()));

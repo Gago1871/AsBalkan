@@ -22,6 +22,13 @@ autoloadernamespaces[] = Xerocopy_
 pluginPaths.Jk_Resource = "Jk/Resource"
 pluginPaths.Xerocopy_Resource = "Xerocopy/Resource"
 
+; CONSTANTS
+constants.app.category.main = 2
+constants.app.category.waiting = 1
+constants.app.category.unmoderated = 0
+constants.fb.appId = 315505988530036
+constants.google.analyticsId = UA-31837797-1
+
 ; XEROCOPY / FILE CONVERSION
 resources.xerocopy.storage.location = 
 resources.xerocopy.storage.host = 
@@ -29,10 +36,12 @@ resources.xerocopy.storeOriginal = 1
 
 resources.xerocopy.format.thumb.width = 460
 resources.xerocopy.format.thumb.quality = 85
+resources.xerocopy.format.thumb.watermark = APPLICATION_PATH "/resources/watermark0.jpg"
 ; resources.xerocopy.format.thumb.type = jpeg
 
 resources.xerocopy.format.view.width = 650
 resources.xerocopy.format.view.quality = 88
+resources.xerocopy.format.thumb.watermark = APPLICATION_PATH "/resources/watermark0.jpg"
 ; resources.xerocopy.format.view.type = jpeg
 
 ; HEADSCRIPTS

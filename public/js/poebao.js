@@ -2,17 +2,40 @@
 // jquery
 $(function () {
     // set up navigation buttons
-    // $('#nav-show-upload-form').click(function () {
-    //     $('#upload-form-layer').show();
-    //     return false;
-    // });
+    $('#nav-show-upload-form').click(function () {
+        $('#upload-form-layer').show();
+        return false;
+    });
 
-    // $('#nav-hide-upload-form').click(function () {
-    //     $('#upload-form-layer').hide();
-    //     return false;
-    // });
+    $('#nav-hide-upload-form').click(function () {
+        $('#upload-form-layer').hide();
+        return false;
+    });
 
+    // init timeago
     $("time.timeago").timeago();
+
+    // init upload form
+    $('#uploadform').submit(function() {
+        
+        var request = $.ajax({
+                url: "/dodaj",
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "json"
+            });
+
+            request.done(function(msg) {
+                
+                alert( "Request success: " + msg );
+            });
+
+            request.fail(function(jqXHR, textStatus) {
+                alert( "Request failed: " + textStatus );
+            });
+
+        return false;
+    });
 
     // infinite scroll
 

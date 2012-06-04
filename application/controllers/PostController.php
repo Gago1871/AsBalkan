@@ -39,9 +39,8 @@ class PostController extends Zend_Controller_Action
      */
     public function uploadAction()
     {
-        $fromFile = (isset($this->params['uploadfromfile']) && (1 == $this->params['uploadfromfile']));
-
         // Create new form
+        $fromFile = (isset($this->params['uploadfromfile']) && (1 == $this->params['uploadfromfile']));
         $form = new Application_Form_Post(array('action' => $this->_helper->url->url(array(), 'postupload'), 'uploadfromfile' => $fromFile));
 
         if ($this->getRequest()->isPost()) {
@@ -62,6 +61,8 @@ class PostController extends Zend_Controller_Action
                     $originalSource = $source;
 
                     if (!$form->file->isReceived()) {
+                        // error - file was not received
+
                         $message = array('type' => 'failure', 'content' => 'Unable to receive file.');
                         // $this->_helper->getHelper('FlashMessenger')->addMessage($message);
                         $this->view->messages[] = $message;
@@ -88,12 +89,22 @@ class PostController extends Zend_Controller_Action
 
                         $file = Jk_File::download($file);    
                     } catch (Exception $e) {
+                        // error- unable to download file
+
                         $message = array('type' => 'failure', 'content' => 'Unable to download file, please try again later (' . $e->getMessage() . ')');
-                        $this->view->messages[] = $message;
+
                         $form->populate($this->params);
-                        $this->view->headTitle('Dodaj post');
-                        $this->view->form = $form;
-                        return;
+                        if ($this->_request->isXmlHttpRequest()) {
+                            $result = array('status'=>'error', 'data' => 'Unable to download file, please try again later (' . $e->getMessage() . ')');
+                            $this->_helper->json($result);
+
+                        } else {
+                            $this->view->messages[] = $message;
+                            $this->view->headTitle('Dodaj post');
+                            $this->view->form = $form;
+                            return;    
+                        }
+                        
                     }                    
                 }
 
@@ -114,7 +125,12 @@ class PostController extends Zend_Controller_Action
                 }
 
                 // Do Xerocopy magic - this will create thumbnails
-                $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $originalSource);
+                try {
+                    $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $originalSource);    
+                } catch (Exception $e) {
+                    // handle any exceptions Xerocopy will throw in future...
+                }
+
 
                 $fileInfo = pathinfo($file);
 
@@ -128,6 +144,7 @@ class PostController extends Zend_Controller_Action
                 $post = $postGateway->createPost(array(
                     'post_id' => $id,
                     'title' => $title,
+                    'category' => Zend_Registry::getInstance()->constants->app->category->unmoderated,
                     'author' => $author,
                     'agreement' => $agreement,
                     'source' => $source,
@@ -139,17 +156,29 @@ class PostController extends Zend_Controller_Action
                 $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
                 $this->_helper->getHelper('FlashMessenger')->addMessage($message);
 
-                $this->_helper->redirector->gotoRouteAndExit(array('id' => $id, 'title' => $title), 'postview');
-
+                if ($this->_request->isXmlHttpRequest()) {
+                    $result = array('status'=>'success', 'data' => $this->_helper->url->url(array('id' => $id), 'postview'));
+                    $this->_helper->json($result);
+                } else {
+                    $this->_helper->redirector->gotoRouteAndExit(array('id' => $id, 'title' => $title), 'postview');    
+                }
             } else {
-
-                $message = array('type' => 'failure', 'content' => 'You`re doing it wrong...');
-                $this->view->messages[] = $message;
-                $form->populate($this->params);
+                if ($this->_request->isXmlHttpRequest()) {
+                    $result = array('status'=>'error', 'data' => $form->getErrors());
+                    $this->_helper->json($result);
+                } else {
+                    $message = array('type' => 'failure', 'content' => 'You`re doing it wrong...');
+                    $this->view->messages[] = $message;
+                    $form->populate($this->params);
+                }
             }
         }
 
-        $this->view->headTitle('Dodaj post');
-        $this->view->form = $form;
+        if ($this->_request->isXmlHttpRequest()) {
+
+        } else {
+            $this->view->headTitle('Dodaj post');
+            $this->view->form = $form;    
+        }
     }
 }

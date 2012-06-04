@@ -21,7 +21,7 @@ class UserController extends Zend_Controller_Action
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
 
-                $filename = APPLICATION_PATH . '/users/.htdigest';
+                $filename = Zend_Registry::getInstance()->constants->app->admin->passwordFile;
                 $realm = 'Admin';
 
                 $auth = Zend_Auth::getInstance();

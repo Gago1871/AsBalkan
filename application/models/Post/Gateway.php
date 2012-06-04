@@ -24,7 +24,7 @@ class Application_Model_Post_Gateway
         //set default values if new
         if (true === $fillDefault) {
             $data['added'] = date('Y-m-d H:i:s');
-            $data['category'] = 0;
+            $data['category'] = Zend_Registry::getInstance()->constants->app->category->unmoderated;
             $data['flag_nsfw'] = 0;
             $data['status'] = 'a';
             $data['author_ip'] = $_SERVER['REMOTE_ADDR'];
@@ -38,7 +38,7 @@ class Application_Model_Post_Gateway
     public function fetchForMain()
     {
         $select = $this->_db_table->select()
-            ->where('category = ?', 2)
+            ->where('category = ?', Zend_Registry::getInstance()->constants->app->category->main)
             ->where('status = ?', "a")
             ->order('moderated DESC')
             ->order('added DESC');
@@ -53,7 +53,7 @@ class Application_Model_Post_Gateway
     public function fetchAwaiting()
     {
         $select = $this->_db_table->select()
-            ->where('category IN (0,1)')
+            ->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')')
             ->where('status = ?', "a")
             ->order('added DESC');
         $posts = $this->_db_table->fetchAll($select);
@@ -91,7 +91,7 @@ class Application_Model_Post_Gateway
             $select->where('status = ?', "a");
         }
 
-        if (in_array($data['category'], array(1, 2))) {
+        if (in_array($data['category'], array(Zend_Registry::getInstance()->constants->app->category->waiting, Zend_Registry::getInstance()->constants->app->category->main))) {
             $select->order('moderated DESC');
         } else {
             $select->order('added ASC');
@@ -151,7 +151,7 @@ class Application_Model_Post_Gateway
             $select->where('moderated > ?', $post->moderated);
             $select->order('moderated ASC');
         } else {
-            $select->where('category IN (0,1)');
+            $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
             $select->where('added > ?', $post->added);
             $select->order('added ASC');
         }
@@ -173,7 +173,7 @@ class Application_Model_Post_Gateway
             $select->where('moderated < ?', $post->moderated);
             $select->order('moderated DESC');
         } else {
-            $select->where('category IN (0,1)');
+            $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
             $select->where('added < ?', $post->added);
             $select->order('added DESC');
         }

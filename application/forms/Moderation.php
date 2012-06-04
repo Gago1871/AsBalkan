@@ -29,9 +29,9 @@ class Application_Form_Moderation extends Zend_Form
 
         $category = new Zend_Form_Element_Radio('category');
         $category
-            ->addMultiOption(0, 'Not moderated')
-            ->addMultiOption(1, 'Waiting')
-            ->addMultiOption(2, 'Promoted')
+            ->addMultiOption(Zend_Registry::getInstance()->constants->app->category->unmoderated, 'Not moderated')
+            ->addMultiOption(Zend_Registry::getInstance()->constants->app->category->waiting, 'Waiting')
+            ->addMultiOption(Zend_Registry::getInstance()->constants->app->category->main, 'Promoted')
             ->setValue(0);
         $category->setDecorators($defaultDecorator);
         $category->setSeparator('');
