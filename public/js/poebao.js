@@ -14,6 +14,44 @@ $(function () {
         // $('#upload-form-layer').hide();
         // return false;
     });
+    
+    function scrollToPosition(element) {
+        if (element !== undefined) {
+            var y = $(element).position().top - 20;
+            $('html, body').animate({scrollTop : y}, 200);
+        }
+    }
+
+    //Create an Array of posts
+    var posts = $('.post-element');
+    var position = 0; //Start Position
+
+    // bind keyboard shortcuts
+    $(window).bind('keydown', 'j', function () {
+        scrollToPosition(posts[++position]);
+    });
+
+    $(window).bind('keydown', 'k', function () {
+        if (position > 0) {
+            scrollToPosition(posts[--position]);    
+        };
+    });
+
+    $(window).bind('keydown', 'r', function () {
+        console.log('"r" pressed - rate');
+    });
+
+    $(window).bind('keydown', 'c', function () {
+        console.log('"c" pressed - comment');
+    });
+
+    $(window).bind('keydown', 'h', function () {
+        console.log('"h" pressed - hate');
+    });
+
+    $(window).bind('keydown', 'l', function () {
+        console.log('"l" pressed - like');
+    });
 
 // <input type="hidden" name="uploadfromfile" value="0" id="uploadfromfile">
 // <tr><td id="file-label"><label for="file" class="required">url pliku <span>(<a id="nav-upload-form-switch-source" href="?uploadfromfile=1">lub dodaj z dysku</a>)</span></label></td>
