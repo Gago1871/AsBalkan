@@ -76,7 +76,7 @@ class Xerocopy_Resource_Xerocopy extends Zend_Application_Resource_ResourceAbstr
 
         foreach ($this->_options['format'] as $key => $format) {
             if (isset($format['width'])) {
-                $image = Xerocopy_Image::resizeImage($file, $format['width']);
+                $image = Xerocopy_Image::resizeImage($file, $format['width'], false, $format['cond']['minWidth']);
             } else {
                 $image = Xerocopy_Image::createImageFromFile($file);
             }

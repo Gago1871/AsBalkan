@@ -3,9 +3,11 @@
     <ul class="post-list">
         <?php foreach ($this->paginator as $key => $value): ?>
             <li class="<?php echo (!$key)?' first':'' ?>" href="post-<?php echo $value->id ?>">
+                <div class="img">
                     <a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'postview') ?>">
                         <img class="post" src="<?php echo $value->image('thumb'); ?>">
                     </a>
+                </div>
                     <div class="smallslimstick"></div>
                 <?php
                 if ($this->identity) {

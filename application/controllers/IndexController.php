@@ -16,11 +16,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->identity = $this->_helper->getIdentity();
 
         $this->params = $this->getRequest()->getParams();
-        // Create new form
-        $fromFile = (isset($this->params['uploadfromfile']) && (1 == $this->params['uploadfromfile']));
-
-        $form = new Application_Form_Post(array('action' => $this->_helper->url->url(array(), 'postupload'), 'uploadfromfile' => $fromFile));
-        $this->view->postForm = $form;
     }
 
     /**
@@ -35,6 +30,8 @@ class IndexController extends Zend_Controller_Action
         $paginator->setCurrentPageNumber($this->_getParam('page'));
 
         $this->view->paginator = $paginator;
+
+        $this->view->postForm = $this->_helper->UploadForm();
     }
     
     /**
@@ -54,6 +51,8 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->title = $author;
         $this->view->headTitle($author);
+
+        $this->view->postForm = $this->_helper->UploadForm();
     }
 
     /**
@@ -71,6 +70,8 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->title = 'Oczekujące';
         $this->view->headTitle('Oczekujące');
+
+        $this->view->postForm = $this->_helper->UploadForm();
     }
     
     /**
@@ -78,6 +79,8 @@ class IndexController extends Zend_Controller_Action
      */
     public function contactAction()
     {
+
+        $this->view->postForm = $this->_helper->UploadForm();
     }
     
     /**
@@ -85,5 +88,7 @@ class IndexController extends Zend_Controller_Action
      */
     public function rulesAction()
     {
+
+        $this->view->postForm = $this->_helper->UploadForm();
     }
 }

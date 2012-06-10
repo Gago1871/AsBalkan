@@ -32,6 +32,16 @@ class PostController extends Zend_Controller_Action
         
         $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
         $this->view->message = $message;
+
+        $this->view->postForm = $this->_helper->UploadForm();
+
+        // Open Graph Protocol (see more: http://mgp.me)
+        $og = new Jk_Og('poebao');
+        $og->setFbAppId(Zend_Registry::getInstance()->constants->fb->appId);
+        $og->setTitle(!empty($post->title)?$post->title:'Poebao.pl');
+        $og->setImage($post->image('min'));
+        $og->setType('article');
+        $this->view->og = $og->getMetaData();
     }
     
     /**

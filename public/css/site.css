@@ -215,9 +215,16 @@ a.button:hover {
 }
 
 .post-list .post {
-    width: 460px;
-    float: left;
+    
+    /*width: 460px;*/
+    
     /*margin-right: 10px;*/
+}
+
+.post-list .img {
+    float: left;
+    width: 460px;
+    text-align: center;
 }
 
 .post-list .info {

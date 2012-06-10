@@ -16,6 +16,32 @@
                 <reverse>%d</reverse>
             </home>
 
+            <postview type="Zend_Controller_Router_Route_Regex">
+                <route>([\w]{6})</route>
+                <defaults>
+                    <controller>post</controller>
+                    <action>view</action>
+                </defaults>
+                <map>
+                    <id>1</id>
+                    <!-- <title>2</title> -->
+                </map>
+                <reverse>%s</reverse>
+            </postview>
+
+            <awaitingpostview type="Zend_Controller_Router_Route_Regex">
+                <route>oczekujace/([\w]{6})</route>
+                <defaults>
+                    <controller>post</controller>
+                    <action>view</action>
+                    <category>1</category>
+                </defaults>
+                <map>
+                    <id>1</id>
+                </map>
+                <reverse>oczekujace/%s</reverse>
+            </awaitingpostview>
+
             <awaiting type="Zend_Controller_Router_Route_Regex">
                 <route>oczekujace(?:/(\d+))?</route>
                 <defaults>
@@ -71,18 +97,7 @@
                 <reverse>/dodaj</reverse>
             </postupload>
 
-            <postview type="Zend_Controller_Router_Route_Regex">
-                <route>p/(.+)</route>
-                <defaults>
-                    <controller>post</controller>
-                    <action>view</action>
-                </defaults>
-                <map>
-                    <id>1</id>
-                    <!-- <title>2</title> -->
-                </map>
-                <reverse>p/%s</reverse>
-            </postview>
+            
 
             <!-- USER -->
 

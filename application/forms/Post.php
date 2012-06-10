@@ -12,6 +12,8 @@ class Application_Form_Post extends Zend_Form
         $this->setName('uploadform');
         $this->setAction($attribs['action']);
 
+        $this->setEnctype('multipart/form-data');
+
         $defaultDecorator = array(
             array('Errors', 'placement' => 'prepend'),
             array('ViewHelper'),
@@ -29,7 +31,7 @@ class Application_Form_Post extends Zend_Form
         if ($fromFile) {
             $file = new Zend_Form_Element_File('file');
             $file
-                ->setLabel('Wgraj z dysku <span>(<a href="?uploadfromfile=0">lub z url</a>)</span>')
+                ->setLabel('Wgraj z dysku <span>(<a id="nav-upload-form-switch-source" href="?uploadfromfile=0">lub z url</a>)</span>')
                 ->setRequired(true)
                 ->addValidator('MimeType', false, array('image/jpeg', 'image/gif', 'image/png'))
                 ->addValidator('Size', false, array('min' => '1kB', 'max' => '4MB'));
@@ -41,7 +43,7 @@ class Application_Form_Post extends Zend_Form
                 array('Description', array('class' => 'hidden')),
                 array(array('data' => 'HtmlTag'),  array('tag' =>'td', 'class'=> 'element')),
                 array('Label', array('tag' => 'td', 'escape' => false)),
-                array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr', 'id' => 'upload-from-file'))
             ));
 
             $uploadFromFile->setValue(1);
@@ -56,7 +58,14 @@ class Application_Form_Post extends Zend_Form
                 ->setDescription('A to jest opis pola Źródło');
 
             $source->class = 'poebao';
-            $source->setDecorators($defaultDecorator);
+            $source->setDecorators(array(
+                array('Errors', 'placement' => 'prepend'),
+                array('ViewHelper'),
+                array('Description', array('class' => 'hidden')),
+                array(array('data' => 'HtmlTag'),  array('tag' => 'td', 'class'=> 'element')),
+                array('Label', array('tag' => 'td', 'escape' => false)),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr', 'id' => 'upload-from-file-source'))
+            ));
 
         } else {
 
@@ -69,12 +78,19 @@ class Application_Form_Post extends Zend_Form
                 ->addValidator(new Jk_Validate_Uri())
                 ->addValidator('NotEmpty')
                 // ->addValidator('Regex', false, array('/^.*\.(jpg|jpeg|gif|png)$/i'))
-                ->setLabel('url pliku <span>(<a href="?uploadfromfile=1">lub dodaj z dysku</a>)</span>')
+                ->setLabel('url pliku <span>(<a id="nav-upload-form-switch-source" href="?uploadfromfile=1">lub dodaj z dysku</a>)</span>')
                 ->setAttrib('placeholder', 'http://www')
                 ->setDescription('A to jest opis pola WWW');
             $file->class = 'poebao';
             
-            $file->setDecorators($defaultDecorator);
+            $file->setDecorators(array(
+                array('Errors', 'placement' => 'prepend'),
+                array('ViewHelper'),
+                array('Description', array('class' => 'hidden')),
+                array(array('data' => 'HtmlTag'),  array('tag' => 'td', 'class'=> 'element')),
+                array('Label', array('tag' => 'td', 'escape' => false)),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr', 'id' => 'upload-from-url'))
+            ));
 
             $uploadFromFile->setValue(0);
 

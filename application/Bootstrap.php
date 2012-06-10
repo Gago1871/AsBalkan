@@ -33,7 +33,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
-     * Enable loading Jk_Model_* classes from jk/models/* dir
+     * Enable loading Jk_Model_* classes from jk/models/* dir - mind plural in folder and singular in model name
      */
     public function _initAutoloaders()
     {
@@ -48,6 +48,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'path' => 'Models')
             )
         );
+    }
+
+    protected function _initPlugins()
+    {
+        // Init custom plugin
+        // $front = $this->getPluginResource('FrontController')->getFrontController();
+        // $front = Zend_Controller_Front::getInstance();
+        // $front->registerPlugin(new Poebao_Controller_Plugin_UploadForm());
+    }
+
+    protected function _initActionHelpers()
+    {
+        Zend_Controller_Action_HelperBroker::addPrefix('Poebao_Action_Helper');
     }
 
     protected function _initConstants()

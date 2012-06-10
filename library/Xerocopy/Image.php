@@ -13,21 +13,26 @@ class Xerocopy_Image
     /**
      * Resize image keeping proportions /ratio aspect
      */
-    public function resizeImage($source, $newWidth = 100, $destination = null)
+    public function resizeImage($source, $newWidth = 100, $destination = false, $minWidthResize = 0)
     {
         $image = self::createImageFromFile($source);
         
         $width = imagesx($image);
         $height = imagesy($image);
-        
-        // calculate thumbnail size
-        $newHeight = floor($height * ($newWidth / $width));
 
-        // create a new temporary image
-        $tmpImage = imagecreatetruecolor($newWidth, $newHeight);
+        // only resize images bigger than $minWidthResize
+        if ($width >= $minWidthResize) {
 
-        // copy and resize old image into new image 
-        imagecopyresampled($tmpImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            // calculate thumbnail size
+            $newHeight = floor($height * ($newWidth / $width));
+            // create a new temporary image
+            $tmpImage = imagecreatetruecolor($newWidth, $newHeight);
+
+            // copy and resize old image into new image 
+            imagecopyresampled($tmpImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        } else {
+            $tmpImage = $image;
+        }
         
         if ($destination) {
             self::saveImage($tmpImage, $destination);
@@ -119,10 +124,7 @@ class Xerocopy_Image
 
         //imagecopymerge ( resource $dst_im , resource $src_im , int $dst_x , int $dst_y , int $src_x , int $src_y , int $src_w , int $src_h , int $pct )
         imagecopymerge($mergedImage, $image, 0, 0, 0, 0, $width, $height, 100);
-        // var_dump($mergedImage);
         imagecopymerge($mergedImage, $watermark, 0, $height, 0, 0, $width, $watermarkHeight, 100);
-
-        // die('test');
 
         return $mergedImage;
     }
