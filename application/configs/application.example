@@ -16,8 +16,9 @@ resources.view.charset = "utf-8"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
 
-autoloadernamespaces[] = Jk_
-autoloadernamespaces[] = Xerocopy_
+autoloadernamespaces.poebao = "Poebao_"
+autoloadernamespaces.jk = "Jk_"
+autoloadernamespaces.xerocopy = "Xerocopy_"
 
 pluginPaths.Jk_Resource = "Jk/Resource"
 pluginPaths.Xerocopy_Resource = "Xerocopy/Resource"
@@ -26,6 +27,7 @@ pluginPaths.Xerocopy_Resource = "Xerocopy/Resource"
 constants.app.category.main = 2
 constants.app.category.waiting = 1
 constants.app.category.unmoderated = 0
+constants.app.admin.passwordFile = APPLICATION_PATH "/users/.htdigest"
 constants.fb.appId = 315505988530036
 constants.google.analyticsId = UA-31837797-1
 
@@ -34,15 +36,23 @@ resources.xerocopy.storage.location =
 resources.xerocopy.storage.host = 
 resources.xerocopy.storeOriginal = 1
 
+resources.xerocopy.format.thumb.cond.minWidth = 460
 resources.xerocopy.format.thumb.width = 460
 resources.xerocopy.format.thumb.quality = 85
 resources.xerocopy.format.thumb.watermark = APPLICATION_PATH "/resources/watermark0.jpg"
 ; resources.xerocopy.format.thumb.type = jpeg
 
+resources.xerocopy.format.view.cond.minWidth = 460
 resources.xerocopy.format.view.width = 650
 resources.xerocopy.format.view.quality = 88
-resources.xerocopy.format.thumb.watermark = APPLICATION_PATH "/resources/watermark0.jpg"
+resources.xerocopy.format.view.watermark = APPLICATION_PATH "/resources/watermark0.jpg"
 ; resources.xerocopy.format.view.type = jpeg
+
+resources.xerocopy.format.min.cond.minWidth = 460
+resources.xerocopy.format.min.width = 140
+resources.xerocopy.format.min.quality = 80
+; resources.xerocopy.format.min.watermark = APPLICATION_PATH "/resources/watermark0.jpg"
+; resources.xerocopy.format.min.type = jpeg
 
 ; HEADSCRIPTS
 resources.headScripts.js.jquery =           "/js/jquery-1.7.2.min.js"
