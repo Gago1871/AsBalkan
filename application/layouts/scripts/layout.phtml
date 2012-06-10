@@ -1,5 +1,5 @@
 <?php echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl" itemscope itemtype="http://schema.org/Blog">
 <!--  xmlns:og="http://opengraphprotocol.org/schema/" -->
 <head>
 <?php echo $this->headMeta(); ?>
@@ -11,10 +11,11 @@
 
 <?php echo $this->headLink()->prependStylesheet($this->baseUrl() . '/css/site.css'); ?>
 <?php echo $this->render('_partials/fb/og.phtml'); ?>
-<?php echo $this->render('_partials/_googleAnalytics.phtml'); ?>
+<?php echo $this->render('_partials/google/analytics.phtml'); ?>
+<?php echo $this->render('_partials/google/plusOneHeader.phtml'); ?>
 </head>
 <body>
-    <?php echo $this->render('_partials/fb/initComments.phtml'); ?>
+    <?php echo $this->render('_partials/fb/initJSSDK.phtml'); ?>
     <div id="page">
         <!-- header -->
         <div id="header">
@@ -46,8 +47,8 @@
                 <?php echo $this->layout()->content; ?>
             </div>
             <div id="additional">
-                <div class="block">
-                    <img src="/img/tmp/ad.png" alt="" title="" />
+                <div class="block google">
+                    <?php echo $this->render('_partials/google/adSense.phtml'); ?>
                 </div>
 
                 <div class="block">

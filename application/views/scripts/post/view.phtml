@@ -13,8 +13,7 @@
         <h1><?php echo $this->post->title; ?></h1>
         <h3 class="subtext"><a href="<?php echo $this->url(array('name' => $this->post->author), 'author') ?>"><?php echo $this->post->author ?></a></h3> - <span class="subtext"><time class="timeago" datetime="<?php echo $this->post->added ?>"><?php echo $this->post->added ?></time>
         <?php if ($this->post->source): ?>
-            -             
-        
+            -
             <span class="source">
                 <?php if (filter_var($this->post->source, FILTER_VALIDATE_URL) !== false): ?>
                     <a href="<?php echo $this->post->source ?>" target="_blank"><?php echo $this->post->source ?></a>
@@ -25,11 +24,23 @@
         <?php endif ?>
         </span>
     </div>
-    
+
+    <div class="center">
+        <div class="social-buttons">
+            <div class="social-button social-button-g-plus">
+                <?php echo $this->partial('_partials/google/plusOne.phtml', array('shareUrl' => $this->url(array('id' => $this->post->post_id, 'title' => $this->post->title), 'postview'))); ?>
+            </div>
+            <div class="social-button social-button-fb-like">
+                <?php echo $this->partial('_partials/fb/like.phtml', array('shareUrl' => $this->url(array('id' => $this->post->post_id, 'title' => $this->post->title), 'postview'))); ?>
+            </div>
+        </div>
+    </div>
+        
     <div class="img">
         <img class="post" src="<?php echo $this->post->image('view'); ?>">
         <div class="smallslimstick"></div>
     </div>
+
 </div>
 
 <?php echo $this->render('_partials/fb/comments.phtml'); ?>
