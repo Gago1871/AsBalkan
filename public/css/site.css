@@ -301,6 +301,9 @@ a.button:hover {
 #post h3 {
     display: inline;
 }
+#post .img {
+    text-align: center;
+}
 
 #post .smallslimstick {
     position: absolute;
