@@ -16,6 +16,14 @@ class IndexController extends Zend_Controller_Action
         $this->view->identity = $this->_helper->getIdentity();
 
         $this->params = $this->getRequest()->getParams();
+
+        $message = array(
+            'title' => 'To jest tytuł komunikatu - ogłaszamy, że każdy kto wrzuci obrazek, może liczyć, że wyląduje on w poczekalni!',
+            'content' => 'Tu jest druga linia komunikatu i tu <a href="">może być link >></a>',
+            'type' => 'message-type-info'
+            );
+
+        $this->view->messages[] = $message;
     }
 
     /**
@@ -23,6 +31,7 @@ class IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
+        // $animation = new Imagick("animation.gif");
         $postsGateway = new Application_Model_Post_Gateway();
         $posts = $postsGateway->fetchForMain();
 

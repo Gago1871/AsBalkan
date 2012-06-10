@@ -37,7 +37,12 @@
         
         <?php if ($this->messages): ?>
             <?php foreach ($this->messages as $key => $value): ?>
-                <div class="message <?php echo $value['type']; ?>"><?php echo $value['content'] ?></div>
+                <div class="message <?php echo $value['type']; ?>">
+                    <?php if (!empty($value['title'])): ?>
+                        <h2><?php echo $value['title'] ?></h2>
+                    <?php endif ?>
+                    <p><?php echo $value['content'] ?></p>
+                </div>
             <?php endforeach ?>
         <?php endif ?>
 

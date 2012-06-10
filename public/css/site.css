@@ -14,9 +14,12 @@ a {
     text-decoration: none;
 }
 
+/*a.hover:hover {*/
 a:hover {
-/*  margin-top: 1px;
-    padding-left: 1px;*/
+    position: relative;
+    top: 1px;
+    left: 1px;
+    cursor: pointer;
 }
 
 img {
@@ -375,6 +378,20 @@ a.button:hover {
     color: white;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.message h2 {
+    color: #382A34;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.message p {
+    font-size: 14px;
+}
+
+.message-type-info {
+    background-color: #7DACF8;
 }
 
 .success {
