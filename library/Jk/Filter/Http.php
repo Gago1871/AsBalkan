@@ -13,8 +13,6 @@ class Jk_Filter_Http implements Zend_Filter_Interface
             $value = 'http://' . $value;
         }
 
-        // die($value);
-
         return $value;
     }
 }

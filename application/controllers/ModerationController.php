@@ -10,7 +10,15 @@ class ModerationController extends Zend_Controller_Action
         $appConfig = Zend_Registry::get('Config_App');
         $this->view->storageHost = $appConfig['storage']['host'];
 
-        $this->view->identity = $this->_helper->getIdentity();
+        $identity = $this->_helper->getIdentity();
+
+        if (null == $identity) {
+            $this->_forward('exceptionPageNotFoundAction', 'ErrorController');
+        }
+
+        $this->view->identity = $identity;
+
+        
 
         $this->requestParams = $this->getRequest()->getParams();
     }
