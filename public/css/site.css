@@ -88,8 +88,9 @@ a.button:hover {
 }
 
 #page {
-    width: 980px;
+    width: 1000px;
     margin: 0 auto;
+    padding: 10px;
 }
 
 #header {
@@ -306,9 +307,6 @@ a.button:hover {
 
 .social-button {
     float: left;
-}
-
-.social-button {
     width: 70px;
 }
 
@@ -349,6 +347,8 @@ a.button:hover {
 #post .social-buttons {
     text-align: center;
     margin-bottom: 16px;
+    /* not to see the height is changed when buttons are loaded */
+    height: 23px; 
 }
 
 #post .info {

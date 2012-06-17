@@ -75,8 +75,9 @@ class Application_Form_Post extends Zend_Form
                 
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
+                ->addFilter(new Jk_Filter_Http())
                 ->addValidator(new Jk_Validate_Uri())
-                ->addValidator('NotEmpty')
+                // ->addValidator('NotEmpty')
                 // ->addValidator('Regex', false, array('/^.*\.(jpg|jpeg|gif|png)$/i'))
                 ->setLabel('url pliku <span>(<a id="nav-upload-form-switch-source" href="?uploadfromfile=1">lub dodaj z dysku</a>)</span>')
                 ->setAttrib('placeholder', 'http://www')

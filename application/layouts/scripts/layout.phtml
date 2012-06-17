@@ -34,7 +34,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <?php if ($this->messages): ?>
             <?php foreach ($this->messages as $key => $value): ?>
                 <div class="message <?php echo $value['type']; ?>">
@@ -52,10 +52,6 @@
                 <?php echo $this->layout()->content; ?>
             </div>
             <div id="additional">
-                <div class="block google">
-                    <?php echo $this->render('_partials/google/adSense.phtml'); ?>
-                </div>
-
                 <div class="block">
                     <h3>1000 postów temu ...</h3>
                     <span class="subtext">Poniedziałek, 16 lutego 2011 - 211 dni, 11 godzin i 23 minuty temu</span>
@@ -66,16 +62,16 @@
 
         <!-- footer -->
         <div id="footer">
-        poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin" target="_blank">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">Kontakt</a>
+        poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">Kontakt</a>
         </div>
         
-        <div id="upload-form-layer">
+        <!-- <div id="upload-form-layer">
             <div class="container">
                 <span id="nav-hide-upload-form">X</span>
                 <h2>Dodaj post</h2>
                 <?php echo $this->postForm; ?>    
             </div>
-        </div>
+        </div> -->
 
     </div>
 </body>
