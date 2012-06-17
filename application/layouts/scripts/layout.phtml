@@ -28,7 +28,7 @@
                     </li>
                     <?php if ($this->identity): ?>
                         <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'moderation') ?>">moderacja</a></li>
-                        <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'userlogout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
+                        <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'admin-logout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
                     <?php endif ?>
                     
                 </ul>
