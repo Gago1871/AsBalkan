@@ -105,7 +105,7 @@ class Application_Model_Post_Gateway
     /**
      * 
      */
-    public function getByPostId($id)
+    public function getByPostId($id, $context = null)
     {
         //use the Table Gateway to find the row that
         //the id represents
@@ -122,13 +122,13 @@ class Application_Model_Post_Gateway
         $post = new Application_Model_Post($result->toArray(), $this);
 
         // fetch previous from category (NEWER)
-        $previous = $this->_getPrevious($post);
+        $previous = $this->_getPrevious($post, $context);
         if (null !== $previous) {
             $post->setPrevious(new Application_Model_Post($previous->toArray(), $this));
         }
         
         // fetch next form category (OLDER)
-        $next = $this->_getNext($post);
+        $next = $this->_getNext($post, $context);
         if (null !== $next) {
             $post->setNext(new Application_Model_Post($next->toArray(), $this));
         }
@@ -140,20 +140,27 @@ class Application_Model_Post_Gateway
     /**
      * Get newer post
      */
-    private function _getPrevious(Application_Model_Post $post)
+    private function _getPrevious(Application_Model_Post $post, $context)
     {
         $select = $this->_db_table->select();
         $select->where('status = ?', "a");
         // $select->where('flag_nsfw = ?', "0");
 
-        if (2 == $post->category) {
-            $select->where('category = ?', $post->category);
-            $select->where('moderated > ?', $post->moderated);
-            $select->order('moderated ASC');
-        } else {
-            $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
+        if (null !== $context) {
+            $select->where('author = ?', $post->author);
             $select->where('added > ?', $post->added);
             $select->order('added ASC');
+        } else {
+
+            if (Zend_Registry::getInstance()->constants->app->category->main == $post->category) {
+                $select->where('category = ?', $post->category);
+                $select->where('moderated > ?', $post->moderated);
+                $select->order('moderated ASC');
+            } else {
+                $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
+                $select->where('added > ?', $post->added);
+                $select->order('added ASC');
+            }
         }
 
         return $this->_db_table->fetchRow($select);
@@ -162,20 +169,27 @@ class Application_Model_Post_Gateway
     /**
      * Get older post
      */
-    private function _getNext(Application_Model_Post $post)
+    private function _getNext(Application_Model_Post $post, $context)
     {
         $select = $this->_db_table->select();
         $select->where('status = ?', "a");
         // $select->where('flag_nsfw = ?', "0");
 
-        if (2 == $post->category) {
-            $select->where('category = ?', $post->category);
-            $select->where('moderated < ?', $post->moderated);
-            $select->order('moderated DESC');
-        } else {
-            $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
+        if (null !== $context) {
+            $select->where('author = ?', $post->author);
             $select->where('added < ?', $post->added);
             $select->order('added DESC');
+        } else {
+
+            if (Zend_Registry::getInstance()->constants->app->category->main == $post->category) {
+                $select->where('category = ?', $post->category);
+                $select->where('moderated < ?', $post->moderated);
+                $select->order('moderated DESC');
+            } else {
+                $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
+                $select->where('added < ?', $post->added);
+                $select->order('added DESC');
+            }
         }
 
         return $this->_db_table->fetchRow($select);

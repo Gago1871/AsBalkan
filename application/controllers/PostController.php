@@ -24,8 +24,32 @@ class PostController extends Zend_Controller_Action
     {
         $id = $this->_getParam('id');
 
+        // determine context form route
+        $route = Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName();
+
+        // Determine context
+        switch ($route) {
+            case 'author-postview':
+                $listRoute = 'author';
+                $this->view->author = $this->_getParam('name');
+                $context = 'author';
+                break;
+
+            case 'awaiting-postview':
+                $listRoute = 'awaiting';
+                $context = null;
+                break;
+            
+            default:
+                $listRoute = 'home';
+                $context = null;
+                break;
+        }
+
+        $this->view->listRoute = $listRoute;
+
         $postGateway = new Application_Model_Post_Gateway();
-        $post = $postGateway->getByPostId($id);
+        $post = $postGateway->getByPostId($id, $context);
 
         $this->view->post = $post;
         $this->view->headTitle($post->title);

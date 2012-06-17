@@ -15,6 +15,11 @@ return array(
     "Removed" => "Usunięte",
     "Filter" => "Filtruj",
 
+    // Zend_Validation_Alnum
+    "Invalid type given. String, integer or float expected" => "Błędny typ danych, oczekiwany ciąg znaków lub liczba",
+    "'%value%' contains characters which are non alphabetic and no digits" => "Możesz użyć tylko liter i cyfr",
+    "'%value%' is an empty string" => "Podałeś pusty ciąg znaków",
+
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Błędny typ danych, oczekiwany ciąg znaków",
     "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' to niepoprawny adres e-mail",

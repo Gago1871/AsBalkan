@@ -118,7 +118,8 @@ class Application_Form_Post extends Zend_Form
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
-            ->addValidator('NotEmpty')
+            ->addValidator(new Zend_Validate_StringLength(array('min' => 3, 'max' => 20)))
+            ->addValidator('Alnum')
             ->setDescription('A to jest opis pola autor');
 
         $author->class = 'poebao';

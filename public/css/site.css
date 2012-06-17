@@ -16,10 +16,13 @@ a {
 
 /*a.hover:hover {*/
 a:hover {
+    cursor: pointer;
+}
+
+a.fancy-hover:hover {
     position: relative;
     top: 1px;
     left: 1px;
-    cursor: pointer;
 }
 
 img {

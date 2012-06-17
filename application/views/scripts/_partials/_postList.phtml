@@ -2,9 +2,10 @@
 <div id="posts">
     <ul class="post-list">
         <?php foreach ($this->paginator as $key => $value): ?>
-            <li class="post-element <?php echo (!$key)?' first':'' ?>" href="post-<?php echo $value->id ?>">
+            <a name="post-<?php echo $value->post_id ?>"></a>
+            <li class="post-element <?php echo (!$key)?' first':'' ?>">
                 <div class="img">
-                    <a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'postview') ?>">
+                    <a href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->postViewRoute) ?>">
                         <img class="post" src="<?php echo $value->image('thumb'); ?>">
                     </a>
                 </div>
@@ -15,14 +16,14 @@
                 }
                 ?>
                 <div class="info">
-                    <h2><a href="<?php echo $this->url(array('id' => $value->post_id, 'title' => $value->title), 'postview') ?>"><?php echo $value->title ?></a></h2>
+                    <h2><a class="fancy-hover" href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->postViewRoute) ?>"><?php echo $value->title ?></a></h2>
                     <span class="subtext">
                         <p>
-                            <a href="<?php echo $this->url(array('name' => $value->author), 'author') ?>"><?php echo $value->author ?></a> - <time class="timeago" datetime="<?php echo $value->added ?>"><?php echo $value->added ?></time>
+                            <a class="fancy-hover" href="<?php echo $this->url(array('name' => $value->author), 'author') ?>"><?php echo $value->author ?></a> - <time class="timeago" datetime="<?php echo $value->added ?>"><?php echo $value->added ?></time>
                         </p>
                         <p><span class="source">
                             <?php if (filter_var($value->source, FILTER_VALIDATE_URL) !== false): ?>
-                                <a href="<?php echo $value->source ?>" target="_blank"><?php echo $value->source ?></a>
+                                <a class="fancy-hover" href="<?php echo $value->source ?>" target="_blank"><?php echo $value->source ?></a>
                             <?php else: ?>
                                 <?php echo $value->source ?>    
                             <?php endif ?>

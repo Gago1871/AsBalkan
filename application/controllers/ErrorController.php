@@ -18,17 +18,30 @@ class ErrorController extends Zend_Controller_Action
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
+                $this->_forward('exception-page-not-found');
+                $this->view->message = 'Nie ma takiej stronyXXX';
                 $priority = Zend_Log::NOTICE;
-                $this->view->message = 'Page not found';
                 break;
             default:
                 // application error
                 $this->getResponse()->setHttpResponseCode(500);
+                switch($errors->exception->getCode()) {
+                  
+                  case 2002:
+                    $this->_forward('exception-db-connection-failed');
+                    break;
+                    
+                  default:
+                    $this->view->message = 'Exception caught (' . get_class($errors->exception) . '), but no specific handler in ErrorHandler defined';
+                    $this->view->exception = $errors->exception;
+                    break;
+                  }
+
                 $priority = Zend_Log::CRIT;
                 $this->view->message = 'Application error';
                 break;
         }
-        
+
         // Log exception, if logger available
         if ($log = $this->getLog()) {
             $log->log($this->view->message, $priority, $errors->exception);
@@ -39,10 +52,8 @@ class ErrorController extends Zend_Controller_Action
         if ($this->getInvokeArg('displayExceptions') == true) {
             $this->view->exception = $errors->exception;
         }
-        
-        $this->view->request   = $errors->request;
 
-        $this->view->postForm = $this->_helper->UploadForm();
+        $this->view->request = $errors->request;
     }
 
     public function getLog()
@@ -55,6 +66,23 @@ class ErrorController extends Zend_Controller_Action
         return $log;
     }
 
+    public function exceptionPageNotFoundAction()
+    {
+        $this->view->message = 'Nie ma takiej strony';
+        $this->_helper->layout->setLayout('error');
+        $this->renderScript('error/404.phtml');
+    }
 
+    public function exceptionDbConnectionFailedAction()
+    {
+        $this->view->message = 'Nie udało się połączyć z bazą danych...';
+        $this->_helper->layout->setLayout('error');
+        $this->renderScript('error/error.phtml');   
+    }
+    
+    public function exceptionMemcachedConnectionFailedAction()
+    {
+        $this->view->message = 'Nie udało się połączyć z Memcached.';
+        $this->renderScript('error/error.phtml');
+    }
 }
-

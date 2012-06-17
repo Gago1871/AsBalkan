@@ -22,13 +22,13 @@
             <a href="/"><img src="/img/poebao.png" alt="Poebao, content is king" title="Poebao, content is king"><h1 class="hidden">Poebao, content is king</h1></a>
             <div id="nav">
                 <ul>
-                    <li class="first"><a class="fancy-hover"href="/oczekujace">oczekujące</a></li>
+                    <li class="first"><a href="/oczekujace">oczekujące</a></li>
                     <li>
-                        <a class="fancy-hover" id="nav-show-upload-form" href="<?php echo $this->url(array(), 'postupload');?>">dodaj</a>
+                        <!-- <a id="nav-show-upload-form" href="<?php echo $this->url(array(), 'postupload');?>">dodaj</a> -->
                     </li>
                     <?php if ($this->identity): ?>
-                        <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'moderation') ?>">moderacja</a></li>
-                        <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'userlogout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
+                        <li><a href="<?php echo $this->url(array(), 'moderation') ?>">moderacja</a></li>
+                        <li><a href="<?php echo $this->url(array(), 'userlogout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
                     <?php endif ?>
                     
                 </ul>
@@ -51,32 +51,12 @@
             <div id="main">
                 <?php echo $this->layout()->content; ?>
             </div>
-            <div id="additional">
-                <div class="block google">
-                    <?php echo $this->render('_partials/google/adSense.phtml'); ?>
-                </div>
-
-                <div class="block">
-                    <h3>1000 postów temu ...</h3>
-                    <span class="subtext">Poniedziałek, 16 lutego 2011 - 211 dni, 11 godzin i 23 minuty temu</span>
-                    <img src="/img/tmp/block.png" alt="" title="" />
-                </div>
-            </div>
         </div>
 
         <!-- footer -->
         <div id="footer">
-        poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin" target="_blank">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">Kontakt</a>
+        poebao.pl (c) 2012 - <a href="/regulamin" target="_blank">Regulamin</a> | <a href="/kontakt">Kontakt</a>
         </div>
-        
-        <div id="upload-form-layer">
-            <div class="container">
-                <span id="nav-hide-upload-form">X</span>
-                <h2>Dodaj post</h2>
-                <?php echo $this->postForm; ?>    
-            </div>
-        </div>
-
     </div>
 </body>
 </html>

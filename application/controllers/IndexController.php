@@ -19,7 +19,7 @@ class IndexController extends Zend_Controller_Action
 
         $message = array(
             'title' => 'To jest tytuł komunikatu - ogłaszamy, że każdy kto wrzuci obrazek, może liczyć, że wyląduje on w poczekalni!',
-            'content' => 'Tu jest druga linia komunikatu i tu <a href="">może być link >></a>',
+            'content' => 'Tu jest druga linia komunikatu i tu <a class="fancy-hover" href="">może być link >></a>',
             'type' => 'message-type-info'
             );
 
@@ -39,6 +39,8 @@ class IndexController extends Zend_Controller_Action
         $paginator->setCurrentPageNumber($this->_getParam('page'));
 
         $this->view->paginator = $paginator;
+
+        $this->view->postViewRoute = 'postview';
 
         $this->view->postForm = $this->_helper->UploadForm();
     }
@@ -61,6 +63,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->title = $author;
         $this->view->headTitle($author);
 
+        $this->view->postViewRoute = 'author-postview';
+
         $this->view->postForm = $this->_helper->UploadForm();
     }
 
@@ -80,6 +84,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->title = 'Oczekujące';
         $this->view->headTitle('Oczekujące');
 
+        $this->view->postViewRoute = 'awaiting-postview';
+
         $this->view->postForm = $this->_helper->UploadForm();
     }
     
@@ -88,7 +94,6 @@ class IndexController extends Zend_Controller_Action
      */
     public function contactAction()
     {
-
         $this->view->postForm = $this->_helper->UploadForm();
     }
     
@@ -97,7 +102,6 @@ class IndexController extends Zend_Controller_Action
      */
     public function rulesAction()
     {
-
         $this->view->postForm = $this->_helper->UploadForm();
     }
 }
