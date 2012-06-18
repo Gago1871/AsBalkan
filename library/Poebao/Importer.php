@@ -10,7 +10,7 @@ class Poebao_Importer
 
     public function figureOutExtension($filename, $path = null)
     {
-        $extensions = array('jpg', 'jpeg', 'gif', 'png');
+        $extensions = array('jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'GIF', 'PNG');
         $filebase = $path . $filename;
 
         foreach ($extensions as $key => $value) {
