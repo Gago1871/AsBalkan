@@ -126,7 +126,7 @@ class Application_Model_Post
     {
         $gateway = $this->getGateway();
         if (null === $this->id) {
-            $gateway->getDbTable()->insert($this->_data);
+            return $gateway->getDbTable()->insert($this->_data);
         } else {
             // update only data that is set, remove null
             $data = $this->_data;
@@ -136,7 +136,7 @@ class Application_Model_Post
                     unset($data[$key]);
                 }
             }
-            $gateway->getDbTable()->update($data, '`id` = "' . $this->_data['id'] . '"');
+            return $gateway->getDbTable()->update($data, '`id` = "' . $this->_data['id'] . '"');
         }
     }
 

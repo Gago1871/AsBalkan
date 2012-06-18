@@ -147,13 +147,23 @@ class ModerationController extends Zend_Controller_Action
 
                 // do the import
                 foreach ($files as $key => $value) {
+                    
+
                     $file = $importer->figureOutExtension($value['filename'], $form->location->getValue());
+                    echo '<li>' . $key . ') ' . $file;
+                    
                     
                     if (!$file) {
+                        echo ' ... is not a file!</li>';
                         continue;
                     }
 
+                    
+
                     $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $file);
+                    
+                    echo ' - attId: ' . $attachmentId;
+
                     $fileInfo = pathinfo($file);
 
                     // Category is always UNMODERATED
@@ -183,7 +193,15 @@ class ModerationController extends Zend_Controller_Action
                         'author_ip' => $_SERVER['REMOTE_ADDR']
                         ));
 
-                    $post->save();
+                    $result = $post->save();
+                    
+                    if ($result) {
+                        echo ' was saved!';
+                    } else {
+                        echo ' was not saved (' . mysql_error() . ', ' . $result . ')';
+                    }
+
+                    echo '</li>';
                 }
             }
         }
