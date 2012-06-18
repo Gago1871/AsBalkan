@@ -35,10 +35,10 @@ class ModerationController extends Zend_Controller_Action
         $posts = array();
 
         $form = new Application_Form_Moderation();
-        $formData = $this->requestParams;
+        $formData = $this->params;
         $postGateway = new Application_Model_Post_Gateway();
 
-        if (isset($this->requestParams['submit'])) {
+        if (isset($this->params['submit'])) {
             if ($form->isValid($formData)) {
                 $posts = $postGateway->fetchForModeration($formData);
             }
@@ -114,26 +114,10 @@ class ModerationController extends Zend_Controller_Action
         $this->_helper->redirector->gotoRouteAndExit(array(), 'moderation');
     }
 
-    private function _figureOutExtension($filename, $path = null) {
-        $extensions = array('jpg', 'jpeg', 'gif', 'png');
-
-        $filebase = $path . $filename;
-
-        foreach ($extensions as $key => $value) {
-
-            $file = $filebase . '.' . $value;
-            // echo $file . '<br/>';
-
-            if (file_exists($file)) {
-                return $file;
-            }
-        }
-
-        return false;
-    }
-
     public function importerAction()
     {
+        $importer = new Poebao_Importer();
+
         $form = new Application_Form_Importer();
         $this->view->importerForm = $form;
 
@@ -163,7 +147,7 @@ class ModerationController extends Zend_Controller_Action
 
                 // do the import
                 foreach ($files as $key => $value) {
-                    $file = $this->_figureOutExtension($value['filename'], $form->location->getValue());
+                    $file = $importer->figureOutExtension($value['filename'], $form->location->getValue());
                     
                     if (!$file) {
                         continue;
@@ -172,13 +156,15 @@ class ModerationController extends Zend_Controller_Action
                     $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $file);
                     $fileInfo = pathinfo($file);
 
+                    // Category is always UNMODERATED
+                    // $category = $value['category'];
+                    $category = Zend_Registry::getInstance()->constants->app->category->unmoderated;
                     $title = $value['title'];
-                    $author = $value['author']?$value['author']:'importer';
-                    $agreement = true;
-
-                    $source = $value['source']?$value['source']:'http://INTERNET';
-                    $category = $value['category'];
-
+                    $author = $value['author']?$value['author']:$importer->getRandomAuthor();
+                    $source = $value['source']?$value['source']:$importer->getRandomSource();
+                    $added = $importer->getRandomDate('2012-06-01', date("Y-m-d"));
+                    // $moderated = $importer->getRandomDate($added, '2012-07-31');
+                    $moderated = null;
                     $id = Jk_Url::generateUniqueId(); // abcd123
 
                     $postGateway = new Application_Model_Post_Gateway();
@@ -187,11 +173,11 @@ class ModerationController extends Zend_Controller_Action
                         'title' => $title,
                         'category' => $category,
                         'author' => $author,
-                        'agreement' => $agreement,
+                        'agreement' => true,
                         'source' => $source,
                         'attachment_id' => $attachmentId,
-                        'moderated' => date('Y-m-d H:i:s'),
-                        'added' => date('Y-m-d H:i:s'),
+                        'moderated' => $moderated,
+                        'added' => $added,
                         'flag_nsfw' => false,
                         'status' => 'a',
                         'author_ip' => $_SERVER['REMOTE_ADDR']
