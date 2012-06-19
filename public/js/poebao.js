@@ -1,6 +1,28 @@
 
 // jquery
 $(function () {
+
+    //sticky scroll
+    var a = function () {
+        var b = $(window).scrollTop();
+        var d = $("#scroller-anchor").offset().top;
+        var c = $("#scroller");
+        var h = $("#header-container").height();
+
+        var space = h + 20;
+
+        console.log('b=' + b + ' d=' + d + ' h=' + h);
+        if (b > d - space) {
+            c.css({position:"fixed",top:space + "px"})
+        } else {
+            if (b <= d + space) {
+                c.css({position:"relative",top:""})
+            }
+        }
+    };
+    
+    $(window).scroll(a);a();
+
     // init timeago
     $("time.timeago").timeago();
 

@@ -117,14 +117,16 @@ class Xerocopy_Image
         $width = imagesx($image);
         $height = imagesy($image);
 
-        $watermark = self::resizeImage($watermarkFile, $width);
+        // $watermark = self::resizeImage($watermarkFile, $width);
+        $watermark = self::createImageFromFile($watermarkFile);
+        $watermarkWidth = imagesx($watermark);
         $watermarkHeight = imagesy($watermark);
 
-        $mergedImage = imagecreatetruecolor($width, $height + $watermarkHeight);
+        $mergedImage = imagecreatetruecolor($width, $height + $watermarkHeight); // create with defined color of 1px 1px watermark image
 
-        //imagecopymerge ( resource $dst_im , resource $src_im , int $dst_x , int $dst_y , int $src_x , int $src_y , int $src_w , int $src_h , int $pct )
+        //imagecopymerge($dst_im, $src_im, int $dst_x, int $dst_y, int $src_x, int $src_y, int $src_w, int $src_h, int $pct )
         imagecopymerge($mergedImage, $image, 0, 0, 0, 0, $width, $height, 100);
-        imagecopymerge($mergedImage, $watermark, 0, $height, 0, 0, $width, $watermarkHeight, 100);
+        imagecopymerge($mergedImage, $watermark, 0, $height, $watermarkWidth - $width, 0, $width, $watermarkHeight, 100);
 
         return $mergedImage;
     }

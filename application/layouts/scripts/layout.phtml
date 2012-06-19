@@ -16,8 +16,8 @@
 </head>
 <body>
     <?php echo $this->render('_partials/fb/initJSSDK.phtml'); ?>
-    <div id="page">
-        <!-- header -->
+    <!-- header -->
+    <div id="header-container">
         <div id="header">
             <a href="/"><img src="/img/poebao.png" alt="Poebao, content is king" title="Poebao, content is king"><h1 class="hidden">Poebao, content is king</h1></a>
             <div id="nav">
@@ -34,7 +34,9 @@
                 </ul>
             </div>
         </div>
+    </div>
 
+    <div id="page">
         <?php if ($this->messages): ?>
             <?php foreach ($this->messages as $key => $value): ?>
                 <div class="message <?php echo $value['type']; ?>">
@@ -51,19 +53,29 @@
             <div id="main">
                 <?php echo $this->layout()->content; ?>
             </div>
+
+
             <div id="additional">
-                <div class="block">
-                    <h3>1000 postów temu ...</h3>
-                    <span class="subtext">Poniedziałek, 16 lutego 2011 - 211 dni, 11 godzin i 23 minuty temu</span>
-                    <img src="/img/tmp/block.png" alt="" title="" />
+                <div id="scroller-anchor"></div>
+                <div id="scroller">
+                    <div class="block">
+                        <h3>1000 postów temu ...</h3>
+                        <span class="subtext">Poniedziałek, 16 lutego 2011 - 211 dni, 11 godzin i 23 minuty temu</span>
+                        <img src="/img/tmp/block.png" alt="" title="" />
+                    </div>
+    
+                    <!-- footer -->
+                    <div id="footer">
+                    poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">Kontakt</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- footer -->
-        <div id="footer">
+        <!-- <div id="footer">
         poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">Kontakt</a>
-        </div>
+        </div> -->
         
         <!-- <div id="upload-form-layer">
             <div class="container">
