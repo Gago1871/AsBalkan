@@ -405,6 +405,27 @@ a.button:hover {
     background-color: red;
 }
 
+/* RULES */
+#rules {
+    line-height: 28px;
+}
+#rules p {
+    margin: 20px 0;
+}
+#rules ol h2 {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+#rules ol li {
+    margin-bottom: 20px;
+}
+
+#rules ol {
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
 /* UPLOAD LAYER */
 #upload-form-layer {
     width: 700px;
