@@ -171,7 +171,8 @@ class ModerationController extends Zend_Controller_Action
                     $category = Zend_Registry::getInstance()->constants->app->category->unmoderated;
                     $title = $value['title'];
                     $author = $value['author']?$value['author']:$importer->getRandomAuthor();
-                    $source = $value['source']?$value['source']:$importer->getRandomSource();
+                    $source = $value['source'];
+                    // $source = $value['source']?$value['source']:$importer->getRandomSource();
                     $added = $importer->getRandomDate('2012-06-01', date("Y-m-d"));
                     // $moderated = $importer->getRandomDate($added, '2012-07-31');
                     $moderated = null;
