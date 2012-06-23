@@ -362,6 +362,12 @@ a.button:hover {
     margin-bottom: 16px;
 }
 
+#fb-comments {
+    /*background-color: lime;*/
+    background: #dfdfdf url('/img/bg.png') repeat;
+}
+
+
 #subnav {
     float: right;
 }

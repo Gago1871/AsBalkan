@@ -158,8 +158,11 @@ $(function () {
             isPaused: false,
             currPage: 1
         },
-        callback: undefined,
-        debug: false,
+        callback: function () {
+            poebao.ui.infiniteScrollLoaded();
+            console.log('infiniteScrollLoaded');
+        },
+        debug: true,
         behavior: undefined,
         binder: $(window), // used to cache the selector
         navSelector  : "#paginator", // selector for the paged navigation (it will be hidden)           
@@ -176,5 +179,5 @@ $(function () {
         infid: 0, //Instance ID
         pixelsFromNavToBottom: 100,
         path: undefined
-    });
+    }, poebao.ui.infiniteScrollLoaded);
 });

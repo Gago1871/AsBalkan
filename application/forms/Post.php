@@ -128,15 +128,15 @@ class Application_Form_Post extends Zend_Form
 
         // Agreement checkbox
         $agreement = new Zend_Form_Element_Checkbox('agreement');
-        $agreement->setRequired(true)
-            ->setLabel('Akceptuję <a href="/regulamin" target="_blank">Regulamin</a> serwisu poebao.pl')
-            ->setDescription('Akceptuję Regulamin serwisu poebao.pl')
-            ->addValidator(new Zend_Validate_InArray(array(1)), false);
+        // $agreement->setRequired(true)
+        $agreement->setLabel('Klikając Dodaj akceptujesz <a href="/regulamin" target="_blank">Regulamin</a> serwisu poebao.pl')
+            ->setDescription('Akceptuję Regulamin serwisu poebao.pl');
+            // Klikajac Dodaj akcpetujesz Regulamin serwisu poebao.pl
+            // ->addValidator(new Zend_Validate_InArray(array(1)), false);
         $agreement->class = 'poebao';
         $agreement->setDecorators(array(
             array('Errors'),
-            array('ViewHelper'),
-            
+            // array('ViewHelper'),
             // array('Description', array('class' => 'hidden')),
             array('Label', array('tag' => 'span', 'escape' => false, 'placement' => 'append')),
             array(array('data' => 'HtmlTag'),  array('tag' => 'td')),
