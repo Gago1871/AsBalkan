@@ -23,6 +23,8 @@ class Xerocopy_Resource_Xerocopy extends Zend_Application_Resource_ResourceAbstr
     public function init()
     {
         $this->_options = $this->getOptions();
+        $this->_exceptions = explode('|', $this->_options['exceptions']);
+
         return $this;
     }
 
@@ -74,6 +76,10 @@ class Xerocopy_Resource_Xerocopy extends Zend_Application_Resource_ResourceAbstr
         // save attachment to database
         $id = $attachment->save();
 
+        if ('gif' == $extension) {
+            
+        }
+
         foreach ($this->_options['format'] as $key => $format) {
             if (isset($format['width'])) {
                 $image = Xerocopy_Image::resizeImage($file, $format['width'], false, $format['cond']['minWidth']);
@@ -89,7 +95,12 @@ class Xerocopy_Resource_Xerocopy extends Zend_Application_Resource_ResourceAbstr
             $destinationFilename = $filename . '.' . $extension;
             $destinationFile = $location . DIRECTORY_SEPARATOR . $destinationFilename;
             Xerocopy_Tools::createDir($location);
-            Xerocopy_Image::saveImage($image, $destinationFile);
+
+            if (in_array($extension, $this->_exceptions)) {
+                copy($file, $destinationFile);
+            } else {
+                Xerocopy_Image::saveImage($image, $destinationFile);    
+            }            
         }
 
         // handle original file if needed
