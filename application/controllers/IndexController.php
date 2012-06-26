@@ -17,6 +17,13 @@ class IndexController extends Zend_Controller_Action
 
         $this->params = $this->getRequest()->getParams();
 
+        // $layerInfo = Zend_Registry::get('layerInfo');
+
+        if (isset($this->params['layerInfo']) AND $this->params['layerInfo'] == 1) {
+            $this->view->layerInfo = "dupa";
+        }   
+
+
         $message = array(
             'title' => 'To jest tytuł komunikatu - ogłaszamy, że każdy kto wrzuci obrazek, może liczyć, że wyląduje on w poczekalni!',
             'content' => 'Tu jest druga linia komunikatu i tu <a class="fancy-hover" href="">może być link >></a>',

@@ -439,6 +439,28 @@ a.button:hover {
     padding-left: 20px;
 }
 
+/* LAYER */
+.top-layer {
+    /*width: 700px;
+    height: 390px;*/
+    left: -350px;
+    top: 115px;
+    
+    margin: 0 50%;
+    padding: 12px;
+
+    position: fixed;
+    /*display: none;*/
+    background-image: url('/img/opaque.png');
+}
+
+.top-layer .body {
+    padding: 12px;
+    background-color: #dcdcdc;
+    /*width: 676px;
+    height: 366px;*/
+}
+
 /* UPLOAD LAYER */
 #upload-form-layer {
     width: 700px;

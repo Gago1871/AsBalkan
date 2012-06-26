@@ -72,6 +72,17 @@
             </div>
         </div>
 
+        <?php if ($this->layerInfo): ?>
+            <div id="layer" class="top-layer">
+                <div class="body">
+                    <h2>Przykro nam, ale podana strona nie istnieje [404]</h2>
+                    <p>Strona do której prowadzi link w adresie, prawdopdobnie została skasowana, zmieniono jej nazwę lub została czasowo usunięta</p>
+                    <input class="close" type="submit" value="Zamknij" />
+                </div>
+            </div>    
+        <?php endif ?>
+        
+
         <!-- footer -->
         <!-- <div id="footer">
         poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">Kontakt</a>

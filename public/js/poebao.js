@@ -1,9 +1,32 @@
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+    return this;
+}
 
 // jquery
 $(function () {
 
     // init interface
     poebao.ui.init();
+
+    // center top-layer
+    // $(".top-layer").center();
+
+    console.log('height: ' + $('.top-layer').height());
+    console.log('width: ' + $('.top-layer').width());
+
+    $('.top-layer').css({top:'50%',left:'50%',margin:'-'+($('.top-layer').height() / 2)+'px 0 0 -'+($('.top-layer').width() / 2)+'px'});
+
+    console.log('height: ' + $('.top-layer').height());
+    console.log('width: ' + $('.top-layer').width());
+
+
+
+    $(".top-layer .close").click(function () {
+        $(".top-layer").hide();
+    });
 
     // init timeago
     $("time.timeago").timeago();
