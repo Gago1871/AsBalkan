@@ -44,7 +44,7 @@ p {
 }
 
 .errors {
-    color: red;
+    color: #BA0000;
 }
 
 .center {
@@ -468,6 +468,10 @@ a.button:hover {
     cursor: pointer;
 }
 
+#upload-form-container h2 {
+    margin-bottom: 30px;
+}
+
 /* UPLOAD FORM */
 #uploadform table {
     width: 100%;
@@ -530,7 +534,7 @@ a.button:hover {
 /* UPLOAD FORM ERRORS */
 #uploadform ul.errors {
     list-style-type: none;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 

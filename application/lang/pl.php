@@ -40,7 +40,7 @@ return array(
     "File '%value%' is not readable or does not exist" => "Nie można odczytać pliku '%value%'",
 
     // Zend_Validate_File_Upload
-    "File '%value%' was not uploaded" => 'No ale musisz wybrać jakiś plik',
+    "File '%value%' was not uploaded" => 'Wskaż zdjęcie na dysku',
 
     // Zend_Validate_NotEmpty
     'Value is required and can\'t be empty' => 'Pole jest wymagane i nie może być puste!',

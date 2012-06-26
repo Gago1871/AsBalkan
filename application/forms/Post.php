@@ -72,14 +72,15 @@ class Application_Form_Post extends Zend_Form
             $file = new Zend_Form_Element_Text('file');
             $file->setLabel('www')
                 ->setRequired(true)
-                
+                ->addValidator('NotEmpty', true)
+                ->addErrorMessage('Podaj adres URL zdjęcia')                
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addFilter(new Jk_Filter_Http())
                 ->addValidator(new Jk_Validate_Uri())
                 // ->addValidator('NotEmpty')
                 // ->addValidator('Regex', false, array('/^.*\.(jpg|jpeg|gif|png)$/i'))
-                ->setLabel('url pliku <span>(<a id="nav-upload-form-switch-source" href="?uploadfromfile=1">lub dodaj z dysku</a>)</span>')
+                ->setLabel('URL pliku <span>(<a id="nav-upload-form-switch-source" href="?uploadfromfile=1">lub dodaj z dysku</a>)</span>')
                 ->setAttrib('placeholder', 'http://www')
                 ->setDescription('A to jest opis pola WWW');
             $file->class = 'poebao';
@@ -117,6 +118,8 @@ class Application_Form_Post extends Zend_Form
         $author = new Zend_Form_Element_Text('author');
         $author->setLabel('Autor')
             ->setRequired(true)
+            // ->addValidator('NotEmpty')
+            // ->addErrorMessage('Podpisz się (minimum 3 znaki)')
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addValidator(new Zend_Validate_StringLength(array('min' => 3, 'max' => 20)))
