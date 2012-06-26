@@ -24,8 +24,9 @@ $(function () {
 
 
 
-    $(".top-layer .close").click(function () {
+    $(".top-layer .layer-close-button").click(function () {
         $(".top-layer").hide();
+        $("#darken").hide();
     });
 
     // init timeago

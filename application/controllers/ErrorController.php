@@ -68,30 +68,18 @@ class ErrorController extends Zend_Controller_Action
     public function exceptionPageNotFoundAction()
     {
         $this->view->message = 'Nie ma takiej strony';
-        // $this->_helper->layout->setLayout('error');
-        // $this->renderScript('error/404.phtml');
-
-        // $this->_redirector = $this->_helper->getHelper('Redirector');
-
-
-
-        // Zend_Registry::set('layerInfo', '404');
-        // $this->_helper->redirector();
         $this->_forward('index', 'index', null, array('layerInfo' => 1));
-
-        // $this->_helper->redirector->gotoRouteAndExit(array(), 'home');    
     }
 
     public function exceptionDbConnectionFailedAction()
     {
         $this->view->message = 'Nie udało się połączyć z bazą danych...';
-        // $this->_helper->layout->setLayout('error');
-        $this->renderScript('error/error.phtml');   
+        $this->_forward('index', 'index', null, array('layerInfo' => 1));
     }
     
     public function exceptionMemcachedConnectionFailedAction()
     {
         $this->view->message = 'Nie udało się połączyć z Memcached.';
-        $this->renderScript('error/error.phtml');
+        $this->_forward('index', 'index', null, array('layerInfo' => 1));
     }
 }

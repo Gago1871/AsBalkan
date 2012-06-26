@@ -103,7 +103,7 @@ a.button:hover {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100000;
+    z-index: 100;
 }
 
 #header {
@@ -441,8 +441,8 @@ a.button:hover {
 
 /* LAYER */
 .top-layer {
-    /*width: 700px;
-    height: 390px;*/
+    width: 700px;
+    /*height: 390px;*/
     left: -350px;
     top: 115px;
     
@@ -452,13 +452,43 @@ a.button:hover {
     position: fixed;
     /*display: none;*/
     background-image: url('/img/opaque.png');
+
+    z-index: 300;
 }
 
 .top-layer .body {
     padding: 12px;
     background-color: #dcdcdc;
+    position: relative;
     /*width: 676px;
     height: 366px;*/
+    /*text-align: center;;*/
+}
+
+.top-layer .body div.layer-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#darken {
+    background-image: url('/img/opaque.png');
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+}
+
+/* ERRORS */
+#error-404 h2 {
+    margin-bottom: 40px;
+}
+
+#error-404 p {
+    margin-bottom: 40px;
 }
 
 /* UPLOAD LAYER */
