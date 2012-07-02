@@ -103,10 +103,10 @@ class Application_Model_Post_Gateway
 
             if (Zend_Registry::getInstance()->constants->app->category->main == $category) {
                 $select->where('category = ?', $category)
-                    ->order('moderated DESC');
+                    ->order('moderated ASC');
             } else {
                 $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')')
-                    ->order('added DESC');
+                    ->order('added ASC');
             }
 
             $posts = $this->_db_table->fetchAll($select);
