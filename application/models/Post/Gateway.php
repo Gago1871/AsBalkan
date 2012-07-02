@@ -93,8 +93,6 @@ class Application_Model_Post_Gateway
                 ->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
         }
 
-        consolelog($select);
-
         $posts = $this->_db_table->fetchAll($select);
 
         // in case we didnt get enough data
@@ -110,8 +108,6 @@ class Application_Model_Post_Gateway
                 $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')')
                     ->order('added ASC');
             }
-
-            consolelog($select);
 
             $posts = $this->_db_table->fetchAll($select);
         }

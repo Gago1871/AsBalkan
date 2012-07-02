@@ -47,6 +47,7 @@ class PostController extends Zend_Controller_Action
         }
 
         $this->view->listRoute = $listRoute;
+        $this->view->blockPostVieRoute = 'postview';
 
         $postGateway = new Application_Model_Post_Gateway();
         $post = $postGateway->getByPostId($id, $context);

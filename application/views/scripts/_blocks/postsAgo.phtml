@@ -7,7 +7,7 @@
     <?php foreach ($this->block->postsAgo->posts as $key => $value): ?>
         <li id="posts-ago-<?php echo $key ?>">
             <div class="img">
-                <a href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->postViewRoute) ?>">
+                <a href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->blockPostVieRoute) ?>">
                     <img class="post" src="<?php echo $value->image('thumb'); ?>">
                 </a>
             </div>
@@ -35,4 +35,8 @@
 [updated] => 2012-06-18 21:10:23
 [agreement] => 1
 [attachment_id] => 2431
+
+<a href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->postViewRoute) ?>">
+
+
 */
