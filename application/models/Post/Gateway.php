@@ -89,10 +89,10 @@ class Application_Model_Post_Gateway
             ->limit(3, Zend_Registry::getInstance()->constants->app->blocks->postsAgo->offset);
 
         if (Zend_Registry::getInstance()->constants->app->category->main == $category) {
-            $select->order('moderated ASC')
+            $select->order('moderated DESC')
                 ->where('category = ?', $category);
         } else {
-            $select->order('added ASC')
+            $select->order('added DESC')
                 ->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
         }
 
@@ -108,10 +108,10 @@ class Application_Model_Post_Gateway
 
             if (Zend_Registry::getInstance()->constants->app->category->main == $category) {
                 $select->where('category = ?', $category)
-                    ->order('moderated ASC');
+                    ->order('moderated DESC');
             } else {
                 $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')')
-                    ->order('added ASC');
+                    ->order('added DESC');
             }
             consolelog('>' . $select);
             $posts = $this->_db_table->fetchAll($select);
