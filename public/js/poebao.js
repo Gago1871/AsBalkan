@@ -175,7 +175,7 @@ $(function () {
             poebao.ui.infiniteScrollLoaded();
             console.log('infiniteScrollLoaded');
         },
-        debug: true,
+        debug: false,
         behavior: undefined,
         binder: $(window), // used to cache the selector
         navSelector  : "#paginator", // selector for the paged navigation (it will be hidden)           
