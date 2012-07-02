@@ -38,6 +38,7 @@ class ErrorController extends Zend_Controller_Action
 
                 $priority = Zend_Log::CRIT;
                 $this->view->message = 'Application error';
+
                 break;
         }
 
@@ -74,12 +75,16 @@ class ErrorController extends Zend_Controller_Action
     public function exceptionDbConnectionFailedAction()
     {
         $this->view->message = 'Nie udało się połączyć z bazą danych...';
-        $this->_forward('index', 'index', null, array('layerInfo' => 1));
+        // $this->_forward('index', 'index', null, array('layerInfo' => 1));
+        // $this->_helper->layout->setLayout('error');
+        $this->renderScript('error/error.phtml');
     }
     
     public function exceptionMemcachedConnectionFailedAction()
     {
         $this->view->message = 'Nie udało się połączyć z Memcached.';
-        $this->_forward('index', 'index', null, array('layerInfo' => 1));
+        // $this->_forward('index', 'index', null, array('layerInfo' => 1));
+        // $this->_helper->layout->setLayout('error');
+        $this->renderScript('error/error.phtml');
     }
 }

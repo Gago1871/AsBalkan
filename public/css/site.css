@@ -176,6 +176,36 @@ a.button:hover {
     margin-bottom: 20px;
 }
 
+/* BLOCK */
+#posts-ago {
+    list-style-type: none;
+    overflow: auto;
+}
+
+#posts-ago li {
+    /*border: 1px solid black;*/
+    overflow: hidden;
+}
+
+#posts-ago #posts-ago-0 {
+    float: left;
+    width: 160px;
+    height: 210px;
+}
+
+#posts-ago #posts-ago-1 {
+    float: right;
+    width: 120px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+#posts-ago #posts-ago-2 {
+    float: right;
+    width: 120px;
+    height: 100px;
+}
+
 .subtext {
     font-size: 12px;
     color: #737375;
@@ -588,6 +618,8 @@ a.button:hover {
     list-style-type: none;
     font-size: 14px;
 }
+
+/* BLOCK */
 
 
 /* ADMIN */

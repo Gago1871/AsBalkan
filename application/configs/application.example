@@ -27,6 +27,7 @@ pluginPaths.Xerocopy_Resource = "Xerocopy/Resource"
 constants.app.category.main = 2
 constants.app.category.waiting = 1
 constants.app.category.unmoderated = 0
+constants.app.blocks.postsAgo.offset = 100
 constants.app.admin.passwordFile = APPLICATION_PATH "/users/.htdigest"
 constants.fb.appId = 315505988530036
 constants.google.analyticsId = UA-31837797-1
@@ -35,6 +36,7 @@ constants.google.analyticsId = UA-31837797-1
 resources.xerocopy.storage.location = 
 resources.xerocopy.storage.host = 
 resources.xerocopy.storeOriginal = 1
+resources.xerocopy.exceptions = gif
 
 resources.xerocopy.format.thumb.cond.minWidth = 460
 resources.xerocopy.format.thumb.width = 460

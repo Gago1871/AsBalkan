@@ -11,18 +11,7 @@ $(function () {
     // init interface
     poebao.ui.init();
 
-    // center top-layer
-    // $(".top-layer").center();
-
-    console.log('height: ' + $('.top-layer').height());
-    console.log('width: ' + $('.top-layer').width());
-
     $('.top-layer').css({top:'50%',left:'50%',margin:'-'+($('.top-layer').height() / 2)+'px 0 0 -'+($('.top-layer').width() / 2)+'px'});
-
-    console.log('height: ' + $('.top-layer').height());
-    console.log('width: ' + $('.top-layer').width());
-
-
 
     $(".top-layer .layer-close-button").click(function () {
         $(".top-layer").hide();

@@ -56,6 +56,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // $front = $this->getPluginResource('FrontController')->getFrontController();
         // $front = Zend_Controller_Front::getInstance();
         // $front->registerPlugin(new Poebao_Controller_Plugin_UploadForm());
+
+        $front = Zend_Controller_Front::getInstance();
+        $front->registerPlugin(new Poebao_Controller_Plugin_PostsAgo());
     }
 
     protected function _initActionHelpers()
@@ -66,7 +69,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initConstants()
     {
         $registry = Zend_Registry::getInstance();
-        $registry->constants = new Zend_Config( $this->getApplication()->getOption('constants') );
+        $registry->constants = new Zend_Config($this->getApplication()->getOption('constants'));
     }
 
     /**

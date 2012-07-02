@@ -17,12 +17,10 @@ class IndexController extends Zend_Controller_Action
 
         $this->params = $this->getRequest()->getParams();
 
-        // $layerInfo = Zend_Registry::get('layerInfo');
-
+        // this param is set in errorController
         if (isset($this->params['layerInfo']) AND $this->params['layerInfo'] == 1) {
-            $this->view->layerInfo = "dupa";
+            $this->view->layerInfo = true;
         }   
-
 
         $message = array(
             'title' => 'To jest tytuł komunikatu - ogłaszamy, że każdy kto wrzuci obrazek, może liczyć, że wyląduje on w poczekalni!',
@@ -38,7 +36,6 @@ class IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        // $animation = new Imagick("animation.gif");
         $postsGateway = new Application_Model_Post_Gateway();
         $posts = $postsGateway->fetchForMain();
 

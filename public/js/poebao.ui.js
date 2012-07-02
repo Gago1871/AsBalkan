@@ -6,6 +6,7 @@ poebao.ui = {
         $(window).scroll(poebao.ui.evntScrollWindow);
         
         poebao.ui.evntScrollWindow();
+        poebao.ui.cropPostAgoPictures();
     },
 
     // Make additional column stick to header
@@ -24,6 +25,34 @@ poebao.ui = {
                 c.css({position:"relative",top:""})
             }
         }
+    },
+
+    cropPostAgoPictures: function () {
+        poebao.ui.cropPostAgoPicture($("#posts-ago-0 img"), {width: 160, height: 210});
+        poebao.ui.cropPostAgoPicture($("#posts-ago-1 img"), {width: 120, height: 100});
+        poebao.ui.cropPostAgoPicture($("#posts-ago-2 img"), {width: 120, height: 100});
+    },
+
+    cropPostAgoPicture: function (img, destSize) {
+    
+        $("<img/>") // Make in memory copy of image to avoid css issues
+            .attr("src", img.attr("src"))
+            .load(function() {
+                width = this.width;   // Note: $(this).width() will not
+                height = this.height; // work for in memory images.
+
+                if (width > height) {
+                    // horizontal photo
+                    img.css('height', destSize.height);
+                    var x = (img.width() - destSize.width) / -2;
+                    img.css('margin-left', x);
+                } else {
+                    // vertical photo
+                    img.css('width', destSize.width);
+                    var y = (img.height() - destSize.height) / -2;
+                    img.css('margin-top', y);
+                };
+            });
     },
 
     // Minimize header when scrolled down a little

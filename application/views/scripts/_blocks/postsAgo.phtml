@@ -1,0 +1,38 @@
+<div class="block">
+    <h3><?php echo $this->block->postsAgo->offset ?> postów temu ...</h3>
+    <span class="subtext">
+        <time class="timeago" datetime="<?php echo $this->block->postsAgo->posts[0]->added ?>"><?php echo $this->block->postsAgo->posts[0]->added ?></time>
+    </span>
+    <ul id="posts-ago">
+    <?php foreach ($this->block->postsAgo->posts as $key => $value): ?>
+        <li id="posts-ago-<?php echo $key ?>">
+            <div class="img">
+                <a href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->postViewRoute) ?>">
+                    <img class="post" src="<?php echo $value->image('thumb'); ?>">
+                </a>
+            </div>
+        </li>
+    <?php endforeach ?>
+    </ul>
+
+</div>
+
+
+<?php
+/*
+
+[id] => 1564
+[post_id] => yiacdq
+[title] => Eskimoski włamywacz :)
+[author] => KenAdams
+[source] => http://www.interia.pl
+[added] => 2012-06-01 16:09:04
+[moderated] => 
+[category] => 0
+[flag_nsfw] => 0
+[status] => a
+[author_ip] => 127.0.0.1
+[updated] => 2012-06-18 21:10:23
+[agreement] => 1
+[attachment_id] => 2431
+*/
