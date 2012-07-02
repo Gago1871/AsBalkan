@@ -95,6 +95,8 @@ class Application_Model_Post_Gateway
 
         $posts = $this->_db_table->fetchAll($select);
 
+        consolelog($select);
+
         // in case we didnt get enough data
         if ($posts->count() < 3) {
             $select = $this->_db_table->select()
@@ -108,7 +110,7 @@ class Application_Model_Post_Gateway
                 $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')')
                     ->order('added ASC');
             }
-
+            consolelog($select);
             $posts = $this->_db_table->fetchAll($select);
         }
 
