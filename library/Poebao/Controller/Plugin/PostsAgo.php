@@ -34,6 +34,10 @@ class Poebao_Controller_Plugin_PostsAgo extends Zend_Controller_Plugin_Abstract
         if ($this->view->paginator !== null) {
             $id = $this->view->paginator->getItem(0)->id;
         }
+
+        if (isset($this->view->post)) {
+            $id = $this->view->post->id;
+        }
         
 
 
