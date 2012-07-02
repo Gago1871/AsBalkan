@@ -47,6 +47,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->postViewRoute = 'postview';
 
         $this->view->postForm = $this->_helper->UploadForm();
+
+        $this->view->category = 2;
     }
     
     /**
@@ -89,6 +91,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->headTitle('Oczekujące');
 
         $this->view->postViewRoute = 'awaiting-postview';
+
+        $this->view->category = 1;
 
         $this->view->postForm = $this->_helper->UploadForm();
     }
