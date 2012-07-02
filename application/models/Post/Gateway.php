@@ -43,7 +43,6 @@ class Application_Model_Post_Gateway
             ->order('moderated DESC')
             ->order('added DESC');
         $posts = $this->_db_table->fetchAll($select);
-        consolelog($select);
 
         return new Application_Model_Post_List($posts, $this);
     }
@@ -58,7 +57,6 @@ class Application_Model_Post_Gateway
             ->where('status = ?', "a")
             ->order('added DESC');
         $posts = $this->_db_table->fetchAll($select);
-        consolelog($select);
 
         return new Application_Model_Post_List($posts, $this);
     }
@@ -73,7 +71,6 @@ class Application_Model_Post_Gateway
             ->where('status = ?', "a")
             ->order('added DESC');
         $posts = $this->_db_table->fetchAll($select);
-        consolelog($select);
 
         return new Application_Model_Post_List($posts, $this);
     }
@@ -98,8 +95,6 @@ class Application_Model_Post_Gateway
 
         $posts = $this->_db_table->fetchAll($select);
 
-        consolelog('>' . $select);
-
         // in case we didnt get enough data
         if ($posts->count() < 3) {
             $select = $this->_db_table->select()
@@ -113,7 +108,7 @@ class Application_Model_Post_Gateway
                 $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')')
                     ->order('added DESC');
             }
-            consolelog('>' . $select);
+
             $posts = $this->_db_table->fetchAll($select);
         }
 
