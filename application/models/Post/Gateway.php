@@ -78,49 +78,43 @@ class Application_Model_Post_Gateway
     /**
      * 
      */
-    public function fetchPostsAgo($id, $category)
+    public function fetchPostsAgo($category)
     {
-        $agoId = $id - (int)Zend_Registry::getInstance()->constants->app->blocks->postsAgo->offset;
-        // if ($agoId < 1) {
-        //     return new Application_Model_Post_List(array(), $this);
-        // }
-
         $select = $this->_db_table->select()
             ->where('status = ?', "a")
-            ->where('id < ?', $agoId)
-            ->where('category = ?', $category)
-            ->limit(3)
-            ->order('added ASC');
-            // echo $select;
-            // die('tes');
-        
+            // ->where('id < ?', $agoId)
+            ->limit(3, Zend_Registry::getInstance()->constants->app->blocks->postsAgo->offset);
 
-        // $select = $this->_db_table->select();
-        // $select->where('status = ?', "a");
-        // // $select->where('flag_nsfw = ?', "0");
+        if (Zend_Registry::getInstance()->constants->app->category->main == $category) {
+            $select->order('moderated ASC')
+                ->where('category = ?', $category);
+        } else {
+            $select->order('added ASC')
+                ->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
+        }
 
-        // if (null !== $context) {
-        //     $select->where('author = ?', $post->author);
-        //     $select->where('added > ?', $post->added);
-        //     $select->order('added ASC');
-        // } else {
-
-        //     if (Zend_Registry::getInstance()->constants->app->category->main == $post->category) {
-        //         $select->where('category = ?', $post->category);
-        //         $select->where('moderated > ?', $post->moderated);
-        //         $select->order('moderated ASC');
-        //     } else {
-        //         $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
-        //         $select->where('added > ?', $post->added);
-        //         $select->order('added ASC');
-        //     }
-        // }
+        consolelog($select);
 
         $posts = $this->_db_table->fetchAll($select);
 
-        // if ($posts->count() < 3) {
-        //     $posts = $this->fetchPostsAgo($id + 1, $category);
-        // }
+        // in case we didnt get enough data
+        if ($posts->count() < 3) {
+            $select = $this->_db_table->select()
+                ->where('status = ?', "a")
+                ->limit(3);
+
+            if (Zend_Registry::getInstance()->constants->app->category->main == $category) {
+                $select->where('category = ?', $category)
+                    ->order('moderated ASC');
+            } else {
+                $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')')
+                    ->order('added ASC');
+            }
+
+            consolelog($select);
+
+            $posts = $this->_db_table->fetchAll($select);
+        }
 
         return new Application_Model_Post_List($posts, $this);
     }

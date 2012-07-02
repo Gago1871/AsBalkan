@@ -24,3 +24,8 @@ $application = new Zend_Application(
 );
 $application->bootstrap()
             ->run();
+
+
+function consolelog($value) {
+    echo '<script>console.log("' . $value . '");</script>';
+}
