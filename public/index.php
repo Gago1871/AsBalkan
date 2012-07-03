@@ -25,6 +25,7 @@ $application = new Zend_Application(
 $application->bootstrap()
             ->run();
 
+// custom functionss
 
 function consolelog($value) {
     echo '<script>console.log("' . $value . '");</script>';
