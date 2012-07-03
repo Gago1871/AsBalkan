@@ -520,6 +520,12 @@ a.button:hover {
     margin-bottom: 40px;
 }
 
+#error-404 .layer-close-button {
+    width: 200px;
+    height: 80px;
+    font-size: 30px;
+}
+
 /* UPLOAD LAYER */
 #upload-form-layer {
     width: 700px;
