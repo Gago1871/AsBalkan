@@ -95,7 +95,7 @@ a.button:hover {
     width: 1000px;
     margin: 0 auto;
     padding: 10px;
-    margin-top: 100px;
+    margin-top: 130px; /* needed because header is fixed */
 }
 
 #header-container {
@@ -422,7 +422,6 @@ a.button:hover {
 .message {
     padding: 14px;
     color: white;
-    margin-top: 10px;
     margin-bottom: 20px;
 }
 

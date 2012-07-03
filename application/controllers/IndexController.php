@@ -22,13 +22,12 @@ class IndexController extends Zend_Controller_Action
             $this->view->layerInfo = true;
         }   
 
-        $message = array(
-            'title' => 'To jest tytuł komunikatu - ogłaszamy, że każdy kto wrzuci obrazek, może liczyć, że wyląduje on w poczekalni!',
-            'content' => 'Tu jest druga linia komunikatu i tu <a class="fancy-hover" href="">może być link >></a>',
-            'type' => 'message-type-info'
-            );
+        // set up initial message to be displayed
+        $message = array();
 
-        $this->view->messages[] = $message;
+        if (!empty($message)) {
+            $this->view->messages[] = $message;
+        }
     }
 
     /**
