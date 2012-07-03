@@ -7,6 +7,13 @@ poebao.ui = {
         
         poebao.ui.evntScrollWindow();
         poebao.ui.cropPostAgoPictures();
+
+        // init timeago
+        $("time.timeago").timeago();
+    },
+
+    infiniteScrollLoaded: function () {
+        $("time.timeago").timeago();
     },
 
     // Make additional column stick to header

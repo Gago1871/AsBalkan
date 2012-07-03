@@ -18,9 +18,6 @@ $(function () {
         $("#darken").hide();
     });
 
-    // init timeago
-    $("time.timeago").timeago();
-
     // set up navigation buttons
     $('#nav-show-upload-form').click(function () {
         // $('#upload-form-layer').show();
@@ -172,8 +169,6 @@ $(function () {
             currPage: 1
         },
         callback: function () {
-            poebao.ui.infiniteScrollLoaded();
-            console.log('infiniteScrollLoaded');
         },
         debug: false,
         behavior: undefined,
