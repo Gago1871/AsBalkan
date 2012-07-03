@@ -5,16 +5,12 @@ class AsyncController extends Zend_Controller_Action
 
     public function init()
     {
-        //  Initialize action controller here 
-        
-        // $appConfig = Zend_Registry::get('Config_App');
-        // $this->view->storageHost = $appConfig['storage']['host'];
-        
-        // $flashMessages = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger')->getMessages();
-        // $this->view->messages = $flashMessages;
+        // Check if request is XHR, otherwise throw 404
+        if (!$this->_request->isXmlHttpRequest()) {
+             throw new Zend_Controller_Action_Exception('Seem like this page doesn\'t exist ;)', 404);
+        }
 
         $this->params = $this->getRequest()->getParams();
-        // $this->view->identity = $this->_helper->getIdentity();
     }
 
     /**
