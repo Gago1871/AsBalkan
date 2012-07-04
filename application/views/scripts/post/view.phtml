@@ -37,7 +37,15 @@
     <!-- </div> -->
         
     <div class="img">
+        <?php if (!is_null($this->post->getNext())): ?>
+            <a href="<?php echo $this->url(array('id' => $this->post->getNext()->post_id, 'title' => $this->post->getNext()->title), $this->postViewRoute) ?>">
+        <?php endif ?>
         <img class="post" src="<?php echo $this->post->image('view'); ?>">
+        <?php if (!is_null($this->post->getNext())): ?>
+            </a>
+        <?php endif ?>
+
+
         <div class="twoja-stara"></div>
     </div>
 </div>

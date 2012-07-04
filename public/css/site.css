@@ -12,6 +12,7 @@ body {
 
 a {
     text-decoration: none;
+    color: #082777;
 }
 
 /*a.hover:hover {*/
@@ -408,14 +409,6 @@ a.button:hover {
     padding: 20px 0;
     margin-top: 20px;
     background: #dfdfdf url('/img/border.png') repeat-x top left;
-}
-
-#footer a {
-    color: #082777;
-}
-
-#footer a:hover {
-/*    color: #0562db;*/
 }
 
 /* MESSAGES */
