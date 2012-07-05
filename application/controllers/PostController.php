@@ -14,7 +14,11 @@ class PostController extends Zend_Controller_Action
         $this->view->messages = $flashMessages;
 
         $this->params = $this->getRequest()->getParams();
+        // $this->params['fromFile'] = $_FILES['fromFile']['name'];
+        $this->params = array_merge($this->params, $_FILES);
+
         $this->view->identity = $this->_helper->getIdentity();
+
     }
 
     /**
@@ -80,6 +84,7 @@ class PostController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->params)) {
+                die('is valid!');
                 
                 // check where upload is comming from
                 $uploadfromfile = $form->getValue('uploadfromfile');
