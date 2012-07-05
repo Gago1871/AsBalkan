@@ -29,6 +29,7 @@ class Application_Model_Post
 
     protected $_next = null;
     protected $_previous = null;
+    protected $_pageNum = null;
     
     public function __construct($data, $gateway)
     {
@@ -117,6 +118,16 @@ class Application_Model_Post
     public function getPrevious()
     {
         return $this->_previous;
+    }
+
+    public function setPageNum($value)
+    {
+        $this->_pageNum = $value;
+    }
+
+    public function getPageNum()
+    {
+        return $this->_pageNum;
     }
 
     /**

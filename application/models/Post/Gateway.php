@@ -173,6 +173,11 @@ class Application_Model_Post_Gateway
             $post->setNext(new Application_Model_Post($next->toArray(), $this));
         }
 
+        $pageNum = $this->_getPageNum($post, $context);
+        if (null !== $pageNum) {
+            $post->setPageNum($pageNum);
+        }
+
         //return the post object
         return $post;
    }
@@ -233,6 +238,38 @@ class Application_Model_Post_Gateway
         }
 
         return $this->_db_table->fetchRow($select);
+    }
+
+    /*
+     * Gate page num for current post
+     */
+    public function _getPageNum(Application_Model_Post $post, $context)
+    {
+        $select = $this->_db_table->select();
+        $select->from('posts', array('count(*) as count'))
+            ->where('status = ?', "a");
+            // ->where('id < ?', $post->id);
+
+        if (null !== $context) {
+            $select->where('author = ?', $post->author);
+            $select->order('added DESC');
+        } else {
+
+            if (Zend_Registry::getInstance()->constants->app->category->main == $post->category) {
+                $select->where('category = ?', $post->category);
+                $select->where('moderated > ?', $post->moderated);
+                $select->order('moderated DESC');
+            } else {
+                $select->where('category IN (' . Zend_Registry::getInstance()->constants->app->category->unmoderated . ',' . Zend_Registry::getInstance()->constants->app->category->waiting . ')');
+                $select->where('added > ?', $post->added);
+                $select->order('added DESC');
+            }
+        }
+
+        $result = $this->_db_table->fetchRow($select);
+        $pageNum = (int)($result['count']/10) + 1;
+
+        return $pageNum;
     }
 
     /**
