@@ -21,7 +21,6 @@
 		if (!this._create(options, callback)) {
                   this.failed = true;
                 }
-	
 	};
 	
 	$.infinitescroll.defaults = {
@@ -109,8 +108,6 @@
 
 		// Fundamental aspects of the plugin are initialized
 		_create: function infscr_create(options, callback) {
-            console.log('dziadek');
-            console.log(callback);
             // Add custom options to defaults
             var opts = $.extend(true, {}, $.infinitescroll.defaults, options);
 

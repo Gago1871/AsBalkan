@@ -9,7 +9,8 @@
 <link href='http://fonts.googleapis.com/css?family=Oxygen&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Dosis:600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
-<?php echo $this->headLink()->prependStylesheet($this->baseUrl() . '/css/site.css'); ?>
+<?php echo $this->headLink(); ?>
+
 <?php echo $this->render('_partials/fb/og.phtml'); ?>
 <?php echo $this->render('_partials/google/analytics.phtml'); ?>
 <?php echo $this->render('_partials/google/plusOneHeader.phtml'); ?>
