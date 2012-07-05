@@ -18,7 +18,7 @@ class Jk_Resource_HeadLinks extends Zend_Application_Resource_ResourceAbstract
         $options = $this->getOptions();
 
         foreach ($options['css'] as $key => $value) {
-            $view->headLink()->prependStylesheet($view->baseUrl() . $value);
+            $view->headLink()->appendStylesheet($view->baseUrl() . $value);
         }
     }
 }
