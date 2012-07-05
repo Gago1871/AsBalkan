@@ -57,12 +57,10 @@ resources.xerocopy.format.min.quality = 80
 ; resources.xerocopy.format.min.type = jpeg
 
 ; HEADSCRIPTS
-resources.headScripts.js.jquery =           "/js/jquery-1.7.2.min.js"
-resources.headScripts.js.timeago =          "/js/jquery.timeago.js"
-resources.headScripts.js.timeagolang =      "/js/jquery.timeago.pl.js"
-resources.headScripts.js.hotkeys =          "/js/jquery.hotkeys.js"
-resources.headScripts.js.infinitescroll =   "/js/jquery.infinitescroll.js"
-resources.headScripts.js.app =              "/js/poebao.js"
+resources.headScripts.js.asset =  "/asset/poebao.js"
+
+; HEADLINKS
+resources.headLinks.css.main =    "/asset/poebao.css"
 
 ; DATABASE
 resources.db.adapter = PDO_MYSQL
@@ -110,3 +108,12 @@ phpSettings.display_errors = 1
 resources.frontController.params.displayExceptions = 1
 
 resources.headScripts.js.jquery =           "/js/jquery-1.7.2.js"
+resources.headScripts.js.timeago =          "/js/jquery.timeago.js"
+resources.headScripts.js.timeagolang =      "/js/jquery.timeago.pl.js"
+resources.headScripts.js.hotkeys =          "/js/jquery.hotkeys.js"
+resources.headScripts.js.infinitescroll =   "/js/jquery.infinitescroll.js"
+resources.headScripts.js.appui =            "/js/poebao.ui.js"
+resources.headScripts.js.appform =        "/js/poebao.form.js"
+resources.headScripts.js.app =              "/js/poebao.js"
+
+resources.headLinks.css.main =              "/css/site.css"
