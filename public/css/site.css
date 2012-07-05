@@ -137,7 +137,7 @@ a.button:hover {
 
 #nav {
     float: right;
-    margin-top: 23px;
+    /*margin-top: 1px;*/
 }
 
 #nav ul {
@@ -149,6 +149,8 @@ a.button:hover {
     margin-left: 10px;
     padding-left: 10px;
     border-left: 1px solid #ccc;
+    padding-top: 1px;
+    padding-bottom: 3px;
 }
 
 #nav .first {
@@ -175,6 +177,10 @@ a.button:hover {
 
 #additional .block {
     margin-bottom: 20px;
+}
+
+#additional .block h3 {
+    margin-bottom: 5px;
 }
 
 /* BLOCK */
@@ -390,7 +396,7 @@ a.button:hover {
 }
 
 #post .info {
-    margin-bottom: 16px;
+    margin-bottom: 6px;
 }
 
 #fb-comments {
@@ -409,6 +415,7 @@ a.button:hover {
     padding: 20px 0;
     margin-top: 20px;
     background: #dfdfdf url('/img/border.png') repeat-x top left;
+    font-size: 12px;
 }
 
 /* MESSAGES */
