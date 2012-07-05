@@ -57,7 +57,7 @@ resources.xerocopy.format.min.quality = 80
 ; resources.xerocopy.format.min.type = jpeg
 
 ; HEADSCRIPTS
-resources.headScripts.js.asset =  "/asset/poebao.js"
+resources.headScripts.js.main =  "/asset/poebao.js"
 
 ; HEADLINKS
 resources.headLinks.css.main =    "/asset/poebao.css"
@@ -114,6 +114,6 @@ resources.headScripts.js.hotkeys =          "/js/jquery.hotkeys.js"
 resources.headScripts.js.infinitescroll =   "/js/jquery.infinitescroll.js"
 resources.headScripts.js.appui =            "/js/poebao.ui.js"
 resources.headScripts.js.appform =        "/js/poebao.form.js"
-resources.headScripts.js.app =              "/js/poebao.js"
+resources.headScripts.js.main =              "/js/poebao.js"
 
 resources.headLinks.css.main =              "/css/site.css"

@@ -1,3 +1,9 @@
+http://addyosmani.com/blog/client-side-build-process/
+http://progrnotes.blogspot.de/2011/12/compressing-javascript-and-css-files.html
+http://stackoverflow.com/questions/3826869/compress-js-and-css-while-deployement
+http://www.julienlecomte.net/blog/2007/09/16/
+
+
 * Zamiast FB Like (na wallach i stronie posta) miał być FB Share (szczegóły w pliku na Dropboxie).
 * Linki prowadzące do konkretnych postów na wallach nie działają dla drugiej i kolejnych paczek.
 * Po powrocie do listy i automatycznym zescrollowaniu walla w dół do posta, przyklejony nagłówek zasłania górę posta.
