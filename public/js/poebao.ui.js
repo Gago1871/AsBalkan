@@ -14,6 +14,11 @@ poebao.ui = {
 
     infiniteScrollLoaded: function () {
         $("time.timeago").timeago();
+        // render Facebook buttons
+        FB.XFBML.parse();
+
+        // render G+ buttons
+        gapi.plusone.go();
     },
 
     // Make additional column stick to header
