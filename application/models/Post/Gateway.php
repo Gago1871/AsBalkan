@@ -266,7 +266,7 @@ class Application_Model_Post_Gateway
             }
         }
 
-        $result = $this->_db_table->fetchRow($select);
+        $result = $this->_db_table->fetchRow($select); 
         $pageNum = (int)($result['count']/10) + 1;
 
         return $pageNum;
