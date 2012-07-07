@@ -148,7 +148,6 @@ class ModerationController extends Zend_Controller_Action
                 // do the import
                 foreach ($files as $key => $value) {
                     
-
                     $file = $importer->figureOutExtension($value['filename'], $form->location->getValue());
                     echo '<li>' . $key . ') ' . $file;
                     
@@ -157,8 +156,6 @@ class ModerationController extends Zend_Controller_Action
                         echo ' ... is not a file!</li>';
                         continue;
                     }
-
-                    
 
                     $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $file);
                     
