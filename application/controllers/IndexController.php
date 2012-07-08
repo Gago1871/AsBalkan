@@ -44,7 +44,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->paginator = $paginator;
 
         $this->view->postViewRoute = 'postview';
-        $this->view->blockPostVieRoute = 'postview';
+        $this->view->blockPostViewRoute = 'home';
 
         $this->view->postForm = $this->_helper->UploadForm();
     }
@@ -68,7 +68,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->headTitle($author);
 
         $this->view->postViewRoute = 'author-postview';
-        $this->view->blockPostVieRoute = 'postview';
+        $this->view->blockPostViewRoute = 'home';
 
         $this->view->postForm = $this->_helper->UploadForm();
     }
@@ -90,7 +90,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->headTitle('Oczekujące');
 
         $this->view->postViewRoute = 'awaiting-postview';
-        $this->view->blockPostVieRoute = 'awaiting-postview';
+        $this->view->blockPostViewRoute = 'awaiting';
 
         $this->view->category = 1;
 

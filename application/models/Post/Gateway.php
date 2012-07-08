@@ -112,7 +112,18 @@ class Application_Model_Post_Gateway
             $posts = $this->_db_table->fetchAll($select);
         }
 
-        return new Application_Model_Post_List($posts, $this);
+        $list = new Application_Model_Post_List(null, $this);
+
+        foreach ($posts as $key => $value) {
+            $post = new Application_Model_Post($value, $this);
+            $pageNum = $this->_getPageNum($post);
+            if (null !== $pageNum) {
+                $post->setPageNum($pageNum);
+            }
+            $list->add($post);
+        }
+
+        return $list;
     }
 
     /**
@@ -243,7 +254,7 @@ class Application_Model_Post_Gateway
     /*
      * Gate page num for current post
      */
-    public function _getPageNum(Application_Model_Post $post, $context)
+    public function _getPageNum(Application_Model_Post $post, $context = null)
     {
         $select = $this->_db_table->select();
         $select->from('posts', array('count(*) as count'))

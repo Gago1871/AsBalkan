@@ -6,17 +6,22 @@ class Application_Model_Post_List
     protected $_gateway;
     protected $_list = array();
 
-    public function __construct(Zend_Db_Table_Rowset_Abstract $data, $gateway)
+    public function __construct($data = null, $gateway)
     {
         $this->setGateway($gateway);
 
-        // if ($data instanceof Zend_Db_Table_Rowset_Abstract) {
-        $data = $data->toArray();
-        // }
+        if ($data instanceof Zend_Db_Table_Rowset_Abstract) {
+            $data = $data->toArray();
 
-        foreach ($data as $key => $value) {
-            $this->_list[] = new Application_Model_Post($value, $gateway);
+            foreach ($data as $key => $value) {
+                $this->_list[] = new Application_Model_Post($value, $gateway);
+            }
         }
+    }
+
+    public function add($item)
+    {
+        $this->_list[] = $item;
     }
 
     public function setGateway(Application_Model_Post_Gateway $gateway)
