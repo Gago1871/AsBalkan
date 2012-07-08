@@ -111,5 +111,7 @@ class IndexController extends Zend_Controller_Action
     public function rulesAction()
     {
         $this->view->postForm = $this->_helper->UploadForm();
+        
+        $this->view->blockPostViewRoute = 'home';
     }
 }

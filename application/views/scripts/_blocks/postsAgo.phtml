@@ -1,5 +1,5 @@
 <div class="block">
-    <h3><?php echo $this->block->postsAgo->offset ?> postów temu ...</h3>
+    <h3><a href="<?php echo $this->url(array('page' => $this->block->postsAgo->posts[0]->getPageNum()), $this->blockPostViewRoute) ?>#post-<?php echo $this->block->postsAgo->posts[0]->post_id; ?>"><?php echo $this->block->postsAgo->offset ?> postów temu ...</a></h3>
     <span class="subtext">
         <time class="timeago" datetime="<?php echo $this->block->postsAgo->posts[0]->added ?>"><?php echo $this->block->postsAgo->posts[0]->added ?></time>
     </span>
