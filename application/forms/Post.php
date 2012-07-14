@@ -4,12 +4,7 @@ class Application_Form_Post extends Zend_Form
 {
     public function init()
     {
-        // read form attribs passed to constructor in controller
-        $attribs = $this->getAttribs();
-
         $this->setName('uploadform');
-        $this->setAction($attribs['action']);
-
         $this->setEnctype('multipart/form-data');
 
         $defaultDecorator = array(
@@ -20,39 +15,17 @@ class Application_Form_Post extends Zend_Form
             array('Label', array('tag' => 'td', 'escape' => false)),
             array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
         );
-
-        $fileFileds = array('fromFile', 'fromUrl');
         
         $fromFile = new Zend_Form_Element_File('fromFile');
         $fromFile
             ->setLabel('Wgraj z dysku')
-            // ->setRequired(true)
-
-            // ->addValidator(new Jk_Validate_EitherOneNotEmpty($fileFileds))
-            ->setAllowEmpty(false);
-
-            // ->addValidator('MimeType', false, array('image/jpeg', 'image/gif', 'image/png'))
-            // ->addValidator('Size', false, array('min' => '1kB', 'max' => '4MB'));
+            ->addValidator('MimeType', false, array('image/jpeg', 'image/gif', 'image/png'))
+            ->addValidator('Size', false, array('min' => '1kB', 'max' => '4MB'));
     
         $fromFile->class = 'file';
-        // $fromFile->setDecorators(array(
-        //     array('Errors', 'placement' => 'prepend'),
-        //     array('File'),
-        //     array('Description', array('class' => 'hidden')),
-        //     array(array('data' => 'HtmlTag'),  array('tag' =>'td', 'class'=> 'element')),
-        //     array('Label', array('tag' => 'td', 'escape' => false)),
-        //     array(array('row' => 'HtmlTag'), array('tag' => 'tr', 'id' => 'upload-from-file'))
-        // ));
 
         $fromUrl = new Zend_Form_Element_Text('fromUrl');
         $fromUrl->setLabel('www')
-            // ->setRequired(true)
-            
-            // ->addValidator('NotEmpty', true)
-            ->setAllowEmpty(false)
-            ->addValidator(new Jk_Validate_EitherOneNotEmpty($fileFileds))
-            
-            ->addErrorMessage('Podaj adres URL zdjęcia')                
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addFilter(new Jk_Filter_Http())

@@ -15,7 +15,7 @@ class PostController extends Zend_Controller_Action
 
         $this->params = $this->getRequest()->getParams();
         // $this->params['fromFile'] = $_FILES['fromFile']['name'];
-        $this->params = array_merge($this->params, $_FILES);
+        // $this->params = array_merge($this->params, $_FILES);
 
         $this->view->identity = $this->_helper->getIdentity();
 
@@ -79,36 +79,46 @@ class PostController extends Zend_Controller_Action
     public function uploadAction()
     {
         // Create new form
-        $fromFile = (isset($this->params['uploadfromfile']) && (1 == $this->params['uploadfromfile']));
-        $form = new Application_Form_Post(array('action' => $this->_helper->url->url(array(), 'postupload'), 'uploadfromfile' => $fromFile));
+        $form = new Application_Form_Post(array('action' => $this->_helper->url->url(array(), 'postupload')));
 
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($this->params)) {
-                die('is valid!');
-                
-                // check where upload is comming from
+
+            // Validate URL/file fields
+            $val1 = $_FILES['fromFile']['name'];
+            $val2 = $this->params['fromUrl'];
+
+            $invalid = false;
+            if (empty($val1) && empty($val2)) {
+                $form->getElement('fromFile')->addError('One of fields should not be empty');
+                $form->getElement('fromFile')->markAsError();
+                $invalid = true;
+            }
+
+            if ($form->isValid($this->params) && !$invalid) {
+
+                // Check where upload is comming from
                 $uploadfromfile = $form->getValue('uploadfromfile');
 
-                if ($uploadfromfile) {
+                if (!empty($val1)) {
 
                     // upload from file
-                    $file = $form->file->getFileName();
-                    $form->file->receive();
+                    $file = $form->fromFile->getFileName();
+                    $form->fromFile->receive();
 
                     // set source from text field
                     $originalSource = $source = $form->getValue('source');
 
-                    if (!$form->file->isReceived()) {
-                        $form->getElement('file')->addError('Unable to download file, please try again later');
+                    if (!$form->fromFile->isReceived()) {
+                        $form->fromFile->addError('Unable to download file, please try again later');
                     }
                 } else {
                     // upload from web
-                    $file = $form->getValue('file');
+                    $file = $form->getValue('fromUrl');
 
                     $filedata = parse_url($file);
                     
                     if (!$filedata) {
-                        $form->getElement('file')->addError('Unable to download file, please try again later');
+                        $form->getElement('fromFile')->addError('Unable to download file, please try again later');
                     } else {
                         $source = (!empty($filedata['scheme'])?$filedata['scheme']:'http') . '://' . $filedata['host'];
                         $originalSource = $file;
@@ -116,14 +126,16 @@ class PostController extends Zend_Controller_Action
 
                     $file = Jk_File::download($file);
                     if (!$file) {
-                        $form->getElement('file')->addError('Unable to download file, please try again later');
+                        $form->getElement('fromFile')->addError('Unable to download file, please try again later');
                     }
                 }
+
+                // $form->getElement('file')->addError('Unable to download file, please try again later');
 
                 // we have downloaded file under $file
 
                 // check file type based on mime type
-                if (!$form->getElement('file')->hasErrors()) {
+                if (!$form->getElement('fromFile')->hasErrors()) {
                     $mime = Jk_File::getMimeType($file);
                     switch ($mime) {
                         case 'image/jpeg':
@@ -131,12 +143,12 @@ class PostController extends Zend_Controller_Action
                         case 'image/png':
                             break;
                         default:
-                            $form->getElement('file')->addError($mime . ' filetype is not supported.');
+                            $form->getElement('fromFile')->addError($mime . ' filetype is not supported.');
                     }
                 }
 
                 // if no errors
-                if (!$form->getElement('file')->hasErrors()) {
+                if (!$form->getElement('fromFile')->hasErrors()) {
                     // Do Xerocopy magic - this will create thumbnails
                     $attachmentId = $this->getInvokeArg('bootstrap')->getResource('xerocopy')->saveImage($file, $originalSource);
                     $fileInfo = pathinfo($file);
