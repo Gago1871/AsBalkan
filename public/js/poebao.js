@@ -10,6 +10,7 @@ $(function () {
 
     // init interface
     poebao.ui.init();
+    poebao.ui.uploadForm.init();
 
     $('.top-layer').css({top:'50%',left:'50%',margin:'-'+($('.top-layer').height() / 2)+'px 0 0 -'+($('.top-layer').width() / 2)+'px'});
 
@@ -104,47 +105,6 @@ $(function () {
         o += "</ul>";
         return o;
     }
-
-    // function uploadSuccess(msg) {
-    //     window.location.href = msg.data;
-    // }
-
-    // function uploadFailure(msg) {
-    //     // $("#"+id).parent().find(".errors").remove();
-    //     // $("#"+id).parent().prepend(getErrorHtml(resp[id], id));
-    //     console.log(msg.data);
-
-    //     for (error in msg.data) {
-    //         console.log(error);
-    //     };
-    // }
-
-    // // init upload form
-    // $('#uploadform').submit(function () {
-        
-    //     var request = $.ajax({
-    //             url: "/dodaj",
-    //             type: "POST",
-    //             data: $(this).serialize(),
-    //             dataType: "json"
-    //         });
-
-    //     request.done(function (msg) {
-    //         if (msg.status == "success") {
-    //             uploadSuccess(msg);
-    //         } else {
-    //             uploadFailure(msg);
-    //         }
-    //     });
-
-    //     request.fail(function(jqXHR, textStatus) {
-    //         alert( "Request failed: " + textStatus );
-    //     });
-
-    //     return false;
-    // });
-
-    // infinite scroll
 
     // infinitescroll() is called on the element that surrounds 
     // the items you will be loading more of

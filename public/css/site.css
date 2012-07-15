@@ -568,68 +568,78 @@ a.button:hover {
 }
 
 /* UPLOAD FORM */
-#uploadform table {
+#formupload ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#formupload li {
+    padding: 4px;
+}
+
+#formupload {
     width: 100%;
 }
 
-#uploadform table td.element {
-    /*font-size: 17px;*/
-    vertical-align: top;
+#formupload .spacer {
+    width: 170px;
+    display: inline-block;
+    font-size: 22px;
+    vertical-align: bottom;
 }
 
-#uploadform .file, #uploadform .submit {
-    /*font-size: 30px;*/
+#formupload .spacer span span {
+    font-size: 14px;
 }
 
-#uploadform .poebao {
-    border: 1px solid #aaa;
+#formupload input {
+    font-size: 16px;
 }
 
-#uploadform label {
-    font-size: 18px;
-    width: 300px;
+#formupload ul li.element {
+    margin-bottom: 8px;
 }
 
-#uploadform label span {
-    font-size: 12px;
+#url, #file, #title, #author, #source {
+    border: 1px solid #ADADAD;
+    padding: 4px;
+    background-color: white;
+    height: 20px;
 }
 
-#uploadform .agreement {
-    height: 80px;
+#file-sources * {
+    vertical-align: bottom;
 }
 
-#uploadform td.element input {
-    /*border: 1px solid green;*/
-    width: 100%;
-    padding: 5px;
-    font-size: 13px;
+#url {
+    width: 131px;
 }
 
-#uploadform  input.submit {
-    margin-right: 10px;
-    /*font-size: 25px;*/
+#file {    
+    width: 440px;
 }
 
-#uploadform .submit .hint {
-    /*font-size: 17px;*/
-}
-
-#uploadform #file-label {
-    width: 200px;
-}
-
-#uploadform #agreement-label label {
-    font-size: 13px;
-}
-
-#uploadform #submitbutton {
-    width: 100px;
+#title, #author, #source {
+    width: 440px;
 }
 
 /* UPLOAD FORM ERRORS */
-#uploadform ul.errors {
+#formupload ul.errors {
     list-style-type: none;
     font-size: 14px;
+    margin-left: 170px;
+}
+
+#file-sources ul.errors {
+    margin-left: 0;
+}
+
+#upload-form-submit-button {
+    width: 100px;
+    margin-right: 10px;
+    padding: 5px;
+    vertical-align: bottom;
 }
 
 /* BLOCK */

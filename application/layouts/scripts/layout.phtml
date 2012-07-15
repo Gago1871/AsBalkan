@@ -19,6 +19,7 @@
 </head>
 <body>
     <?php echo $this->render('_partials/fb/initJSSDK.phtml'); ?>
+    <?php echo $this->render('_partials/google/plusOneRender.phtml'); ?>
     <!-- header -->
     <div id="header-container">
         <div id="header">
@@ -27,13 +28,12 @@
                 <ul>
                     <li class="first"><a class="fancy-hover"href="/oczekujace">oczekujące</a></li>
                     <li>
-                        <a class="fancy-hover" id="nav-show-upload-form" href="<?php echo $this->url(array(), 'postupload') . "?uploadfromfile=1";?>">dodaj</a>
+                        <a class="fancy-hover" id="nav-show-upload-form" href="<?php echo $this->url(array(), 'postupload');?>">dodaj</a>
                     </li>
                     <?php if ($this->identity): ?>
                         <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'moderation') ?>">moderacja</a></li>
                         <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'admin-logout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
                     <?php endif ?>
-                    
                 </ul>
             </div>
         </div>

@@ -1,4 +1,4 @@
-var poebao = {};
+var poebao = poebao || {};
 
 poebao.ui = {
 
