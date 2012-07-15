@@ -55,7 +55,7 @@
             </awaiting>
 
             <author type="Zend_Controller_Router_Route_Regex">
-                <route>u/([\w]{3,20})/(.*)</route>
+                <route>u/([\w]{3,20})(?:/(\d+))?</route>
                 <defaults>
                     <controller>index</controller>
                     <action>author</action>

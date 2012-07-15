@@ -1,4 +1,4 @@
-<a class="left fancy-hover" href="<?php echo $this->url(array('name' => $this->author), $this->listRoute) ?>#post-<?php echo $this->post->post_id; ?>">« Wróć do listy</a>
+<a class="left fancy-hover" href="<?php echo $this->url(array('name' => $this->author, 'page' => $this->post->getPageNum()), $this->listRoute) ?>#post-<?php echo $this->post->post_id; ?>">« Wróć do listy</a>
 <div class="right">
     <?php if (!is_null($this->post->getPrevious())): ?>
         <a class="button button-wider button-taller" id="nav-post-view-prev" href="<?php echo $this->url(array('id' => $this->post->getPrevious()->post_id, 'title' => $this->post->getPrevious()->title), $this->postViewRoute) ?>"><<</a>    

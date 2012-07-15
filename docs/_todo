@@ -1,0 +1,45 @@
+https://github.com/valums/file-uploader
+
+http://addyosmani.com/blog/client-side-build-process/
+http://progrnotes.blogspot.de/2011/12/compressing-javascript-and-css-files.html
+http://stackoverflow.com/questions/3826869/compress-js-and-css-while-deployement
+http://www.julienlecomte.net/blog/2007/09/16/
+
+
+* Zamiast FB Like (na wallach i stronie posta) miał być FB Share (szczegóły w pliku na Dropboxie).
+* Linki prowadzące do konkretnych postów na wallach nie działają dla drugiej i kolejnych paczek.
+* Po powrocie do listy i automatycznym zescrollowaniu walla w dół do posta, przyklejony nagłówek zasłania górę posta.
+
+* Poprawki dotyczące formatki uploadu:
+    * Ustawienie domyślnego trybu na Plik (a nie URL)
+    * Poprawka walidacji pliku do wgrania - obecnie zawsze dostaję błąd "File 'file' exceeds the defined ini size"
+    * Dodanie napisu "Formularz w wersji beta ;)" - czcionka 12px, na prawo od tytułu Dodaj post
+
+[P2]
+
+Skalowanie w dół dużych animowanych gifów.
+Na wallach tytuł, źródło i sociale nie przyklejają się do nagłówka (jak na 9gag).
+Etykieta "1000 postów temu" powinna linkować do zdjęcia na wallu (ten sam link, jak dla dużego zdjęcia w bloczku).
+Bloczek "1000 postów temu" źle buduje URLe na stronie uploadu i regulaminu.
+Pod IE nie działa infinite scroll (cały czas widać paczkowanie).
+Stylowanie
+Logo serwisu na górnym mini-pasku o 1px w dół, teraz jest przyklejone do góry strony.
+Czcionka stopki mniejsza - taka, jak autor i data na wallu (12px, a nie 16px)
+Czcionka linków "oczekujące" i "dodaj" w nagłówku jest inna niż na grafikach (Franek dzisiaj dośle nazwę czcionki)
+Czcionka tytułów źle wygląda - na grafikach wyglądała dużo lepiej (Franek dośle właściwą)
+Pozioma linia rozdzielająca "oczekujące" i "dodaj" powinna być o 4px dłuższa. 
+W przerywniku BR co 4 wystąpienie, zamiast "poebao" jest "poeabo"
+Na poście sociale nie są na środku
+W bloczku "1000 postów temu" odległość pomiędzy 1000, a datą powinna być taka sama, jak pomiędzy datą a zajawką posta (= ta druga odległość jest OK)
+Na wallach odległość pomiędzy nazwą usera i socialami powinna być taka, jak pomiędzy tytułem, a userem (= ta druga odległość jest OK)
+Tekst w zielonym bloczku po dodaniu posta ma za dużą odległość od dołu ramki. Odległość powinna być taka sama, jak od góry. Dodatkowo teks powinien być wyboldowany.
+Odległość zielonego bloczka po dodaniu posta, do napisu "<< wróć..." powinna być taka sama, jak od nagłówka serwisu
+[P3]
+
+Przy tytułach, które na wysokość są dłuższe niż zdjęcia, bigfatdick nie zasłania watermarka.
+Po najechaniu myszą na źródło hoover (1px w prawo) rozwala diva i pojawia się poziomy scroll. Patrz zrzut z załącznika. 
+Ekran podziękowalno-propagujący po dodaniu posta (był i znikł).
+Naciśnięcie przycisków moderujących nie powinno przeładowywać stron.
+Po zmoderowaniu posta z widoku danego walla powinniśmy zostawać na tym samym wallu, a nie trafiać na wall Moderacja. 
+Niedoklejanie watermarka do zdjęć węższych niż szerokość watermarka.
+Animowane gify w bloczku "1000 postów temu" odciągają uwagę od scrollowania walla, to może być denerwujące - ustatecznianie animowanych gifów vs. nie pokazywanie tam gifów w ogóle.

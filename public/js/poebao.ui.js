@@ -14,6 +14,11 @@ poebao.ui = {
 
     infiniteScrollLoaded: function () {
         $("time.timeago").timeago();
+        // render Facebook buttons
+        FB.XFBML.parse();
+
+        // render G+ buttons
+        gapi.plusone.go();
     },
 
     // Make additional column stick to header
@@ -74,7 +79,7 @@ poebao.ui = {
     minimizeHeader: function () {
         var duration = 100;
         // $("#header img").attr("src", "/img/poebao-smaller.png");
-        $("#header img").animate({width: "127px"}, { duration: duration, queue: false });
+        $("#header img").animate({width: "120px"}, { duration: duration, queue: false });
         $("#header").animate({height: "52px"}, { duration: duration, queue: false });
         $("#header").animate({"padding-top": "0px"}, { duration: duration, queue: false });
         $("#nav").animate({"margin-top": "12px"}, { duration: duration, queue: false });

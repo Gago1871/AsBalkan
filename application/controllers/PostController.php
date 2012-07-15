@@ -51,7 +51,7 @@ class PostController extends Zend_Controller_Action
         }
 
         $this->view->listRoute = $listRoute;
-        $this->view->blockPostVieRoute = 'postview';
+        $this->view->blockPostViewRoute = 'home';
 
         $postGateway = new Application_Model_Post_Gateway();
         $post = $postGateway->getByPostId($id, $context);
@@ -190,6 +190,8 @@ class PostController extends Zend_Controller_Action
         }
 
         $this->view->headTitle('Dodaj post');
-        $this->view->form = $form;    
+        $this->view->form = $form;
+
+        $this->view->blockPostViewRoute = 'home';
     }
 }
