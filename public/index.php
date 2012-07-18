@@ -31,7 +31,7 @@ function consolelog($value) {
     echo '<script>console.log("' . $value . '");</script>';
 }
 
-$offset = 60;
-header('Date: '.  gmdate( "D, d M Y H:i:s" ) .' GMT');
-header('Cache-control: max-age='. $offset);
-header('Expires: ' . gmdate( 'D, d M Y H:i:s', time()+$offset ) . ' GMT');
+// $offset = 60;
+// header('Date: '.  gmdate( "D, d M Y H:i:s" ) .' GMT');
+// header('Cache-control: max-age='. $offset);
+// header('Expires: ' . gmdate( 'D, d M Y H:i:s', time()+$offset ) . ' GMT');
