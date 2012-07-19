@@ -32,7 +32,7 @@
                     </span>
                     <div class="social-buttons">
                         <div class="social-button social-button-g-plus">
-                            <?php echo $this->partial('_partials/google/plusOne.phtml', array('shareUrl' => $_SERVER['HTTP_HOST'] . $this->url(array('id' => $value->post_id, 'title' => $value->title), $this->postViewRoute))); ?>
+                            <?php echo $this->partial('_partials/google/plusOne.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id, 'title' => $value->title), $this->postViewRoute))); ?>
                         </div>
                         <div class="social-button social-button-fb-like">
                             <?php echo $this->partial('_partials/fb/like.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id, 'title' => $value->title), $this->postViewRoute))); ?>
