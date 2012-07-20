@@ -18,16 +18,18 @@ class ErrorController extends Zend_Controller_Action
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
-                $this->_forward('exception-page-not-found');
+                $this->exceptionPageNotFound();
                 $priority = Zend_Log::NOTICE;
                 break;
             default:
+                // EXCEPTION_OTHER
                 // application error
-                $this->getResponse()->setHttpResponseCode(500);
+                $this->getResponse()->setHttpResponseCode(500); 
+
                 switch($errors->exception->getCode()) {
                   
-                  case 2002:
-                    $this->_forward('exception-db-connection-failed');
+                  case 2002:               
+                    $this->exceptionDbConnectionFailed();
                     break;
                     
                   default:
@@ -66,13 +68,13 @@ class ErrorController extends Zend_Controller_Action
         return $log;
     }
 
-    public function exceptionPageNotFoundAction()
+    public function exceptionPageNotFound()
     {
         $this->view->message = 'Nie ma takiej strony';
         $this->_forward('index', 'index', null, array('layerInfo' => 1));
     }
 
-    public function exceptionDbConnectionFailedAction()
+    public function exceptionDbConnectionFailed()
     {
         $this->view->message = 'Nie udało się połączyć z bazą danych...';
         // $this->_forward('index', 'index', null, array('layerInfo' => 1));
