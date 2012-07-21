@@ -87,15 +87,15 @@ resources.mail.defaultReplyTo.name =
 
 ; DEBUG LOG
 resources.log.debug.writerName = "Stream"
-resources.log.debug.writerParams.stream = "/var/log/poebao/debug.log"
+resources.log.debug.writerParams.stream = "/var/log/" APPLICATION_NAME "/debug.log"
 resources.log.debug.filterName = "Priority"
 resources.log.debug.filterParams.priority = 7
 
 ; APPLICATION ERROR LOG
-resources.log.stream.writerName = "Stream"
-resources.log.stream.writerParams.stream = "/var/log/poebao/error.log"
-resources.log.stream.filterName = "Priority"
-resources.log.stream.filterParams.priority = 6
+resources.log.error.writerName = "Stream"
+resources.log.error.writerParams.stream = "/var/log/" APPLICATION_NAME "/error.log"
+resources.log.error.filterName = "Priority"
+resources.log.error.filterParams.priority = 3
 
 [staging : production]
 

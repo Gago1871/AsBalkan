@@ -25,6 +25,7 @@ class ErrorController extends Zend_Controller_Action
                 // EXCEPTION_OTHER
                 // application error
                 $this->getResponse()->setHttpResponseCode(500); 
+                $this->view->exception = $errors->exception;
 
                 switch($errors->exception->getCode()) {
                   
@@ -34,7 +35,6 @@ class ErrorController extends Zend_Controller_Action
                     
                   default:
                     $this->view->message = 'Exception caught (' . get_class($errors->exception) . '), but no specific handler in ErrorHandler defined';
-                    $this->view->exception = $errors->exception;
                     break;
                   }
 
@@ -46,8 +46,16 @@ class ErrorController extends Zend_Controller_Action
 
         // Log exception, if logger available
         if ($log = $this->getLog()) {
-            $log->log($this->view->message, $priority, $errors->exception);
-            $log->log('Request Parameters', $priority, $errors->request->getParams());
+           $logMsg =
+                $this->view->message . ' [httpResponseCode: ' . $this->getResponse()->getHttpResponseCode() . '], ' .
+                $errors->exception->getMessage() . ' [exceptionCode: ' . $errors->exception->getCode() . ']';
+
+            // Log error with set priority
+            $log->log($logMsg, $priority);
+
+            // Log details to debug.log
+            $log->log('Request Parameters: ' . print_r($errors->request->getParams(), true), Zend_Log::DEBUG);
+            $log->log('Exception stack: ' . serialize($errors->exception), Zend_Log::DEBUG);
         }
         
         // conditionally display exceptions
@@ -70,7 +78,7 @@ class ErrorController extends Zend_Controller_Action
 
     public function exceptionPageNotFound()
     {
-        $this->view->message = 'Nie ma takiej strony';
+        $this->view->message = 'Page not found ' . $_SERVER['REQUEST_URI'];
         $this->_forward('index', 'index', null, array('layerInfo' => 1));
     }
 
