@@ -11,9 +11,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $appConfig = $this->getOption('app');
         Zend_Registry::set('Config_App', $appConfig);
 
-        $config = $this->getOptions();
-        Zend_Registry::set('Zend_Config', $config);
-
         // Start routing
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
