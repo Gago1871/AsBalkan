@@ -1,6 +1,6 @@
 <?php
 
-header('jk_php_CurrentDate: ' . gmdate( 'D, d M Y H:i:s', time()) . ' GMT');
+header('jk_php_CurrentDate: ' . time());
 
 // Define application name
 defined('APPLICATION_NAME')
