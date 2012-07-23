@@ -4,7 +4,7 @@ header('jk_php_CurrentDate: ' . gmdate( 'D, d M Y H:i:s', time()) . ' GMT');
 
 // Define application name
 defined('APPLICATION_NAME')
-    || define('APPLICATION_NAME', $_SERVER['HTTP_HOST']);
+    || define('APPLICATION_NAME', $_SERVER['SERVER_NAME']);
 
 // Define path to application directory
 defined('APPLICATION_PATH')
