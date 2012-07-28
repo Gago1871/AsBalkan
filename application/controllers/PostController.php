@@ -68,6 +68,27 @@ class PostController extends Zend_Controller_Action
         $og->setType('article');
         $this->view->og = $og->getMetaData();
     }
+
+    public function dynamicAction()
+    {
+        $postGateway = new Application_Model_Post_Gateway();
+        $id = $this->params['id'];
+        $post = $postGateway->getByPostId($id);
+
+        switch ($post->category) {
+            case 2:
+                $route = 'home';
+                break;
+            
+            default:
+                $route = 'awaiting';
+                break;
+        }
+        $url = $this->_helper->url->url(array('id' => $id), $route);
+
+        $r = new Zend_Controller_Action_Helper_Redirector();
+        $r->gotoUrl($url . '#post-' . $id)->redirectAndExit();
+    }
     
     /**
      * Upload post

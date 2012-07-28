@@ -2,11 +2,10 @@
 
 class Application_Model_Post_List
 {
-    protected $_count;
     protected $_gateway;
     protected $_list = array();
 
-    public function __construct($data = null, $gateway)
+    public function __construct($data = null, $gateway = null)
     {
         $this->setGateway($gateway);
 
@@ -24,7 +23,7 @@ class Application_Model_Post_List
         $this->_list[] = $item;
     }
 
-    public function setGateway(Application_Model_Post_Gateway $gateway)
+    public function setGateway($gateway)
     {
         $this->_gateway = $gateway;
         return $this;

@@ -5,9 +5,6 @@
 */
 class Application_Model_Post
 {
-
-    protected $_gateway = null;
-
     protected $_data = array(
         'id' => null,
         'post_id' => null,
@@ -31,25 +28,13 @@ class Application_Model_Post
     protected $_previous = null;
     protected $_pageNum = null;
     
-    public function __construct($data, $gateway)
+    public function __construct($data)
     {
-        $this->setGateway($gateway);
         $this->populate($data);
 
         if (!isset($this->post_id)) {
             // throw new Exception('Initial data must contain an id');
         }
-    }
-
-    public function setGateway(Application_Model_Post_Gateway $gateway)
-    {
-        $this->_gateway = $gateway;
-        return $this;
-    }
-
-    public function getGateway()
-    {
-        return $this->_gateway;
     }
 
     public function populate($data)
@@ -135,7 +120,8 @@ class Application_Model_Post
      */
     public function save()
     {
-        $gateway = $this->getGateway();
+        $gateway = new Application_Model_Post_Gateway();
+
         if (null === $this->id) {
             return $gateway->getDbTable()->insert($this->_data);
         } else {

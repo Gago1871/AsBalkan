@@ -41,6 +41,18 @@
                 <reverse>oczekujace/%s</reverse>
             </awaiting-postview>
 
+            <dynamic-postview type="Zend_Controller_Router_Route_Regex">
+                <route>share/([\w]{6})</route>
+                <defaults>
+                    <controller>post</controller>
+                    <action>dynamic</action>
+                </defaults>
+                <map>
+                    <id>1</id>
+                </map>
+                <reverse>share/%s</reverse>
+            </dynamic-postview>
+
             <awaiting type="Zend_Controller_Router_Route_Regex">
                 <route>oczekujace(?:/(\d+))?</route>
                 <defaults>

@@ -36,17 +36,17 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         $postsGateway = new Application_Model_Post_Gateway();
-        $posts = $postsGateway->fetchForMain();
+        $select = $postsGateway->fetchForMain();
 
-        $paginator = new Jk_Paginator(new Zend_Paginator_Adapter_Array($posts->getList()));
+        $adapter = new Poebao_Paginator_Adapter_DbSelect($select);
+
+        $paginator = new Zend_Paginator($adapter);
         $paginator->setCurrentPageNumber($this->_getParam('page'));
 
         $this->view->paginator = $paginator;
 
         $this->view->postViewRoute = 'postview';
         $this->view->blockPostViewRoute = 'home';
-
-        $this->view->postForm = $this->_helper->UploadForm();
     }
     
     /**

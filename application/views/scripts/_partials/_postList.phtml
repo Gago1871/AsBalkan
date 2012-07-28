@@ -2,8 +2,8 @@
 <div id="posts">
     <ul class="post-list">
         <?php foreach ($this->paginator as $key => $value): ?>
-            <a name="post-<?php echo $value->post_id ?>"></a>
             <li class="post-element <?php echo (!$key)?' first':'' ?>">
+                <a name="post-<?php echo $value->post_id; ?>"></a>
                 <div class="img">
                     <a href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->postViewRoute) ?>">
                         <img class="post" src="<?php echo $value->image('thumb'); ?>">
@@ -32,14 +32,15 @@
                     </span>
                     <div class="social-buttons">
                         <div class="social-button social-button-g-plus">
-                            <?php echo $this->partial('_partials/google/plusOne.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id, 'name' => $value->author, 'title' => $value->title), $this->postViewRoute))); ?>
+                            <?php echo $this->partial('_partials/google/plusOne.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id), 'dynamic-postview'))); ?>
                         </div>
                         <div class="social-button social-button-fb-like">
-                            <?php echo $this->partial('_partials/fb/like.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id, 'name' => $value->author, 'title' => $value->title), $this->postViewRoute))); ?>
+                            <?php echo $this->partial('_partials/fb/like.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id), 'dynamic-postview'))); ?>
                         </div>
                     </div>
                 </div>
             </li>
+
         <?php endforeach ?>
     </ul>
 </div>

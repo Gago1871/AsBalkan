@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+* Gateway aka Mapper
 */
 class Application_Model_Post_Gateway
 {
@@ -10,6 +10,7 @@ class Application_Model_Post_Gateway
 
     protected $_next;
     protected $_previous;
+    protected $_defaultCount = 10;
 
     public function __construct()
     {
@@ -35,16 +36,19 @@ class Application_Model_Post_Gateway
     /**
      * 
      */
-    public function fetchForMain()
+    public function fetchForMain($page = 1, $count = null)
     {
+        if (null === $count) {
+            $count = $this->_defaultCount;
+        }
+
         $select = $this->_db_table->select()
             ->where('category = ?', Zend_Registry::getInstance()->constants->app->category->main)
             ->where('status = ?', "a")
             ->order('moderated DESC')
             ->order('added DESC');
-        $posts = $this->_db_table->fetchAll($select);
 
-        return new Application_Model_Post_List($posts, $this);
+        return $select;
     }
 
     /**
@@ -172,21 +176,23 @@ class Application_Model_Post_Gateway
         //corresponding Data Object
         $post = new Application_Model_Post($result->toArray(), $this);
 
-        // fetch previous from category (NEWER)
-        $previous = $this->_getPrevious($post, $context);
-        if (null !== $previous) {
-            $post->setPrevious(new Application_Model_Post($previous->toArray(), $this));
-        }
-        
-        // fetch next form category (OLDER)
-        $next = $this->_getNext($post, $context);
-        if (null !== $next) {
-            $post->setNext(new Application_Model_Post($next->toArray(), $this));
-        }
+        if (null !== $context) {
+            // fetch previous from category (NEWER)
+            $previous = $this->_getPrevious($post, $context);
+            if (null !== $previous) {
+                $post->setPrevious(new Application_Model_Post($previous->toArray(), $this));
+            }
+            
+            // fetch next form category (OLDER)
+            $next = $this->_getNext($post, $context);
+            if (null !== $next) {
+                $post->setNext(new Application_Model_Post($next->toArray(), $this));
+            }
 
-        $pageNum = $this->_getPageNum($post, $context);
-        if (null !== $pageNum) {
-            $post->setPageNum($pageNum);
+            $pageNum = $this->_getPageNum($post, $context);
+            if (null !== $pageNum) {
+                $post->setPageNum($pageNum);
+            }
         }
 
         //return the post object
