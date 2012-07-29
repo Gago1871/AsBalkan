@@ -65,7 +65,7 @@ class PostController extends Zend_Controller_Action
         $og = new Jk_Og('poebao');
         $og->fbAppId = Zend_Registry::getInstance()->constants->fb->appId;
         $og->title = !empty($post->title)?$post->title:'Poebao.pl';
-        $og->image = $post->image('min');
+        $og->image = array($post->image('min'));
         $og->type = 'article';
         $og->url = $this->view->canonicalUrl;
         $this->view->og = $og->getMetaData();
