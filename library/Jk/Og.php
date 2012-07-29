@@ -71,7 +71,7 @@ class Jk_Og
         }
 
         if (null !== $this->author && null !== $this->type) {
-            $ogMeta .= '<meta property="og:' . $this->type . ':author" content="' . $this->author . '" />' . "\n";
+            $ogMeta .= '<meta property="' . $this->type . ':author" content="' . $this->author . '" />' . "\n";
         }
 
         $ogMeta .= '<meta property="og:site_name" content="' . $this->siteName . '" />' . "\n";
