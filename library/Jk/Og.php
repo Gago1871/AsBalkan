@@ -56,7 +56,9 @@ class Jk_Og
         }
 
         if (null !== $this->image) {
-            $ogMeta .= '<meta property="og:image" content="' . $this->image . '" />' . "\n";
+            foreach ($this->image as $key => $value) {
+                $ogMeta .= '<meta property="og:image" content="' . $value . '" />' . "\n";    
+            }
         }
 
         if (null !== $this->type) {

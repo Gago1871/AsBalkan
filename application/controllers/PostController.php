@@ -59,7 +59,6 @@ class PostController extends Zend_Controller_Action
         $this->view->message = $message;
 
         $this->view->canonicalUrl = $this->view->serverUrl() . $this->view->url(array('id' => $id, 'name' => $post->author), 'author-postview');
-
         $this->view->headLink()->headLink(array('rel' => 'canonical', 'href' => $this->view->canonicalUrl), 'PREPEND');
 
         // Open Graph Protocol (see more: http://mgp.me)

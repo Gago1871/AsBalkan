@@ -47,6 +47,22 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->postViewRoute = 'postview';
         $this->view->blockPostViewRoute = 'home';
+
+        $this->view->canonicalUrl = $this->view->serverUrl();
+        $this->view->headLink()->headLink(array('rel' => 'canonical', 'href' => $this->view->canonicalUrl), 'PREPEND');
+
+        // Open Graph Protocol (see more: http://mgp.me)
+        $og = new Jk_Og('poebao');
+        $og->fbAppId = Zend_Registry::getInstance()->constants->fb->appId;
+        $og->title = 'Poebao.pl';
+        $images = array();
+        foreach ($paginator as $key => $value) {
+            $images[] = $value->image('min');
+        }
+        $og->image = $images;
+        $og->type = 'article';
+        $og->url = $this->view->canonicalUrl;
+        $this->view->og = $og->getMetaData();
     }
     
     /**
@@ -69,6 +85,19 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->postViewRoute = 'author-postview';
         $this->view->blockPostViewRoute = 'home';
+
+        // Open Graph Protocol (see more: http://mgp.me)
+        $og = new Jk_Og('poebao');
+        $og->fbAppId = Zend_Registry::getInstance()->constants->fb->appId;
+        $og->title = $this->view->title = $author;
+        $images = array();
+        foreach ($paginator as $key => $value) {
+            $images[] = $value->image('min');
+        }
+        $og->image = $images;
+        $og->type = 'article';
+        $og->url = $this->view->canonicalUrl;
+        $this->view->og = $og->getMetaData();
     }
 
     /**
@@ -90,7 +119,18 @@ class IndexController extends Zend_Controller_Action
         $this->view->postViewRoute = 'awaiting-postview';
         $this->view->blockPostViewRoute = 'awaiting';
 
-        $this->view->category = 1;
+        // Open Graph Protocol (see more: http://mgp.me)
+        $og = new Jk_Og('poebao');
+        $og->fbAppId = Zend_Registry::getInstance()->constants->fb->appId;
+        $og->title = 'Poebao.pl - oczekujące';
+        $images = array();
+        foreach ($paginator as $key => $value) {
+            $images[] = $value->image('min');
+        }
+        $og->image = $images;
+        $og->type = 'article';
+        $og->url = $this->view->canonicalUrl;
+        $this->view->og = $og->getMetaData();
     }
     
     /**
