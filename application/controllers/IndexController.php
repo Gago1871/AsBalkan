@@ -89,7 +89,7 @@ class IndexController extends Zend_Controller_Action
         // Open Graph Protocol (see more: http://mgp.me)
         $og = new Jk_Og('poebao');
         $og->fbAppId = Zend_Registry::getInstance()->constants->fb->appId;
-        $og->title = $this->view->title = $author;
+        $og->title = 'Poebao.pl - ' . $author;
         $images = array();
         foreach ($paginator as $key => $value) {
             $images[] = $value->image('min');
