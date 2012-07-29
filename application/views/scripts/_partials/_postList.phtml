@@ -32,10 +32,10 @@
                     </span>
                     <div class="social-buttons">
                         <div class="social-button social-button-g-plus">
-                            <?php echo $this->partial('_partials/google/plusOne.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id, 'name' => $value->author, 'title' => $value->title), 'author-postview'))); ?>
+                            <?php echo $this->partial('_partials/google/plusOne.phtml', array('href' => $this->serverUrl() . $this->url(array('id' => $value->post_id, 'name' => $value->author, 'title' => $value->title), 'author-postview'))); ?>
                         </div>
                         <div class="social-button social-button-fb-like">
-                            <?php echo $this->partial('_partials/fb/like.phtml', array('shareUrl' => $this->url(array('id' => $value->post_id, 'name' => $value->author, 'title' => $value->title), 'author-postview'))); ?>
+                            <?php echo $this->partial('_partials/fb/like.phtml', array('href' => $this->serverUrl() . $this->url(array('id' => $value->post_id, 'name' => $value->author, 'title' => $value->title), 'author-postview'))); ?>
                         </div>
                     </div>
                 </div>

@@ -58,8 +58,9 @@ class PostController extends Zend_Controller_Action
         $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
         $this->view->message = $message;
 
-        $canonicalUrl = $this->view->serverUrl() . $this->view->url(array('id' => $id, 'name' => $post->author), 'author-postview');
-        $this->view->headLink()->headLink(array('rel' => 'canonical', 'href' => $canonicalUrl), 'PREPEND');
+        $this->view->canonicalUrl = $this->view->serverUrl() . $this->view->url(array('id' => $id, 'name' => $post->author), 'author-postview');
+
+        $this->view->headLink()->headLink(array('rel' => 'canonical', 'href' => $this->view->canonicalUrl), 'PREPEND');
 
         // Open Graph Protocol (see more: http://mgp.me)
         $og = new Jk_Og('poebao');
@@ -67,7 +68,7 @@ class PostController extends Zend_Controller_Action
         $og->title = !empty($post->title)?$post->title:'Poebao.pl';
         $og->image = $post->image('min');
         $og->type = 'article';
-        $og->url = $canonicalUrl;
+        $og->url = $this->view->canonicalUrl;
         $this->view->og = $og->getMetaData();
     }
 
