@@ -14,6 +14,7 @@ class Jk_Og
         'siteName' => null,
         'type' => null,
         'url' => null,
+        'author' => null,
         );
 
     function __construct($siteName)
@@ -67,6 +68,10 @@ class Jk_Og
 
         if (null !== $this->url) {
             $ogMeta .= '<meta property="og:url" content="' . $this->url . '" />' . "\n";
+        }
+
+        if (null !== $this->author && null !== $this->type) {
+            $ogMeta .= '<meta property="og:' . $this->type . ':author" content="' . $this->author . '" />' . "\n";
         }
 
         $ogMeta .= '<meta property="og:site_name" content="' . $this->siteName . '" />' . "\n";

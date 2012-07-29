@@ -64,10 +64,11 @@ class PostController extends Zend_Controller_Action
         // Open Graph Protocol (see more: http://mgp.me)
         $og = new Jk_Og('poebao');
         $og->fbAppId = Zend_Registry::getInstance()->constants->fb->appId;
-        $og->title = !empty($post->title)?$post->title:'Poebao.pl';
-        $og->image = array($post->image('min'));
+        $og->title = 'Poebao.pl' . !empty($post->title)?' - ' . $post->title:'';
+        $og->image = array($post->image('thumb'));
         $og->type = 'article';
         $og->url = $this->view->canonicalUrl;
+        $og->author = $post->author;
         $this->view->og = $og->getMetaData();
     }
 

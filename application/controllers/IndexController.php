@@ -57,7 +57,7 @@ class IndexController extends Zend_Controller_Action
         $og->title = 'Poebao.pl';
         $images = array();
         foreach ($paginator as $key => $value) {
-            $images[] = $value->image('min');
+            $images[] = $value->image('thumb');
         }
         $og->image = $images;
         $og->type = 'article';
@@ -92,7 +92,7 @@ class IndexController extends Zend_Controller_Action
         $og->title = 'Poebao.pl - ' . $author;
         $images = array();
         foreach ($paginator as $key => $value) {
-            $images[] = $value->image('min');
+            $images[] = $value->image('thumb');
         }
         $og->image = $images;
         $og->type = 'article';
@@ -125,7 +125,7 @@ class IndexController extends Zend_Controller_Action
         $og->title = 'Poebao.pl - oczekujące';
         $images = array();
         foreach ($paginator as $key => $value) {
-            $images[] = $value->image('min');
+            $images[] = $value->image('thumb');
         }
         $og->image = $images;
         $og->type = 'article';
