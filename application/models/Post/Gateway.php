@@ -176,23 +176,21 @@ class Application_Model_Post_Gateway
         //corresponding Data Object
         $post = new Application_Model_Post($result->toArray(), $this);
 
-        if (null !== $context) {
-            // fetch previous from category (NEWER)
-            $previous = $this->_getPrevious($post, $context);
-            if (null !== $previous) {
-                $post->setPrevious(new Application_Model_Post($previous->toArray(), $this));
-            }
-            
-            // fetch next form category (OLDER)
-            $next = $this->_getNext($post, $context);
-            if (null !== $next) {
-                $post->setNext(new Application_Model_Post($next->toArray(), $this));
-            }
+        // fetch previous from category (NEWER)
+        $previous = $this->_getPrevious($post, $context);
+        if (null !== $previous) {
+            $post->setPrevious(new Application_Model_Post($previous->toArray(), $this));
+        }
+        
+        // fetch next form category (OLDER)
+        $next = $this->_getNext($post, $context);
+        if (null !== $next) {
+            $post->setNext(new Application_Model_Post($next->toArray(), $this));
+        }
 
-            $pageNum = $this->_getPageNum($post, $context);
-            if (null !== $pageNum) {
-                $post->setPageNum($pageNum);
-            }
+        $pageNum = $this->_getPageNum($post, $context);
+        if (null !== $pageNum) {
+            $post->setPageNum($pageNum);
         }
 
         //return the post object
