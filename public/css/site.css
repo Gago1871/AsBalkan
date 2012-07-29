@@ -234,7 +234,7 @@ a.button:hover {
 /* post list */
 .post-list {
     list-style-type: none;
-    /*margin-bottom: 40px;*/
+    float: left;
 }
 
 .post-list a {
@@ -250,14 +250,12 @@ a.button:hover {
 }
 
 .post-list li {
-    overflow: auto;
     background: #dfdfdf url('/img/border.png') no-repeat bottom left;
-
     margin-bottom: 34px;
     padding-bottom: 12px;
-
     word-wrap: break-word;
     position: relative;
+    float: left;
 }
 
 .post-list .twoja-stara {
@@ -277,14 +275,14 @@ a.button:hover {
 
 .post-list .post {
     
-    /*width: 460px;*/
+    width: 460px;
     
-    /*margin-right: 10px;*/
+    margin-right: 10px;
 }
 
 .post-list .img {
     float: left;
-    width: 460px;
+    /*width: 460px;*/
     text-align: center;
 }
 
@@ -350,7 +348,7 @@ a.button:hover {
 }
 
 .social-buttons {
-    overflow: hidden;
+    /*overflow: hidden;*/
     width: 176px;
     margin: 0 auto;
 }

@@ -58,18 +58,24 @@ class PostController extends Zend_Controller_Action
         $message = array('type' => 'success', 'content' => 'Twój post został dodany.');
         $this->view->message = $message;
 
-        $this->view->postForm = $this->_helper->UploadForm();
+        $canonicalUrl = $this->view->serverUrl() . $this->view->url(array('id' => $id, 'name' => $post->author), 'author-postview');
+        $this->view->headLink()->headLink(array('rel' => 'canonical', 'href' => $canonicalUrl), 'PREPEND');
 
         // Open Graph Protocol (see more: http://mgp.me)
         $og = new Jk_Og('poebao');
-        $og->setFbAppId(Zend_Registry::getInstance()->constants->fb->appId);
-        $og->setTitle(!empty($post->title)?$post->title:'Poebao.pl');
-        $og->setImage($post->image('min'));
-        $og->setType('article');
+        $og->fbAppId = Zend_Registry::getInstance()->constants->fb->appId;
+        $og->title = !empty($post->title)?$post->title:'Poebao.pl';
+        $og->image = $post->image('min');
+        $og->type = 'article';
+        $og->url = $canonicalUrl;
         $this->view->og = $og->getMetaData();
     }
 
-    public function dynamicAction()
+    /**
+     * Sharing action to put links to particular post, displayed on the list 
+     * Used to share links on social services
+     */
+    public function shareAction()
     {
         $postGateway = new Application_Model_Post_Gateway();
         $id = $this->params['id'];
@@ -84,10 +90,13 @@ class PostController extends Zend_Controller_Action
                 $route = 'awaiting';
                 break;
         }
-        $url = $this->_helper->url->url(array('id' => $id), $route);
 
-        $r = new Zend_Controller_Action_Helper_Redirector();
-        $r->gotoUrl($url . '#post-' . $id)->redirectAndExit();
+        // add page number 
+
+        $url = $this->_helper->url->url(array('id' => $id), $route);
+        $url .= '#post-' . $id;
+
+        $this->_redirect($url, array('code'=>301));
     }
     
     /**

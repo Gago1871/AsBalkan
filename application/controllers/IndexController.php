@@ -69,8 +69,6 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->postViewRoute = 'author-postview';
         $this->view->blockPostViewRoute = 'home';
-
-        $this->view->postForm = $this->_helper->UploadForm();
     }
 
     /**
@@ -93,8 +91,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->blockPostViewRoute = 'awaiting';
 
         $this->view->category = 1;
-
-        $this->view->postForm = $this->_helper->UploadForm();
     }
     
     /**
@@ -102,7 +98,6 @@ class IndexController extends Zend_Controller_Action
      */
     public function contactAction()
     {
-        $this->view->postForm = $this->_helper->UploadForm();
     }
     
     /**
@@ -110,8 +105,6 @@ class IndexController extends Zend_Controller_Action
      */
     public function rulesAction()
     {
-        $this->view->postForm = $this->_helper->UploadForm();
-        
         $this->view->blockPostViewRoute = 'home';
     }
 }
