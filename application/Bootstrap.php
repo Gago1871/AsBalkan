@@ -92,7 +92,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headMeta()->setName('Description', 'Wyszukane, intrygujące, piękne zdjęcia dla ludzi szukających inspiracji i rozrywki z klasą.');
         $view->headMeta()->setName('Keywords', 'śmieszne zdjęcia, śmieszne fotki, śmieszne obrazki, zdjęcia, fotki, obrazki, oryginalne, inspirujące, poebao');
         $view->headMeta()->setName('robots', 'index,follow');
-        $view->headMeta()->setName('author', 'www.webascrazy.net');
+        // $view->headMeta()->setName('author', 'www.webascrazy.net');
         $view->headTitle()->setSeparator(' - ');
         $view->headTitle('poebao');
     }
