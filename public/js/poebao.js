@@ -31,9 +31,16 @@ $(function () {
     
     function scrollToPosition(element) {
         if (element !== undefined) {
-            var y = $(element).position().top - 20;
+            var y = $(element).position().top - 80;
+            console.log('y:' + y);
             $('html, body').animate({scrollTop : y}, 200);
         }
+    }
+
+    if(window.location.hash) {
+        var hash = window.location.hash.substr(6);
+        scrollToPosition('#' + hash);
+        // scrollToPosition('div[name="' + hash + '"]');
     }
 
     //Create an Array of posts

@@ -2,8 +2,7 @@
 <div id="posts">
     <ul class="post-list">
         <?php foreach ($this->paginator as $key => $value): ?>
-            <li class="post-element <?php echo (!$key)?' first':'' ?>">
-                <a name="post-<?php echo $value->post_id; ?>"></a>
+            <li id="<?php echo $value->post_id ?>" class="post-element <?php echo (!$key)?' first':'' ?>">
                 <div class="img">
                     <a href="<?php echo $this->url(array('id' => $value->post_id, 'name' => $value->author), $this->postViewRoute) ?>">
                         <img class="post" src="<?php echo $value->image('thumb'); ?>">
