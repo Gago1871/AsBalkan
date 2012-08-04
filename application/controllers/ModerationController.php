@@ -170,7 +170,7 @@ class ModerationController extends Zend_Controller_Action
                     $author = $value['author']?$value['author']:$importer->getRandomAuthor();
                     $source = $value['source'];
                     // $source = $value['source']?$value['source']:$importer->getRandomSource();
-                    $added = $importer->getRandomDate('2012-06-01', date("Y-m-d"));
+                    $added = $importer->getRandomDate(date("Y-m-d"), date("Y-m-d"));
                     // $moderated = $importer->getRandomDate($added, '2012-07-31');
                     $moderated = null;
                     $id = Jk_Url::generateUniqueId(); // abcd123
