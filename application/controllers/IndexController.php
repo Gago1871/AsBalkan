@@ -58,6 +58,7 @@ class IndexController extends Zend_Controller_Action
         $images = array();
         foreach ($paginator as $key => $value) {
             $images[] = $value->image('thumb');
+            $value->added = $value->moderated;
         }
         $og->image = $images;
         $og->type = 'article';
