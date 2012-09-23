@@ -114,7 +114,7 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->paginator = $paginator;
 
-        $this->view->title = 'Oczekujące';
+        $this->view->title = 'oczekujące';
         $this->view->headTitle('Oczekujące');
 
         $this->view->postViewRoute = 'awaiting-postview';

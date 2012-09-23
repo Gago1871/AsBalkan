@@ -24,15 +24,16 @@
             <a href="/"><img src="/img/poebao.png" alt="Poebao, content is king" title="Poebao, content is king"><h1 class="hidden">Poebao, content is king</h1></a>
             <div id="nav">
                 <ul>
-                    <li class="first"><a class="fancy-hover"href="/oczekujace">oczekujące</a></li>
+                    <li class="first">
+                        <a class="fancy-hover<?php if ($this->url() == $this->url(array(), 'awaiting')): echo ' selected' ?><?php endif ?>"href="<?php echo $this->url(array(), 'awaiting') ?>">oczekujące</a>
+                    </li>
                     <li>
-                        <a class="fancy-hover" id="nav-show-upload-form" href="<?php echo $this->url(array(), 'postupload') . "?uploadfromfile=1";?>">dodaj</a>
+                        <a class="fancy-hover<?php if ($this->url() == $this->url(array(), 'postupload')): echo ' selected' ?><?php endif ?>" id="nav-show-upload-form" href="<?php echo $this->url(array(), 'postupload') . "?uploadfromfile=1";?>">dodaj</a>
                     </li>
                     <?php if ($this->identity): ?>
                         <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'moderation') ?>">moderacja</a></li>
                         <li><a class="fancy-hover" href="<?php echo $this->url(array(), 'admin-logout') ?>">wyloguj (<?php echo $this->identity['username'] ?>)</a></li>
                     <?php endif ?>
-                    
                 </ul>
             </div>
         </div>
@@ -62,7 +63,7 @@
                     <?php echo $this->render('_blocks/postsAgo.phtml'); ?>
                     <!-- footer -->
                     <div class="block" id="footer">
-                    poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">Kontakt</a>
+                    poebao.pl (c) 2012 - <a class="fancy-hover" href="/regulamin">Regulamin</a> | <a class="fancy-hover" href="mailto:kontakt@poebao.pl">kontakt@poebao.pl</a>
                     </div>
                 </div>
             </div>

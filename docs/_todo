@@ -1,3 +1,16 @@
++ usunięcie G+
++ zmiana linku "więcej"
++ Zmiana stylowania tytułu i źródła na stronie posta
++ Dodanie tytułów stron Oczekujące i Wall usera
++ Tekst "Kontakt" w stopce zamienić na "kontakt@poebao.pl"
++ Dodanie selectów do linków Oczekujące oraz Dodaj
++ Na stronie posta, w  tekście "« Wróć do listy", zamienić "lista" na konkretną listę 
+
+* przyklejania info box podczas scrollowania
+* Rozwój modułu 1000 postów temu...
+* Naprawa walidacji pól w formatce uploadu
+
+
 https://github.com/valums/file-uploader
 
 http://addyosmani.com/blog/client-side-build-process/

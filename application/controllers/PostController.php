@@ -33,21 +33,25 @@ class PostController extends Zend_Controller_Action
                 $listRoute = 'author';
                 $this->view->author = $this->_getParam('name');
                 $context = 'author';
+                $backButtonText = 'Wszystkie posty od ' . $this->view->author;
                 break;
 
             case 'awaiting-postview':
                 $listRoute = 'awaiting';
                 $context = null;
+                $backButtonText = 'Wróć do oczekujących';
                 break;
             
             default:
                 $listRoute = 'home';
                 $context = null;
+                $backButtonText = 'Wróć na stronę główną';
                 break;
         }
 
         $this->view->listRoute = $listRoute;
         $this->view->blockPostViewRoute = 'home';
+        $this->view->backButtonText = $backButtonText;
 
         $postGateway = new Application_Model_Post_Gateway();
         $post = $postGateway->getByPostId($id, $context);

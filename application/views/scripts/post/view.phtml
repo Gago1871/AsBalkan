@@ -1,4 +1,5 @@
-<a class="left fancy-hover" href="<?php echo $this->url(array('name' => $this->author, 'page' => $this->post->getPageNum()), $this->listRoute) ?>#post-<?php echo $this->post->post_id; ?>">« Wróć do listy</a>
+<a class="left fancy-hover" href="<?php echo $this->url(array('name' => $this->author, 'page' => $this->post->getPageNum()), $this->listRoute) ?>#post-<?php echo $this->post->post_id; ?>">« <?php echo $this->backButtonText ?></a>
+
 <div class="right">
     <?php if (!is_null($this->post->getPrevious())): ?>
         <a class="button button-wider button-taller" id="nav-post-view-prev" href="<?php echo $this->url(array('id' => $this->post->getPrevious()->post_id, 'title' => $this->post->getPrevious()->title), $this->postViewRoute) ?>"><<</a>    
@@ -11,25 +12,26 @@
 <div id="post" class="clear">
     <div class="info">
         <h1><?php echo $this->post->title; ?></h1>
-        <h3 class="subtext"><a class="fancy-hover" href="<?php echo $this->url(array('name' => $this->post->author), 'author') ?>"><?php echo $this->post->author ?></a></h3> - <span class="subtext"><time class="timeago" datetime="<?php echo $this->post->added ?>"><?php echo $this->post->added ?></time>
         <?php if ($this->post->source): ?>
-            -
-            <span class="source">
+            <p class="source">
                 <?php if (filter_var($this->post->source, FILTER_VALIDATE_URL) !== false): ?>
                     <a class="fancy-hover" href="<?php echo $this->post->source ?>" target="_blank"><?php echo $this->post->source ?></a>
                 <?php else: ?>
                     <?php echo $this->post->source ?>    
                 <?php endif ?>
-            </span>
+            </p>
         <?php endif ?>
+        <h3 class="subtext"><a class="fancy-hover" href="<?php echo $this->url(array('name' => $this->post->author), 'author') ?>"><?php echo $this->post->author ?></a></h3> - <span class="subtext"><time class="timeago" datetime="<?php echo $this->post->added ?>"><?php echo $this->post->added ?></time>
         </span>
     </div>
 
     <!-- <div class="center"> -->
         <div class="center social-buttons">
+            <?php /*
             <div class="social-button social-button-g-plus">
                 <?php echo $this->partial('_partials/google/plusOne.phtml', array('href' => $this->canonicalUrl)); ?>
             </div>
+            */ ?>
             <div class="social-button social-button-fb-like">
                 <?php echo $this->partial('_partials/fb/like.phtml', array('href' => $this->canonicalUrl)); ?>
             </div>
