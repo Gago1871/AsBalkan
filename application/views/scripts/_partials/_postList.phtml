@@ -1,4 +1,6 @@
-<h1><?php echo $this->escape($this->title); ?></h1>
+<?php if (isset($this->title)): ?>
+    <h1><?php echo $this->escape($this->title); ?></h1>
+<?php endif ?>
 <div id="posts">
     <ul class="post-list">
         <?php foreach ($this->paginator as $key => $value): ?>

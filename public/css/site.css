@@ -123,8 +123,7 @@ a.button:hover {
 }
 
 #header a.selected {
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 3px;
+    color: #fff;
 }
 
 #header a:hover {
@@ -411,6 +410,11 @@ a.button:hover {
 
 #post .info {
     margin-bottom: 6px;
+    padding-top: 10px;
+}
+
+#post .info h3 a {
+    font-weight: normal;
 }
 
 #fb-comments {
