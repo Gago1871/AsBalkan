@@ -25,6 +25,9 @@
             <div id="nav">
                 <ul>
                     <li class="first">
+                        <?php echo $this->partial('_partials/fb/like.phtml', array('href' => 'https://www.facebook.com/poebaopl')); ?>
+                    </li>
+                    <li class="first">
                         <a class="fancy-hover<?php if ($this->url() == $this->url(array(), 'awaiting')): echo ' selected' ?><?php endif ?>"href="<?php echo $this->url(array(), 'awaiting') ?>">oczekujące</a>
                     </li>
                     <li>
