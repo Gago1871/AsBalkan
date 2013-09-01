@@ -44,12 +44,15 @@
 		
 	************************************************************************************** -->
 	
+	<!-- to create DSTAMP -->
+	<tstamp/>
+
 	<!-- props -->
 	<property environment="env" />
 	<property name="build.dir" value="build" />
-	<property name="lib.dir" value="${env.COMPRESSOR_HOME}" />
-	<property name="final_js" value="${basedir}/../public/asset/poebao.js" />
-	<property name="final_css" value="${basedir}/../public/asset/poebao.css" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="final_js" value="${basedir}/../public/asset/poebao-${DSTAMP}.js" />
+	<property name="final_css" value="${basedir}/../public/asset/poebao-${DSTAMP}.css" />
 	
 	<!-- libraries -->
 	<property name="yui-compressor" location="${lib.dir}/yuicompressor-2.4.2.jar" />
