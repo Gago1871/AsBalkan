@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage Zend_Translate_Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Adapter.php 24215 2011-07-08 21:27:44Z guilhermeblanco $
+ * @version    $Id$
  */
 
 /**
@@ -36,7 +36,7 @@ require_once 'Zend/Translate/Plural.php';
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage Zend_Translate_Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Translate_Adapter {
@@ -249,7 +249,8 @@ abstract class Zend_Translate_Adapter {
                 new RecursiveRegexIterator(
                     new RecursiveDirectoryIterator($options['content'], RecursiveDirectoryIterator::KEY_AS_PATHNAME),
                     '/^(?!.*(\.svn|\.cvs)).*$/', RecursiveRegexIterator::MATCH
-                )
+                ),
+                RecursiveIteratorIterator::SELF_FIRST
             );
             
             foreach ($iterator as $directory => $info) {
