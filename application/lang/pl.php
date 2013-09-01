@@ -41,6 +41,7 @@ return array(
 
     // Zend_Validate_File_Upload
     "File '%value%' was not uploaded" => 'Wskaż zdjęcie na dysku',
+    "File '%value%' exceeds the defined ini size" => 'Rozmiar pliku przekracza dozwolony rozmiar, wybierz mniejszy plik',
 
     // Zend_Validate_NotEmpty
     'Value is required and can\'t be empty' => 'Pole jest wymagane i nie może być puste!',

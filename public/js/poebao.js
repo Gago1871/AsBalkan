@@ -80,7 +80,7 @@ $(function () {
     
 
     // init form validation
-    $("input").blur(function () {
+    $("#author").blur(function () {
         
         var forElementId = $(this).parent().prev().find("label").attr("for");
 
